@@ -3,8 +3,10 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardFooter,
-  Link
+  Chip,
+  Link,
+  Icon,
+  Row
 } from "framework7-react";
 
 import "./CardItem.scss";
@@ -27,6 +29,18 @@ const CardItem = () => {
                   style={{ position: "absolute", right: "15px", top: "15px" }}
                   iconF7="multiply_circle_fill"
                 />
+                <div className="row padding-horizontal">
+                  <div className="row">
+                    <Chip text="Red Chip" color="red" />
+                    <Chip text="Green Chip" color="green" />
+                    <Chip text="Blue Chip" color="blue" />
+                    <Chip text="Orange Chip" color="orange" />
+                    <Chip text="Pink Chip" color="pink" />
+                  </div>
+                  <div className="row justify-content-center" style={{width: '100%'}}>
+                    <Icon f7="chevron_down"></Icon>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="row card-content-padding ">
