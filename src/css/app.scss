@@ -53,3 +53,12 @@
 }
 
 /* Your app custom styles here */
+// Custom variables
+$font-size-title: 1.5rem !important;
+
+// Custom Classes
+.header-title{
+  width: 100%;
+  height: 100%;
+  font-size: $font-size-title;
+}

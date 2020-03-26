@@ -17,25 +17,24 @@ import {
   Button
 } from 'framework7-react';
 
+import CardItem from '../components/shared/CardItem/CardItem'
+
+
 export default () => (
   <Page name="home">
     {/* Top Navbar */}
-    <Navbar sliding={false} large>
+    <Navbar>
       <NavLeft>
         <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="left" />
       </NavLeft>
-      <NavTitle sliding>Bilingualy</NavTitle>
+      <NavTitle className="header-title display-flex justify-content-center align-items-center">Bilingualy</NavTitle>
       <NavRight>
         <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="right" />
       </NavRight>
-      <NavTitleLarge>Bilingualy</NavTitleLarge>
     </Navbar>
-    {/* Toolbar */}
-    <Toolbar bottom>
-      <Link>Left Link</Link>
-      <Link>Right Link</Link>
-    </Toolbar>
-    {/* Page content */}
+
+    <CardItem />
+    {/* Page content
     <Block strong>
       <p>Here is your blank Framework7 app. Let's see what we have here.</p>
     </Block>
@@ -83,7 +82,7 @@ export default () => (
         title="Request Data & Load"
         link="/request-and-load/user/123456/"
       />
-    </List>
+    </List> */}
 
   </Page>
 );
