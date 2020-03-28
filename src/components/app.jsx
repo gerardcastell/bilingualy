@@ -75,7 +75,7 @@ export default class extends React.Component {
 
 
         {/* Your main view, should have "view-main" class */}
-        <View main className="safe-areas" url="/" />
+        <View main className="safe-areas" url="/" pushState={true} pushStateSeparator=""/>
 
 
         {/* Popup */}

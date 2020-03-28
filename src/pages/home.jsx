@@ -38,12 +38,14 @@ export default () => (
     <Block strong>
       <p>Here is your blank Framework7 app. Let's see what we have here.</p>
     </Block>
+*/}
 
     <BlockTitle>Navigation</BlockTitle>
     <List>
       <ListItem link="/about/" title="About"/>
       <ListItem link="/form/" title="Form"/>
     </List>
+    {/* Page content
 
     <BlockTitle>Modals</BlockTitle>
     <Block strong>
@@ -68,7 +70,7 @@ export default () => (
         </Col>
       </Row>
     </Block>
-
+*/}
     <List>
       <ListItem
         title="Dynamic (Component) Route"
@@ -82,7 +84,7 @@ export default () => (
         title="Request Data & Load"
         link="/request-and-load/user/123456/"
       />
-    </List> */}
+    </List> 
 
   </Page>
 );
