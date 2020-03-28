@@ -135,6 +135,8 @@ export default class extends React.Component {
     this.$f7ready((f7) => {
 
       // Call F7 APIs here
+      console.log(this.$f7)
+      console.log(this.$f7.eventsListeners)
     });
   }
 }

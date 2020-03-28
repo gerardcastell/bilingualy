@@ -17,7 +17,7 @@ import {
   Button
 } from 'framework7-react';
 
-import CardItem from '../components/core/CardItem/CardItem'
+import {CardItem} from '../components/core/CardItem/CardItem'
 
 
 export default () => (
