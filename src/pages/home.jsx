@@ -18,7 +18,7 @@ import {
 } from 'framework7-react';
 
 import {CardItem} from '../components/core/CardItem/CardItem'
-
+import Item from '../components/core/Item'
 
 export default () => (
   <Page name="home">
@@ -40,11 +40,11 @@ export default () => (
     </Block>
 */}
 
-    <BlockTitle>Navigation</BlockTitle>
+    {/* <BlockTitle>Navigation</BlockTitle>
     <List>
       <ListItem link="/about/" title="About"/>
       <ListItem link="/form/" title="Form"/>
-    </List>
+    </List> */}
     {/* Page content
 
     <BlockTitle>Modals</BlockTitle>
@@ -71,7 +71,7 @@ export default () => (
       </Row>
     </Block>
 */}
-    <List>
+    {/* <List>
       <ListItem
         title="Dynamic (Component) Route"
         link="/dynamic-route/blog/45/post/125/?foo=bar#about"
@@ -84,7 +84,7 @@ export default () => (
         title="Request Data & Load"
         link="/request-and-load/user/123456/"
       />
-    </List> 
-
+    </List>  */}
+  <Item />
   </Page>
 );
