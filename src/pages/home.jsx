@@ -71,7 +71,7 @@ export default () => (
       </Row>
     </Block>
 */}
-    {/* <List>
+    <List>
       <ListItem
         title="Dynamic (Component) Route"
         link="/dynamic-route/blog/45/post/125/?foo=bar#about"
@@ -84,7 +84,11 @@ export default () => (
         title="Request Data & Load"
         link="/request-and-load/user/123456/"
       />
-    </List>  */}
+      <ListItem
+        title="New Data"
+        link="new/12"
+      />
+    </List> 
   <Item />
   </Page>
 );
