@@ -1,52 +1,86 @@
 import React, { Component } from "react";
-import { Page, Navbar, Block, Link } from "framework7-react";
+import axios from "axios";
+import {
+  Page,
+  Navbar,
+  Block,
+  Link,
+  ListInput,
+  List,
+  Icon,
+  Button,
+} from "framework7-react";
 
 export default class DynamicRoutePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { pictogramId: "default" };
+
+
+    this.handleChange = this.handleChange.bind(this);
+    this.changeId = this.changeId.bind(this);
+  }
+
+  handleChange(event) {
+    let id = event.target.value;
+    this.setState({ pictogramId: id });
+  }
+  
+
+  async getPictogramList() {
+    const id = this.state.pictogramId;
+      const response = await axios
+      .get(`https://api.arasaac.org/api/pictograms/es/search/${id}`)
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .catch((err) => {
+        console.log(`Request error: ${err}`);
+        return err;
+      });
+
+    console.log(`Response: ${response}`)
+  }
+  changeId(event){
+    console.log(event.target.value)
+    this.setState({pictogramId: 'hola'})
+    console.log(this.state)
+  }
+
+  componentDidMount() {
+    console.log(`axios: ${this.state.pictogramId}`)
+    axios
+      .get(`https://api.arasaac.org/api/pictograms/es/search/adios`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(`Request error: ${err}`);
+      });
+  }
+
   render() {
     return (
       <Page>
         <Navbar title="New Page" backLink="Back" />
-        <Block strong>
-          <p>The new Social Story has the id: </p>
-          <ul>
-            <li>
-              <b>Url:</b> {this.$f7route.url}
-            </li>
-            <li>
-              <b>Path:</b> {this.$f7route.path}
-            </li>
-            <li>
-              <b>Hash:</b> {this.$f7route.hash}
-            </li>
-            <li>
-              <b>Params:</b>
-              <ul>
-                {Object.keys(this.$f7route.params).map((key) => (
-                  <li key={key}>
-                    <b>{key}:</b> {this.$f7route.params[key]}
-                  </li>
-                ))}
-              </ul>
-            </li>
-            <li>
-              <b>Query:</b>
-              <ul>
-                {Object.keys(this.$f7route.query).map((key) => (
-                  <li key={key}>
-                    <b>{key}:</b> {this.$f7route.query[key]}
-                  </li>
-                ))}
-              </ul>
-            </li>
-            <li>
-              <b>Route:</b> {this.$f7route.route.path}
-            </li>
-          </ul>
+        <Block>
+          <List noHairlinesMd>
+            <ListInput
+              label="Pictogram"
+              floatingLabel
+              type="text"
+              placeholder="Write a word"
+              clearButton
+              onChange={this.handleChange}
+            >
+              <Icon f7="search" slot="media" />
+            </ListInput>
+          </List>
+          <Button fill onClick={this.getPictogramList.bind(this)}>Search</Button>
         </Block>
-        <Block strong>
-          <Link onClick={() => this.$f7router.back()}>
-            Go back via Router API
-          </Link>
+        <Block>
+          <p>{this.state.pictogramId}</p>
         </Block>
       </Page>
     );
