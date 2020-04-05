@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import {
   Page,
   Navbar,
@@ -10,6 +9,9 @@ import {
   Icon,
   Button,
 } from "framework7-react";
+
+import {searchPictograms} from '../services/arasaac'
+import { object } from "prop-types";
 
 export default class DynamicRoutePage extends Component {
   constructor(props) {
@@ -28,30 +30,18 @@ export default class DynamicRoutePage extends Component {
   
 
   async getPictogramList() {
-    const id = this.state.pictogramId;
-      const response = await axios
-      .get(`https://api.arasaac.org/api/pictograms/es/search/${id}`)
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .catch((err) => {
-        console.log(`Request error: ${err}`);
-        return err;
-      });
-
-    console.log(`Response: ${response}`)
+    const text = this.state.pictogramId;
+    const response = await searchPictograms(text)
+    .then(res =>res).catch(err => err)
+    console.log(response)
   }
   changeId(event){
-    console.log(event.target.value)
-    this.setState({pictogramId: 'hola'})
-    console.log(this.state)
+    this.setState({pictogramId: event.target.value})
   }
 
   componentDidMount() {
-    console.log(`axios: ${this.state.pictogramId}`)
-    axios
-      .get(`https://api.arasaac.org/api/pictograms/es/search/adios`)
+    console.log(`Aqui comença la festa`)
+    searchPictograms('hola')
       .then((res) => {
         console.log(res);
       })

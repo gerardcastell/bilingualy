@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { todosRef } from "../../js/firebase";
+import { todosRef } from "../../services/firebase";
 
 const Item = () => {
   const [count, setCount] = useState("default");

@@ -88,6 +88,10 @@ export default () => (
         title="New Data"
         link="new/12"
       />
+      <ListItem
+        title="Test page"
+        link="/test/"
+      />
     </List> 
   <Item />
   </Page>
