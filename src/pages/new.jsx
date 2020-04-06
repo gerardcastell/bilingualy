@@ -10,8 +10,9 @@ import {
   Button,
 } from "framework7-react";
 
+import PictoDrag from '../components/core/PictogramDragable'
 import { searchPictograms } from "../services/arasaac";
-import { object } from "prop-types";
+
 
 export default class DynamicRoutePage extends Component {
   constructor(props) {
@@ -32,7 +33,12 @@ export default class DynamicRoutePage extends Component {
       return (
         <div>
           {this.state.images.map((item, idx) => (
-            <img src={item} key={idx} alt=''style={{height: '100px', width: '100px'}} />
+            <img
+              src={item}
+              key={idx}
+              alt=''
+              style={{ height: "100px", width: "100px" }}
+            />
           ))}
         </div>
       );
@@ -75,8 +81,8 @@ export default class DynamicRoutePage extends Component {
           </Button>
         </Block>
         <Block>
-          {this.showImages()}
-        </Block>
+          <PictoDrag />
+          {this.showImages()}</Block>
       </Page>
     );
   }
