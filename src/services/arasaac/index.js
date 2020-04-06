@@ -4,11 +4,11 @@ import axios from 'axios';
 //follow this pages for axios guide: https://www.codementor.io/@capocaccia/keeping-axios-where-it-belongs-o6xidrkrk
 
 const arasaacApi = axios.create({
-    baseURL: 'https://api.arasaac.org/api/pictograms/es/'
+    baseURL: 'https://api.arasaac.org/api/pictograms/'
 });
 
 async function getPictogramsByText(text) {
-    const response = await arasaacApi.get(`search/${text}`)
+    const response = await arasaacApi.get(`es/search/${text}`)
         .then(res => {
             return res
         }).catch(err => {
@@ -28,10 +28,10 @@ async function getPictogramsById(id) {
     });
     // const response = await axios({
     //   method: 'get',
-    //   url: `https://api.arasaac.org/api/pictograms/es/${id}`,
+    //   url: `https://api.arasaac.org/api/pictograms/${id}`,
     //   headers: {"accept": "image/png"}
     // })
-     
+    
     return response;
 }
 
@@ -41,13 +41,15 @@ export async function searchPictograms(searchText) {
     if (idMatches.length === 0) {
         return null;
     } else {
-        const responses = [];
-        const response = await getPictogramsById(idMatches[0])
-        .then(res => {
-            return res
-        }).catch(err =>{
-            return err
+        const responses = idMatches.map(match => {
+            return `https://api.arasaac.org/api/pictograms/${match}`;
         })
-        return response
+        // const response = await getPictogramsById(idMatches[0])
+        // .then(res => {
+        //     return res
+        // }).catch(err =>{
+        //     return err
+        // })
+        return responses;
     }
 }
