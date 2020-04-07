@@ -7,6 +7,8 @@ import './PictogramDraggable.scss'
 
 const PictogramDragable = () => {
   const [deltaPosition, setDeltaPosition] = useState({ x: 0, y: 0 })
+  const divRef = React.useRef()
+
   const handleDrag = (e, position) => {
     const { x, y } = position;
       setDeltaPosition({ x, y })
@@ -14,20 +16,28 @@ const PictogramDragable = () => {
 
   const relocateDrop = (e, position) => {
     const { x, y } = position;
+    console.log(divRef.current.style.width)
 
     if(x > 250){
-      setDeltaPosition({ x:400, y:25 })
-
+      if(y > 250){
+        setDeltaPosition({ x:400, y:400 })
+      }else{
+        setDeltaPosition({ x:400, y:25 })
+      }
     }else{
-
-      setDeltaPosition({ x, y })
+      if(y > 250){
+        setDeltaPosition({ x:25, y:400 })
+      }else{
+        setDeltaPosition({ x:25, y:25 })
+      }
     }
   }
+
 
   return (
     <div>
       <h1>React Draggable</h1>
-      <div className="box" style={{ height: '500px', width: '500px', position: 'relative', overflow: 'hidden', padding: '10px', backgroundColor: 'gray' }}>
+      <div id="divR" ref={divRef} className="box" style={{ height: '500px', width: '500px', position: 'relative', overflow: 'hidden', padding: '10px', backgroundColor: 'gray' }}>
         <Draggable bounds="parent" defaultPosition={{ x: 25, y: 25 }} onDrag={handleDrag} position={deltaPosition} onStop={relocateDrop}>
           <div className="box box-draggable">
             <div>1</div>
