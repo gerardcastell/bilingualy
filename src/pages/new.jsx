@@ -10,7 +10,7 @@ import {
   Button,
 } from "framework7-react";
 
-import PictoDrag from '../components/core/PictogramDragable'
+import PictoDrag from '../components/core/PictogramDraggable/PictogramDraggable'
 import { searchPictograms } from "../services/arasaac";
 
 
