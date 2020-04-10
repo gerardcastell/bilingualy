@@ -7,36 +7,57 @@ import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 class MyFirstGrid extends React.Component {
-    render() {
-        const currentWidth = (window.innerWidth - 50) / 3;
 
+    constructor(props) {
+        super(props);
+        this.state = { width: 0, height: 0 };
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    }
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions() {
+        const currentWidth = (window.innerWidth - 50) / 3;
+        this.setState({ width: currentWidth, height: window.innerHeight });
+    }
+
+    render() {
         // {lg: layout1, md: layout2, ...}
         const layouts = {
             lg: [
                 { i: '1', x: 0, y: 0, w: 4, h: 1 },
                 { i: '2', x: 4, y: 0, w: 4, h: 1 },
                 { i: '3', x: 8, y: 0, w: 4, h: 1 },
-                { i: '4', x: 8, y: 0, w: 4, h: 1 },
+                { i: '4', x: 0, y: 1, w: 4, h: 1 },
+                { i: '5', x: 4, y: 2, w: 4, h: 1 },
             ]
         };
         return (
-            <div>
-
+            <div >
                 <ResponsiveGridLayout
                     measureBeforeMount={true}
                     isResizable={false}
-                    verticalCompact={true}
+                    verticalCompact={false}
                     compactType='vertical'
-                    style={{ backgroundColor: 'gray', maxHeight: currentWidth + 10 }}
+                    style={{ backgroundColor: 'gray', height: '300px' }}
                     className="layout" layouts={layouts}
                     breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                     cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
-                    rowHeight={currentWidth}
+                    rowHeight={this.state.width}
                 >
-                    <img src="https://static.arasaac.org/pictograms/2340/2340_2500.png" key="4" />
+                    {/* <img src="https://static.arasaac.org/pictograms/2340/2340_2500.png" key="4" /> */}
                     <div style={{ backgroundColor: 'red' }} key="1">1</div>
                     <div style={{ backgroundColor: 'blue' }} key="2">2</div>
                     <div style={{ backgroundColor: 'green' }} key="3">3</div>
+                    {/* <div style={{ backgroundColor: 'pink' }} key="4">3</div>
+                    <div style={{ backgroundColor: 'black' }} key="5">3</div> */}
                 </ResponsiveGridLayout>
             </div>
 
