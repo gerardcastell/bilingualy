@@ -12,7 +12,6 @@ async function getPictogramsByText(text) {
         .then(res => {
             return res
         }).catch(err => {
-
             console.log(`Error searching pictograms: ${err}`)
             return [];
         })
@@ -26,11 +25,6 @@ async function getPictogramsById(id) {
         .then(images => {
             return URL.createObjectURL(images)
         });
-    // const response = await axios({
-    //   method: 'get',
-    //   url: `https://api.arasaac.org/api/pictograms/${id}`,
-    //   headers: {"accept": "image/png"}
-    // })
 
     return response;
 }
@@ -44,12 +38,6 @@ export async function searchPictograms(searchText) {
         const responses = idMatches.map(match => {
             return `${Constants.ARASAAC_API}${match}`;
         })
-        // const response = await getPictogramsById(idMatches[0])
-        // .then(res => {
-        //     return res
-        // }).catch(err =>{
-        //     return err
-        // })
         return responses;
     }
 }
