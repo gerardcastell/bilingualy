@@ -1,10 +1,10 @@
 import axios from 'axios';
-
+import * as Constants from '../../constants'
 
 //follow this pages for axios guide: https://www.codementor.io/@capocaccia/keeping-axios-where-it-belongs-o6xidrkrk
 
 const arasaacApi = axios.create({
-    baseURL: 'https://api.arasaac.org/api/pictograms/'
+    baseURL: Constants.ARASAAC_API
 });
 
 async function getPictogramsByText(text) {
@@ -21,17 +21,17 @@ async function getPictogramsByText(text) {
 
 async function getPictogramsById(id) {
     const response = await arasaacApi.get(`${id}`,
-    {responseType: 'arraybuffer'})
-    .then(res => res.blob())
-    .then(images =>{
-        return URL.createObjectURL(images)
-    });
+        { responseType: 'arraybuffer' })
+        .then(res => res.blob())
+        .then(images => {
+            return URL.createObjectURL(images)
+        });
     // const response = await axios({
     //   method: 'get',
     //   url: `https://api.arasaac.org/api/pictograms/${id}`,
     //   headers: {"accept": "image/png"}
     // })
-    
+
     return response;
 }
 
@@ -42,7 +42,7 @@ export async function searchPictograms(searchText) {
         return null;
     } else {
         const responses = idMatches.map(match => {
-            return `https://api.arasaac.org/api/pictograms/${match}`;
+            return `${Constants.ARASAAC_API}${match}`;
         })
         // const response = await getPictogramsById(idMatches[0])
         // .then(res => {

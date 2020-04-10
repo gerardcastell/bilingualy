@@ -10,10 +10,10 @@ import {
   Button,
 } from "framework7-react";
 
-import PictoDrag from '../components/core/PictogramDraggable/PictogramDraggable'
-import Grid from '../components/core/Grid/Grid'
+import PictoDrag from "../components/core/PictogramDraggable/PictogramDraggable";
+import Grid from "../components/core/Grid/Grid";
+import GridDnd from "../components/core/Grid/GridDnd";
 import { searchPictograms } from "../services/arasaac";
-
 
 export default class DynamicRoutePage extends Component {
   constructor(props) {
@@ -84,8 +84,9 @@ export default class DynamicRoutePage extends Component {
         <Block>
           {/* <PictoDrag /> */}
           {this.showImages()}
-          <Grid />
-          </Block>
+          {/* <Grid /> */}
+          <GridDnd />
+        </Block>
       </Page>
     );
   }
