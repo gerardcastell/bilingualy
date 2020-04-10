@@ -11,6 +11,7 @@ import {
 } from "framework7-react";
 
 import PictoDrag from '../components/core/PictogramDraggable/PictogramDraggable'
+import Grid from '../components/core/Grid/Grid'
 import { searchPictograms } from "../services/arasaac";
 
 
@@ -81,8 +82,10 @@ export default class DynamicRoutePage extends Component {
           </Button>
         </Block>
         <Block>
-          <PictoDrag />
-          {this.showImages()}</Block>
+          {/* <PictoDrag /> */}
+          {this.showImages()}
+          <Grid />
+          </Block>
       </Page>
     );
   }
