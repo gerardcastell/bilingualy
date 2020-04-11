@@ -4,6 +4,7 @@ import AboutPage from '../pages/about.jsx';
 import FormPage from '../pages/form.jsx';
 import NewPage from '../pages/new.jsx';
 import TestPage from '../pages/test.jsx';
+import CreatePage from '../pages/create.jsx';
 
 
 import DynamicRoutePage from '../pages/dynamic-route.jsx';
@@ -22,6 +23,10 @@ var routes = [
   {
     path: '/about/',
     component: AboutPage,
+  },
+  {
+    path: '/create/',
+    component: CreatePage,
   },
   {
     path: '/test/',

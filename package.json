@@ -63,7 +63,6 @@
     "react-grid-layout": "^0.18.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
     "template7": "^1.4.2"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Page,
   Navbar,
@@ -14,22 +14,34 @@ import {
   ListItem,
   Row,
   Col,
-  Button
-} from 'framework7-react';
+  Button,
+} from "framework7-react";
 
-import {CardItem} from '../components/core/CardItem/CardItem'
-import Item from '../components/core/Item'
+import { CardItem } from "../components/core/CardItem/CardItem";
+import Item from "../components/core/Item";
 
 export default () => (
-  <Page name="home">
+  <Page name='home'>
     {/* Top Navbar */}
     <Navbar>
       <NavLeft>
-        <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="left" />
+        <Link
+          iconIos='f7:menu'
+          iconAurora='f7:menu'
+          iconMd='material:menu'
+          panelOpen='left'
+        />
       </NavLeft>
-      <NavTitle className="header-title display-flex justify-content-center align-items-center">Bilingualy</NavTitle>
+      <NavTitle className='header-title display-flex justify-content-center align-items-center'>
+        Bilingualy
+      </NavTitle>
       <NavRight>
-        <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="right" />
+        <Link
+          iconIos='f7:menu'
+          iconAurora='f7:menu'
+          iconMd='material:menu'
+          panelOpen='right'
+        />
       </NavRight>
     </Navbar>
 
@@ -73,26 +85,21 @@ export default () => (
 */}
     <List>
       <ListItem
-        title="Dynamic (Component) Route"
-        link="/dynamic-route/blog/45/post/125/?foo=bar#about"
+        title='Dynamic (Component) Route'
+        link='/dynamic-route/blog/45/post/125/?foo=bar#about'
       />
       <ListItem
-        title="Default Route (404)"
-        link="/load-something-that-doesnt-exist/"
+        title='Default Route (404)'
+        link='/load-something-that-doesnt-exist/'
       />
       <ListItem
-        title="Request Data & Load"
-        link="/request-and-load/user/123456/"
+        title='Request Data & Load'
+        link='/request-and-load/user/123456/'
       />
-      <ListItem
-        title="New Data"
-        link="new/12"
-      />
-      <ListItem
-        title="Test page"
-        link="/test/"
-      />
-    </List> 
-  <Item />
+      <ListItem title='New Data' link='new/12' />
+      <ListItem title='Test page' link='/test/' />
+      <ListItem title='Create page' link='/create/' />
+    </List>
+    <Item />
   </Page>
 );

@@ -23,13 +23,17 @@ Framework7.use(Framework7React);
 
 //Import Redux libraries
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reduxThunk from "redux-thunk";
-import reducers from "./reducers";
+import { createStore } from "redux";
+import rootReducer from "./reducers";
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+
 // Mount React App
 ReactDOM.render(
-  <Provider store={store}>{React.createElement(App)}</Provider>, 
+  <Provider store={store}>{React.createElement(App)}</Provider>,
   document.getElementById("app")
 );

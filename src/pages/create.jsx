@@ -3,16 +3,10 @@ import { Page, Navbar, Block, BlockTitle } from "framework7-react";
 import { useSelector, useDispatch } from "react-redux";
 import allActions from "../js/actions";
 
-const test = () => {
+const createPage = () => {
   const counter = useSelector((state) => state.counter);
   const currentUser = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
-
-  const user = { name: "Rei" };
-
-  useEffect(() => {
-    dispatch(allActions.userActions.setUser(user));
-  }, []);
 
   return (
     <Page>
@@ -49,4 +43,4 @@ const test = () => {
   );
 };
 
-export default test;
+export default createPage;
