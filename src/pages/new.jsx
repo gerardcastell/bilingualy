@@ -10,7 +10,6 @@ import {
   Button,
 } from "framework7-react";
 
-import Grid from "../components/core/Grid/Grid";
 import GridDnd from "../components/core/Grid/GridDnd";
 import { searchPictograms } from "../services/arasaac";
 

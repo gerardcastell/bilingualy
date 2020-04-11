@@ -1,4 +1,4 @@
-.container {
+.dnd-container {
     display: flex;
     touch-action: none;
     width: 800px;
@@ -7,14 +7,11 @@
 
 .dropzone {
     flex: 1;
-    height: 400px;
+    height: 200px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
 }
 
-.dropzone.left {
-    margin-right: 10px;
-}
 
 .grid-item {
     padding: 10px;
@@ -24,14 +21,18 @@
 }
 
 .grid-item-content {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     box-sizing: border-box;
-    background: #08e;
+    background-color: white;
     display: flex;
     justify-content: center;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
     align-items: center;
-    border-radius: 50%;
+    border-radius: 2rem;
+    border-color: black;
+}
+
+.image {
+    pointer-events: none;
+    width: -webkit-fill-available;
 }

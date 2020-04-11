@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     GridContextProvider,
     GridDropZone,
@@ -8,8 +8,8 @@ import {
 import './GridDnd.scss'
 
 const GridDnd = ({ elements }) => {
-    const [items, setItems] = React.useState([]); // supply your own state
-    React.useEffect(
+    const [items, setItems] = useState([]); // supply your own state
+    useEffect(
         () => {
             setItems(elements)
         }, [elements]
@@ -23,33 +23,30 @@ const GridDnd = ({ elements }) => {
 
     return (
         <GridContextProvider onChange={onChange}>
-            <GridDropZone
-                id="items"
-                boxesPerRow={3}
-                rowHeight={200}
-                style={{ height: "200px", width: '800px', backgroundColor: 'gray' }}
-            >
-                {items.map((item, idx) => (
-                    <GridItem key={item}>
-                        <div
-                            key={idx}
-                            style={{
-                                pointerEvents: "none",
-                                width: "100%",
-                                height: "100%",
-                                backgroundColor: 'white',
-                                zIndex: 30
-                            }}
-                        >
-                            <img
-                                src={item}
-                                alt=''
-                                style={{ zIndex: 20, height: "100px", width: "100px", display: 'flex', justifyContent: 'center' }}
-                            />
-                        </div>
-                    </GridItem>
-                ))}
-            </GridDropZone>
+            <div className="dnd-container">
+
+                <GridDropZone
+                    className="dropzone"
+                    id="items"
+                    boxesPerRow={3}
+                    rowHeight={200}
+                >
+                    {items.map((item, idx) => (
+                        <GridItem key={idx}>
+                            <div className="grid-item">
+                                <div className="grid-item-content">
+                                    <img
+                                        src={item}
+                                        alt=''
+                                        className="image"
+                                    />
+                                </div>
+                            </div>
+                        </GridItem>
+                    ))}
+                </GridDropZone>
+            </div>
+
         </GridContextProvider>
     );
 }
