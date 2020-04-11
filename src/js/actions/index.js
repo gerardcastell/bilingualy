@@ -17,10 +17,12 @@
 
 import counterActions from './counterActions'
 import userActions from './userActions'
+import socialStoryActions from './socialStory'
 
 const allActions = {
   counterActions,
-  userActions
+  userActions,
+  socialStoryActions
 }
 
 export default allActions

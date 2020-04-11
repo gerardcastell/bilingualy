@@ -1,11 +1,11 @@
-
+import React from 'react';
 import {
     GridContextProvider,
     GridDropZone,
     GridItem,
     swap
 } from "react-grid-dnd";
-import React from 'react';
+import './GridDnd.scss'
 
 const GridDnd = ({ elements }) => {
     const [items, setItems] = React.useState([]); // supply your own state
@@ -27,23 +27,25 @@ const GridDnd = ({ elements }) => {
                 id="items"
                 boxesPerRow={3}
                 rowHeight={200}
-                style={{ height: "400px", backgroundColor: 'gray' }}
+                style={{ height: "200px", width: '800px', backgroundColor: 'gray' }}
             >
-                {items.map((item) => (
+                {items.map((item, idx) => (
                     <GridItem key={item}>
                         <div
+                            key={idx}
                             style={{
+                                pointerEvents: "none",
                                 width: "100%",
                                 height: "100%",
-                                backgroundColor: 'white'
+                                backgroundColor: 'white',
+                                zIndex: 30
                             }}
                         >
                             <img
                                 src={item}
                                 alt=''
-                                style={{ height: "100px", width: "100px", display: 'flex', justifyContent: 'center' }}
+                                style={{ zIndex: 20, height: "100px", width: "100px", display: 'flex', justifyContent: 'center' }}
                             />
-                            {item}
                         </div>
                     </GridItem>
                 ))}
