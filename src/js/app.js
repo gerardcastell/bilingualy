@@ -24,7 +24,7 @@ Framework7.use(Framework7React);
 //Import Redux libraries
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "./reducers";
+import rootReducer from "../redux/reducers";
 import thunk from 'redux-thunk'
 
 //Import Firebase modules

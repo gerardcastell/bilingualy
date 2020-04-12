@@ -13,15 +13,18 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import GridDnd from "../components/core/Grid/GridDnd";
 import { searchPictograms } from "../services/arasaac";
-import allActions from "../js/actions";
+import allActions from "../redux/actions";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 const createPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [word, setWord] = useState("");
+  const store = useSelector((state) => state);
   const counter = useSelector((state) => state.counter);
   const currentUser = useSelector((state) => state.currentUser);
   const currentStory = useSelector((state) => state.socialStory);
   const dispatch = useDispatch();
+  useFirestoreConnect("prueba");
 
   const handleChange = (event) => {
     let id = event.target.value;
@@ -57,6 +60,10 @@ const createPage = () => {
         ))}
       </div>
     );
+  };
+
+  const downloadSocialStories = () => {
+    console.log(store);
   };
 
   const showSearchResults = () => {
@@ -130,6 +137,13 @@ const createPage = () => {
         </Button>
         <Button fill onClick={saveSocialStory} style={{ marginTop: "10px" }}>
           Save Pictogram
+        </Button>
+        <Button
+          fill
+          onClick={downloadSocialStories}
+          style={{ marginTop: "10px" }}
+        >
+          Download social stories
         </Button>
         {showSearchResults()}
       </Block>

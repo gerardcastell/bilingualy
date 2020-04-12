@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Page, Navbar, Block, BlockTitle } from "framework7-react";
 import { useSelector, useDispatch } from "react-redux";
-import allActions from "../js/actions";
+import allActions from "../redux/actions";
 
 const test = () => {
   const counter = useSelector((state) => state.counter);
