@@ -1,38 +1,39 @@
 .dnd-container {
     display: flex;
     touch-action: none;
-    width: 800px;
+    width: 90vw;
     margin: 1rem auto;
 }
 
 .dropzone {
     flex: 1;
-    height: 200px;
+    height: 20vh;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
 }
 
 
 .grid-item {
-    padding: 10px;
     width: 100%;
-    height: 100%;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid-item-content {
-    width: 100px;
-    height: 100px;
+    width: 27vw;
     box-sizing: border-box;
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 2rem;
-    border-color: black;
+    border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .image {
+    padding: .4rem;
     pointer-events: none;
     width: -webkit-fill-available;
 }
