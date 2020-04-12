@@ -23,17 +23,40 @@ Framework7.use(Framework7React);
 
 //Import Redux libraries
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducers";
+import thunk from 'redux-thunk'
+
+//Import Firebase modules
+import firebase from 'firebase/app';
+import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
+import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
+
+//Import Firebase project config
+import firebaseConfig from '../services/firebase/config'
 
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+  compose(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(firebase, firebaseConfig),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
+const reactReduxFirebaseProps = {
+  firebase,
+  config: firebaseConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+};
 
 // Mount React App
 ReactDOM.render(
-  <Provider store={store}>{React.createElement(App)}</Provider>,
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
+      {React.createElement(App)}
+    </ReactReduxFirebaseProvider>
+  </Provider>,
   document.getElementById("app")
 );

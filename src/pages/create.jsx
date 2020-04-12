@@ -40,6 +40,10 @@ const createPage = () => {
     dispatch(allActions.socialStoryActions.addPictogram(id));
   };
 
+  const saveSocialStory = () => {
+    dispatch(allActions.socialStoryActions.createSocialStory(currentStory));
+  };
+
   const showCurrentStory = () => {
     return (
       <div>
@@ -123,6 +127,9 @@ const createPage = () => {
         </List>
         <Button fill onClick={getPictogramList}>
           Search
+        </Button>
+        <Button fill onClick={saveSocialStory} style={{ marginTop: "10px" }}>
+          Save Pictogram
         </Button>
         {showSearchResults()}
       </Block>
