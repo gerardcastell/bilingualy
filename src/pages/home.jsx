@@ -14,14 +14,24 @@ import {
   ListItem,
   Row,
   Col,
+  Panel,
+  View,
   Button,
 } from "framework7-react";
 
 import { CardItem } from "../components/core/CardItem/CardItem";
-import Item from "../components/core/Item";
+import { useSelector } from "react-redux";
 
 export default () => (
   <Page name='home'>
+    <Panel left cover themeDark>
+      <View>
+        <Page>
+          <Navbar title='Left Panel' />
+          <Block>Left panel content goes here</Block>
+        </Page>
+      </View>
+    </Panel>
     {/* Top Navbar */}
     <Navbar>
       <NavLeft>
@@ -97,9 +107,8 @@ export default () => (
         link='/request-and-load/user/123456/'
       />
       <ListItem title='New Data' link='new/12' />
-      <ListItem title='Test page' link='/test/' />
+      <ListItem title='Login page' link='/login/' />
       <ListItem title='Create page' link='/create/' />
     </List>
-    <Item />
   </Page>
 );

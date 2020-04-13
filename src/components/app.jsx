@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   App,
@@ -19,11 +19,10 @@ import {
   ListItem,
   ListInput,
   ListButton,
-  BlockFooter
-} from 'framework7-react';
+  BlockFooter,
+} from "framework7-react";
 
-
-import routes from '../js/routes';
+import routes from "../js/routes";
 
 export default class extends React.Component {
   constructor() {
@@ -32,57 +31,48 @@ export default class extends React.Component {
     this.state = {
       // Framework7 Parameters
       f7params: {
-        name: 'Bilingualy', // App name
-        theme: 'auto', // Automatic theme detection
-
+        name: "Bilingualy", // App name
+        theme: "auto", // Automatic theme detection
 
         // App routes
         routes: routes,
         // Register service worker
         serviceWorker: {
-          path: '/service-worker.js',
+          path: "/service-worker.js",
         },
       },
       // Login screen demo data
-      username: '',
-      password: '',
-    }
+      username: "",
+      password: "",
+    };
   }
   render() {
     return (
-      <App params={ this.state.f7params } >
-
-        {/* Left panel with cover effect*/}
-        <Panel left cover themeDark>
-          <View>
-            <Page>
-              <Navbar title="Left Panel"/>
-              <Block>Left panel content goes here</Block>
-            </Page>
-          </View>
-        </Panel>
-
-
+      <App params={this.state.f7params}>
         {/* Right panel with reveal effect*/}
         <Panel right reveal themeDark>
           <View>
             <Page>
-              <Navbar title="Right Panel"/>
+              <Navbar title='Right Panel' />
               <Block>Right panel content goes here</Block>
             </Page>
           </View>
         </Panel>
 
-
         {/* Your main view, should have "view-main" class */}
-        <View main className="safe-areas" url="/" pushState={true} pushStateSeparator="#"/>
-
+        <View
+          main
+          className='safe-areas'
+          url='/'
+          pushState={true}
+          pushStateSeparator='#'
+        />
 
         {/* Popup */}
-        <Popup id="my-popup">
+        <Popup id='my-popup'>
           <View>
             <Page>
-              <Navbar title="Popup">
+              <Navbar title='Popup'>
                 <NavRight>
                   <Link popupClose>Close</Link>
                 </NavRight>
@@ -94,49 +84,59 @@ export default class extends React.Component {
           </View>
         </Popup>
 
-        <LoginScreen id="my-login-screen">
+        <LoginScreen id='my-login-screen'>
           <View>
             <Page loginScreen>
               <LoginScreenTitle>Login</LoginScreenTitle>
               <List form>
                 <ListInput
-                  type="text"
-                  name="username"
-                  placeholder="Your username"
+                  type='text'
+                  name='username'
+                  placeholder='Your username'
                   value={this.state.username}
-                  onInput={(e) => this.setState({username: e.target.value})}
+                  onInput={(e) => this.setState({ username: e.target.value })}
                 ></ListInput>
                 <ListInput
-                  type="password"
-                  name="password"
-                  placeholder="Your password"
+                  type='password'
+                  name='password'
+                  placeholder='Your password'
                   value={this.state.password}
-                  onInput={(e) => this.setState({password: e.target.value})}
+                  onInput={(e) => this.setState({ password: e.target.value })}
                 ></ListInput>
               </List>
               <List>
-                <ListButton title="Sign In" onClick={() => this.alertLoginData()} />
+                <ListButton
+                  title='Sign In'
+                  onClick={() => this.alertLoginData()}
+                />
                 <BlockFooter>
-                  Some text about login information.<br />Click "Sign In" to close Login Screen
+                  Some text about login information.
+                  <br />
+                  Click "Sign In" to close Login Screen
                 </BlockFooter>
               </List>
             </Page>
           </View>
         </LoginScreen>
       </App>
-    )
+    );
   }
   alertLoginData() {
-    this.$f7.dialog.alert('Username: ' + this.state.username + '<br>Password: ' + this.state.password, () => {
-      this.$f7.loginScreen.close();
-    });
+    this.$f7.dialog.alert(
+      "Username: " +
+        this.state.username +
+        "<br>Password: " +
+        this.state.password,
+      () => {
+        this.$f7.loginScreen.close();
+      }
+    );
   }
   componentDidMount() {
     this.$f7ready((f7) => {
-
       // Call F7 APIs here
-      console.log(this.$f7)
-      console.log(this.$f7.eventsListeners)
+      console.log(this.$f7);
+      console.log(this.$f7.eventsListeners);
     });
   }
 }

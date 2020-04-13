@@ -3,13 +3,21 @@ import HomePage from '../pages/home.jsx';
 import AboutPage from '../pages/about.jsx';
 import FormPage from '../pages/form.jsx';
 import NewPage from '../pages/new.jsx';
-import TestPage from '../pages/test.jsx';
+import LoginPage from '../pages/login.jsx';
 import CreatePage from '../pages/create.jsx';
 
 
 import DynamicRoutePage from '../pages/dynamic-route.jsx';
 import RequestAndLoad from '../pages/request-and-load.jsx';
 import NotFoundPage from '../pages/404.jsx';
+
+function checkAuth(to, from, resolve, reject) {
+  if (true) {
+    resolve();
+  } else {
+    reject();
+  }
+}
 
 var routes = [
   {
@@ -23,14 +31,16 @@ var routes = [
   {
     path: '/about/',
     component: AboutPage,
+
   },
   {
     path: '/create/',
     component: CreatePage,
   },
   {
-    path: '/test/',
-    component: TestPage,
+    path: '/login/',
+    component: LoginPage,
+
   },
   {
     path: '/form/',
