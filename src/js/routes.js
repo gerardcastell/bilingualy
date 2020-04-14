@@ -36,6 +36,7 @@ var routes = [
   {
     path: '/create/',
     component: CreatePage,
+
   },
   {
     path: '/login/',

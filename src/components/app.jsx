@@ -24,6 +24,7 @@ import {
 
 import routes from "../js/routes";
 
+import LoginView from "../pages/login";
 export default class extends React.Component {
   constructor() {
     super();
@@ -41,9 +42,6 @@ export default class extends React.Component {
           path: "/service-worker.js",
         },
       },
-      // Login screen demo data
-      username: "",
-      password: "",
     };
   }
   render() {
@@ -57,76 +55,8 @@ export default class extends React.Component {
           pushState={true}
           pushStateSeparator='#'
         />
-
-        {/* Popup */}
-        <Popup id='my-popup'>
-          <View>
-            <Page>
-              <Navbar title='Popup'>
-                <NavRight>
-                  <Link popupClose>Close</Link>
-                </NavRight>
-              </Navbar>
-              <Block>
-                <p>Popup content goes here.</p>
-              </Block>
-            </Page>
-          </View>
-        </Popup>
-
-        <LoginScreen id='my-login-screen'>
-          <View>
-            <Page loginScreen>
-              <LoginScreenTitle>Login</LoginScreenTitle>
-              <List form>
-                <ListInput
-                  type='text'
-                  name='username'
-                  placeholder='Your username'
-                  value={this.state.username}
-                  onInput={(e) => this.setState({ username: e.target.value })}
-                ></ListInput>
-                <ListInput
-                  type='password'
-                  name='password'
-                  placeholder='Your password'
-                  value={this.state.password}
-                  onInput={(e) => this.setState({ password: e.target.value })}
-                ></ListInput>
-              </List>
-              <List>
-                <ListButton
-                  title='Sign In'
-                  onClick={() => this.alertLoginData()}
-                />
-                <BlockFooter>
-                  Some text about login information.
-                  <br />
-                  Click "Sign In" to close Login Screen
-                </BlockFooter>
-              </List>
-            </Page>
-          </View>
-        </LoginScreen>
+        <LoginView />
       </App>
     );
-  }
-  alertLoginData() {
-    this.$f7.dialog.alert(
-      "Username: " +
-        this.state.username +
-        "<br>Password: " +
-        this.state.password,
-      () => {
-        this.$f7.loginScreen.close();
-      }
-    );
-  }
-  componentDidMount() {
-    this.$f7ready((f7) => {
-      // Call F7 APIs here
-      console.log(this.$f7);
-      console.log(this.$f7.eventsListeners);
-    });
   }
 }

@@ -16,6 +16,8 @@ import { searchPictograms } from "../services/arasaac";
 import allActions from "../redux/actions";
 import { useFirestoreConnect } from "react-redux-firebase";
 
+import { f7 } from "framework7-react";
+
 const createPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [word, setWord] = useState("");
