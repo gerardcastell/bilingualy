@@ -4,6 +4,8 @@ import {
   Navbar,
   Block,
   BlockTitle,
+  NavRight,
+  Link,
   Button,
   LoginScreen,
   View,
@@ -12,10 +14,13 @@ import {
   ListInput,
   ListButton,
   BlockFooter,
+  Popup,
 } from "framework7-react";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../redux/actions";
 import { f7 } from "framework7-react";
+
+import SignUpPopup from "../components/core/SignUp";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -77,7 +82,10 @@ const LoginPage = () => {
           <List>
             <ListButton title='Sign In' onClick={signIn} />
             <BlockFooter>{showSignedIn()}</BlockFooter>
+            <Button popupOpen='.signup-popup'>Sign Up</Button>
           </List>
+
+          <SignUpPopup />
         </Page>
       </View>
     </LoginScreen>
