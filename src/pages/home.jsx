@@ -20,28 +20,12 @@ import {
 } from "framework7-react";
 
 import { CardItem } from "../components/core/CardItem/CardItem";
-import { useSelector } from "react-redux";
-
+import SidePanel from "../components/core/SidePanel";
 export default () => (
   <Page name='home'>
-    <Panel left cover themeDark>
-      <View>
-        <Page>
-          <Navbar title='Left Panel' />
-          <Block>Left panel content goes here</Block>
-        </Page>
-      </View>
-    </Panel>
+    <SidePanel />
     {/* Top Navbar */}
     <Navbar>
-      <NavLeft>
-        <Link
-          iconIos='f7:menu'
-          iconAurora='f7:menu'
-          iconMd='material:menu'
-          panelOpen='left'
-        />
-      </NavLeft>
       <NavTitle className='header-title display-flex justify-content-center align-items-center'>
         Bilingualy
       </NavTitle>

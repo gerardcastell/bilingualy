@@ -79,6 +79,7 @@ const LoginPage = () => {
         <ListButton onClick={signOut}>Sign Out</ListButton>
         {/* <BlockFooter>Some text about login information.</BlockFooter> */}
         {showSignedIn()}
+        <ListButton back>Back to dashboard</ListButton>
       </List>
     </Page>
   );

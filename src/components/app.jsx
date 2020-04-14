@@ -49,16 +49,6 @@ export default class extends React.Component {
   render() {
     return (
       <App params={this.state.f7params}>
-        {/* Right panel with reveal effect*/}
-        <Panel right reveal themeDark>
-          <View>
-            <Page>
-              <Navbar title='Right Panel' />
-              <Block>Right panel content goes here</Block>
-            </Page>
-          </View>
-        </Panel>
-
         {/* Your main view, should have "view-main" class */}
         <View
           main

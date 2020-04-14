@@ -22,7 +22,9 @@ import App from "../components/app.jsx";
 Framework7.use(Framework7React);
 
 //Import Redux libraries
-import { Provider } from "react-redux";
+import {
+  Provider, useSelector
+} from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../redux/reducers";
 import thunk from 'redux-thunk'
@@ -30,8 +32,7 @@ import thunk from 'redux-thunk'
 //Import Firebase modules
 import firebase from 'firebase/app';
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
-import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
-
+import { ReactReduxFirebaseProvider, getFirebase, isLoaded } from 'react-redux-firebase'
 //Import Firebase project config
 import firebaseConfig from '../services/firebase/config'
 
@@ -44,6 +45,12 @@ const store = createStore(
   )
 );
 
+const AuthIsLoaded = ({ children }) => {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return <div>splash screen...</div>;
+  return children
+}
+
 const reactReduxFirebaseProps = {
   firebase,
   config: firebaseConfig,
@@ -55,7 +62,9 @@ const reactReduxFirebaseProps = {
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
-      {React.createElement(App)}
+      <AuthIsLoaded>
+        {React.createElement(App)}
+      </AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("app")
