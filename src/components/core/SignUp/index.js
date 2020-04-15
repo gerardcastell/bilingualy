@@ -20,16 +20,20 @@ import { useSelector, useDispatch } from "react-redux";
 import actions from "../../../redux/actions";
 import { f7 } from "framework7-react";
 
-const SignUpPopup = () => {
+const SignUpPopup = ({ openSignUp, closeSignUp }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
 
     const auth = useSelector((state) => state.auth);
     const firebase = useSelector((state) => state.firebase);
-    const store = useSelector((state) => state);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log('HA ENTRADO EN EL USE EFFECT')
+        closeSignUp()
+    }, [firebase.auth.uid])
 
     const signIn = () => {
         dispatch(actions.authActions.signUp({ username, email, password }));
@@ -42,7 +46,7 @@ const SignUpPopup = () => {
     };
 
     return (
-        <Popup className='signup-popup' swipeToClose>
+        <Popup className='signup-popup' opened={openSignUp} swipeToClose>
             <Page loginScreen>
                 <Navbar>
                     <NavRight>
@@ -84,6 +88,8 @@ const SignUpPopup = () => {
                     <List style={{ margin: 0, width: "100%", marginTop: "1.5rem" }}>
                         <Button onClick={signIn}>Sign Up</Button>
                         <BlockFooter>{showSignedIn()}</BlockFooter>
+                        <p>{openSignUp ? 'OpenSignUp true' : 'OpenSignUp false'}</p>
+                        <p>{firebase.auth.uid ? 'firebase.auth.uid true' : 'firebase.auth.uid false'}</p>
                     </List>
                 </div>
             </Page>

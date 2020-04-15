@@ -25,17 +25,17 @@ import SignUpPopup from "../components/core/SignUp";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [opened, setOpened] = useState(true);
+  const [openSignIn, setOpenSignIn] = useState(true);
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   const auth = useSelector((state) => state.auth);
   const firebase = useSelector((state) => state.firebase);
-  const store = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setOpened(firebase.auth.uid ? false : true);
-  });
+    setOpenSignIn(firebase.auth.uid ? false : true);
+  }, [firebase.auth]);
 
   const signIn = () => {
     // f7.dialog.preloader();
@@ -45,11 +45,8 @@ const LoginPage = () => {
     // }, 2000);
   };
 
-  const signOut = () => {
-    dispatch(actions.authActions.signOut());
-    setTimeout(() => {
-      console.log(store);
-    }, 2000);
+  const closeSignUp = () => {
+    setOpenSignUp(false);
   };
 
   const showSignedIn = () => {
@@ -59,7 +56,7 @@ const LoginPage = () => {
   };
 
   return (
-    <LoginScreen opened={opened} id='my-login-screen'>
+    <LoginScreen opened={openSignIn} id='my-login-screen'>
       <View>
         <Page loginScreen>
           <LoginScreenTitle>Bilingualy</LoginScreenTitle>
@@ -82,10 +79,16 @@ const LoginPage = () => {
           <List>
             <ListButton title='Sign In' onClick={signIn} />
             <BlockFooter>{showSignedIn()}</BlockFooter>
-            <Button popupOpen='.signup-popup'>Sign Up</Button>
+            <Button
+              popupOpen='.signup-popup'
+              onClick={() => setOpenSignUp(true)}
+            >
+              Sign Up
+            </Button>
           </List>
 
-          <SignUpPopup />
+          {/* <SignUpPopup /> */}
+          <SignUpPopup openSignUp={openSignUp} closeSignUp={closeSignUp} />
         </Page>
       </View>
     </LoginScreen>
