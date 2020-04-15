@@ -35,7 +35,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     setOpenSignIn(firebase.auth.uid ? false : true);
-    console.log("USE EFFECT EXECUTED");
   }, [firebase.auth]);
 
   const signIn = () => {
@@ -79,7 +78,6 @@ const LoginPage = () => {
             <Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
           </List>
 
-          {/* <SignUpPopup /> */}
           <SignUpPopup openSignUp={openSignUp} closeSignUp={closeSignUp} />
         </Page>
       </View>

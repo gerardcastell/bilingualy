@@ -18,40 +18,44 @@ import {
   View,
   Button,
 } from "framework7-react";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 import { CardItem } from "../components/core/CardItem/CardItem";
 import SidePanel from "../components/core/SidePanel";
-export default () => (
-  <Page name='home'>
-    <SidePanel />
-    {/* Top Navbar */}
-    <Navbar>
-      <NavTitle className='header-title display-flex justify-content-center align-items-center'>
-        Bilingualy
-      </NavTitle>
-      <NavRight>
-        <Link
-          iconIos='f7:menu'
-          iconAurora='f7:menu'
-          iconMd='material:menu'
-          panelOpen='right'
-        />
-      </NavRight>
-    </Navbar>
+export default () => {
+  useFirestoreConnect(["users", "prueba"]);
 
-    <CardItem />
-    {/* Page content
+  return (
+    <Page name='home'>
+      <SidePanel />
+      {/* Top Navbar */}
+      <Navbar>
+        <NavTitle className='header-title display-flex justify-content-center align-items-center'>
+          Bilingualy
+        </NavTitle>
+        <NavRight>
+          <Link
+            iconIos='f7:menu'
+            iconAurora='f7:menu'
+            iconMd='material:menu'
+            panelOpen='right'
+          />
+        </NavRight>
+      </Navbar>
+
+      <CardItem />
+      {/* Page content
     <Block strong>
       <p>Here is your blank Framework7 app. Let's see what we have here.</p>
     </Block>
 */}
 
-    {/* <BlockTitle>Navigation</BlockTitle>
+      {/* <BlockTitle>Navigation</BlockTitle>
     <List>
       <ListItem link="/about/" title="About"/>
       <ListItem link="/form/" title="Form"/>
     </List> */}
-    {/* Page content
+      {/* Page content
 
     <BlockTitle>Modals</BlockTitle>
     <Block strong>
@@ -77,22 +81,23 @@ export default () => (
       </Row>
     </Block>
 */}
-    <List>
-      <ListItem
-        title='Dynamic (Component) Route'
-        link='/dynamic-route/blog/45/post/125/?foo=bar#about'
-      />
-      <ListItem
-        title='Default Route (404)'
-        link='/load-something-that-doesnt-exist/'
-      />
-      <ListItem
-        title='Request Data & Load'
-        link='/request-and-load/user/123456/'
-      />
-      <ListItem title='New Data' link='new/12' />
-      <ListItem title='Login page' link='/login/' />
-      <ListItem title='Create page' link='/create/' />
-    </List>
-  </Page>
-);
+      <List>
+        <ListItem
+          title='Dynamic (Component) Route'
+          link='/dynamic-route/blog/45/post/125/?foo=bar#about'
+        />
+        <ListItem
+          title='Default Route (404)'
+          link='/load-something-that-doesnt-exist/'
+        />
+        <ListItem
+          title='Request Data & Load'
+          link='/request-and-load/user/123456/'
+        />
+        <ListItem title='New Data' link='new/12' />
+        <ListItem title='Login page' link='/login/' />
+        <ListItem title='Create page' link='/create/' />
+      </List>
+    </Page>
+  );
+};

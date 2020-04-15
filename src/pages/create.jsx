@@ -22,8 +22,6 @@ const createPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [word, setWord] = useState("");
   const store = useSelector((state) => state);
-  const counter = useSelector((state) => state.counter);
-  const currentUser = useSelector((state) => state.currentUser);
   const currentStory = useSelector((state) => state.socialStory);
   const dispatch = useDispatch();
   useFirestoreConnect("prueba");

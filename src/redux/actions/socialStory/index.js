@@ -12,16 +12,19 @@ const addPictogram = (payload) => {
     }
 }
 
-const createSocialStory = payload => (dispatch, getState, { getFirebase, getFirestore }) => {
+const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    firestore.collection('prueba').add({
-        pictograms: payload,
-        createdAt: new Date()
-    }).then(() => {
+
+    try {
+        await firestore.collection('prueba').add({
+            pictograms: payload,
+            createdAt: new Date()
+        })
         dispatch({ type: CREATE_SOCIAL_STORY, payload })
-    }).catch((err) => {
-        dispatch({ type: CREATE_SOCIAL_STORY_ERROR, err })
-    })
+
+    } catch (e) {
+        dispatch({ type: CREATE_SOCIAL_STORY_ERROR, err: e })
+    }
 }
 
 export default {

@@ -36,6 +36,14 @@ import { ReactReduxFirebaseProvider, getFirebase, isLoaded } from 'react-redux-f
 //Import Firebase project config
 import firebaseConfig from '../services/firebase/config'
 
+//construct required properties
+const profileSpecificProps = {
+  userProfile: 'users',
+  useFirestoreForProfile: true,
+  enableRedirectHandling: false,
+  resetBeforeLogin: false
+}
+
 const store = createStore(
   rootReducer,
   compose(
@@ -54,6 +62,7 @@ const AuthIsLoaded = ({ children }) => {
 const reactReduxFirebaseProps = {
   firebase,
   config: firebaseConfig,
+  config: profileSpecificProps,
   dispatch: store.dispatch,
   createFirestoreInstance
 };
