@@ -31,12 +31,11 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('HA ENTRADO EN EL USE EFFECT')
         closeSignUp()
     }, [firebase.auth.uid])
 
-    const signIn = () => {
-        dispatch(actions.authActions.signUp({ username, email, password }));
+    const signIn = async () => {
+        await dispatch(actions.authActions.signUp({ username, email, password }));
     };
 
     const showSignedIn = () => {

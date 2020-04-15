@@ -1,20 +1,22 @@
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNOUT_SUCCESS, SIGNOUT_FAILED, SIGNUP_SUCCESS, SIGNUP_FAILED } from '../../../constants';
+import { firebaseWrapper } from '../../../utils'
+import { f7 } from "framework7-react";
 
-const signIn = (payload) => (dispatch, getState, { getFirebase }) => {
+const signIn = (payload) => async (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
-    firebase.auth().signInWithEmailAndPassword(
-        payload.email,
-        payload.password
-    ).then(() => {
-        dispatch({
-            type: LOGIN_SUCCESS,
-        })
-    }).catch((err) => {
-        dispatch({
-            type: LOGIN_FAILED,
-            err
-        })
-    })
+    f7.dialog.preloader()
+    try {
+        await firebaseWrapper(firebase.auth().signInWithEmailAndPassword(
+            payload.email,
+            payload.password
+        ))
+        dispatch({ type: LOGIN_SUCCESS })
+    } catch (err) {
+        console.log('jajaj', err)
+        dispatch({ type: LOGIN_FAILED, err })
+    }
+    f7.dialog.close()
+
 }
 
 const signOut = () => (dispatch, getState, { getFirebase }) => {
@@ -35,6 +37,7 @@ const signUp = (payload) => (dispatch, getState, { getFirebase, getFirestore }) 
     const firebase = getFirebase();
     const firestore = getFirestore();
 
+    f7.dialog.preloader()
     firebase.auth().createUserWithEmailAndPassword(
         payload.email,
         payload.password
@@ -51,8 +54,9 @@ const signUp = (payload) => (dispatch, getState, { getFirebase, getFirestore }) 
             type: SIGNUP_FAILED,
             err
         })
+    }).finally(() => {
+        f7.dialog.close()
     })
-
 }
 
 

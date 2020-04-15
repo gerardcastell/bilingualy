@@ -35,14 +35,11 @@ const LoginPage = () => {
 
   useEffect(() => {
     setOpenSignIn(firebase.auth.uid ? false : true);
+    console.log("USE EFFECT EXECUTED");
   }, [firebase.auth]);
 
   const signIn = () => {
-    // f7.dialog.preloader();
     dispatch(actions.authActions.signIn({ email, password }));
-    // setTimeout(() => {
-    //   console.log(store);
-    // }, 2000);
   };
 
   const closeSignUp = () => {
@@ -63,7 +60,7 @@ const LoginPage = () => {
           <List form>
             <ListInput
               type='text'
-              name='Email'
+              name='text'
               placeholder='Your email'
               value={email}
               onInput={(e) => setEmail(e.target.value)}
@@ -79,12 +76,7 @@ const LoginPage = () => {
           <List>
             <ListButton title='Sign In' onClick={signIn} />
             <BlockFooter>{showSignedIn()}</BlockFooter>
-            <Button
-              popupOpen='.signup-popup'
-              onClick={() => setOpenSignUp(true)}
-            >
-              Sign Up
-            </Button>
+            <Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
           </List>
 
           {/* <SignUpPopup /> */}
