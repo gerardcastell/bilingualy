@@ -14,10 +14,13 @@ const addPictogram = (payload) => {
 
 const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-
+    const profile = getState().firebase.profile;
+    const userId = getState().firebase.auth.uid;
     try {
         await firestore.collection('prueba').add({
             pictograms: payload,
+            username: profile.username,
+            userId,
             createdAt: new Date()
         })
         dispatch({ type: CREATE_SOCIAL_STORY, payload })

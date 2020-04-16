@@ -21,7 +21,7 @@ import { f7 } from "framework7-react";
 const createPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [word, setWord] = useState("");
-  const store = useSelector((state) => state);
+  const stories = useSelector((state) => state.firestore.ordered.prueba);
   const currentStory = useSelector((state) => state.socialStory);
   const dispatch = useDispatch();
   useFirestoreConnect("prueba");
@@ -63,7 +63,8 @@ const createPage = () => {
   };
 
   const downloadSocialStories = () => {
-    console.log(store);
+    console.log(stories);
+    f7.dialog.alert((stories? `${stories.length} lodaded` : 'No story loaded'),'Social stories')
   };
 
   const showSearchResults = () => {
@@ -136,7 +137,7 @@ const createPage = () => {
           Search
         </Button>
         <Button fill onClick={saveSocialStory} style={{ marginTop: "10px" }}>
-          Save Pictogram
+          Save Social Story
         </Button>
         <Button
           fill

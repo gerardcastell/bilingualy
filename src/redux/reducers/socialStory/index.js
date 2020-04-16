@@ -10,6 +10,7 @@ export default (state = initialState, { type, payload }) => {
         case ADD_PICTOGRAM:
             return [...state, payload];
         case CREATE_SOCIAL_STORY:
+            console.log('Created social story')
             return initialState;
         case CREATE_SOCIAL_STORY_ERROR:
             console.error(`Created social story FAIL: ${payload}`);
