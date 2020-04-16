@@ -24,7 +24,7 @@ const createPage = () => {
   const stories = useSelector((state) => state.firestore.ordered.prueba);
   const currentStory = useSelector((state) => state.socialStory);
   const dispatch = useDispatch();
-  useFirestoreConnect("prueba");
+  useFirestoreConnect({collection: 'prueba', orderBy:['createdAt', 'desc']});
 
   const handleChange = (event) => {
     let id = event.target.value;

@@ -97,6 +97,7 @@ export default () => {
         <ListItem title='New Data' link='new/12' />
         <ListItem title='Login page' link='/login/' />
         <ListItem title='Create page' link='/create/' />
+        <ListItem title='About page' link='/about/' />
       </List>
     </Page>
   );
