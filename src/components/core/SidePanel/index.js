@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import actions from '../../../redux/actions'
 
-const index = () => {
+const SidePanel = () => {
     const auth = useSelector(state => state.firebase.auth)
     const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ const index = () => {
         }
     }
     return (
-        <Panel right cover themeDark swipe>
+        <Panel right cover themeDark>
             <View>
                 <Page>
                     <Navbar title='My profile' />
@@ -35,4 +35,4 @@ const index = () => {
     )
 }
 
-export default index
+export default SidePanel
