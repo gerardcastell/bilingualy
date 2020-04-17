@@ -13,54 +13,42 @@ import {
   Icon,
   Button,
 } from "framework7-react";
-import { useSelector, useDispatch } from "react-redux";
-import GridDnd from "../components/core/Grid/GridDnd";
-import { searchPictograms } from "../services/arasaac";
-import Stepper from "../components/core/Stepper";
-import allActions from "../redux/actions";
-import { useFirestoreConnect } from "react-redux-firebase";
-
 import { f7 } from "framework7-react";
 
-const createPage = () => {
-  const currentStory = useSelector((state) => state.socialStory);
+import Stepper from "../components/core/Stepper";
+import Step1 from "../components/Create/Step1";
 
-  const dispatch = useDispatch();
-
-  const getPictogramList = async () => {
-    const text = word;
-    const response = await searchPictograms(text)
-      .then((res) => res)
-      .catch((err) => err);
-    setSearchResults(response);
+const createPage = ({ f7router }) => {
+  const activeStep = 0;
+  const steps = [
+    { title: "Design" },
+    { title: "Title" },
+    { title: "Tags" },
+    { title: "Save" },
+  ];
+  const confirmBack = () => {
+    f7.dialog.confirm(
+      "Current social story will be deleted if you go on. Go back anyway?",
+      () => {
+        f7router.navigate("/create/");
+      },
+      () => {
+        f7router.navigate("/");
+        console.log("Delete current object");
+      }
+    );
   };
 
   return (
     <Page>
-      <Navbar title='Create your social story' backLink='Back' />
-      <Fab position='left-bottom' slot='fixed' text='Add'>
-        <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
-        <Icon ios='f7:xmark' aurora='f7:xmark' md='material:close'></Icon>
-        <FabButtons position='top'>
-          <FabButton label='Pictogram'>
-            <Icon md='material:portrait' />
-          </FabButton>
-          <FabButton label='Photo'>
-            <Icon md='material:photo_camera' />
-          </FabButton>
-          <FabButton label='Draw'>
-            <Icon md='material:brush' />
-          </FabButton>
-        </FabButtons>
-      </Fab>
-      <Block>
-        {/* <GridDnd elements={currentStory} /> */}
-        <Stepper />
-        <Button fill>Search</Button>
-      </Block>
-      <Button raised round>
-        Round
-      </Button>
+      <Navbar
+        onClickBack={confirmBack}
+        title='Create your social story'
+        backLink='Back'
+      />
+      <Stepper steps={steps} activeStep={activeStep} />
+
+      <Step1 />
     </Page>
   );
 };

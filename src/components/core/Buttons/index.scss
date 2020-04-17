@@ -1,0 +1,17 @@
+.next-button,
+.back-button {
+    width: 6.14rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 1rem;
+}
+
+.next-button {
+    right: 1rem;
+}
+
+.back-button {
+    left: 1rem;
+}

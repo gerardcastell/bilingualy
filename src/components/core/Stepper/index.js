@@ -1,11 +1,18 @@
 import Stepper from 'react-stepper-horizontal';
+import React from 'react';
+import './index.scss'
 
-import React from 'react'
-
-const CustomStepper = ({steps, activeStep}) => {
+const CustomStepper = ({ steps, activeStep }) => {
     return (
         <>
-            <Stepper titleTop="6"	 activeTitleColor="#468edds" activeColor="#468edd" completeColor="#468edd" steps={ [{title: 'Step One'}, {title: 'Step Two'}, {title: 'Step Three'}, {title: 'Step Four'}] } activeStep={ 1 } />
+            <Stepper
+                // circleTop={0}
+                completeBarColor="#68a3e3"
+                completeColor="#68a3e3"
+                activeColor="#468edd"
+                steps={steps}
+                activeStep={activeStep}
+            />
         </>
     )
 }
