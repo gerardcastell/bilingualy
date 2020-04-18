@@ -1,0 +1,6 @@
+.fab-buttons-top,
+.fab-buttons-bottom {
+    // left: 50%;
+    // width: var(--f7-fab-button-size);
+    margin-left: calc(-1 * var(--f7-fab-button-size) - 0.5rem) !important;
+}

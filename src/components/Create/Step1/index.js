@@ -22,6 +22,8 @@ import PictoBrowser from './PictoBrowser.jsx'
 import Actions from '../../../redux/actions'
 import { useSelector, useDispatch } from "react-redux";
 
+import './index.scss'
+
 const Step1 = () => {
   const [openPictoBrowser, setOpenPictoBrowser] = useState(false)
 
@@ -51,7 +53,7 @@ const Step1 = () => {
           <FabButton label='Photo'>
             <Icon md='material:photo_camera' />
           </FabButton>
-          <FabButton label='Draw'>
+          <FabButton fabClose label='Draw'>
             <Icon md='material:brush' />
           </FabButton>
         </FabButtons>
