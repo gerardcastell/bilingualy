@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Page,
     Navbar,
@@ -7,9 +7,6 @@ import {
     Link,
     ListInput,
     List,
-    Fab,
-    FabButtons,
-    FabButton,
     Icon,
     Button,
 } from "framework7-react";
@@ -20,6 +17,8 @@ import BackButton from '../../core/Buttons/BackButton';
 import { useSelector } from 'react-redux'
 
 const Step2 = () => {
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const story = useSelector(state => state.socialStory);
 
     return (
@@ -27,7 +26,31 @@ const Step2 = () => {
             <BlockTitle>Add a title and a description:</BlockTitle>
             <Block>
             </Block>
-            <NextButton disabled={true} />
+
+            <List inlineLabels noHairlines >
+                <ListInput
+                    label="Title"
+                    type="text"
+                    placeholder="Enter a title"
+                    required
+                    validate
+                    clearButton
+                    onChange={(e) => setTitle(e.target.value)}
+                >
+                </ListInput>
+                <ListInput
+                    label="Description"
+                    type="textarea"
+                    placeholder="Enter a brief description about the social story"
+                    required
+                    validate
+                    clearButton
+                    onChange={(e) => setDescription(e.target.value)}
+                >
+                </ListInput>
+            </List>
+
+            <NextButton disabled={title === '' || description === ''} />
             <BackButton />
         </>
     )

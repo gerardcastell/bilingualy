@@ -7,7 +7,13 @@ import {
     MOVE_TO_STEP,
 } from '../../../constants'
 
-const initialState = { pictograms: [], step: 0 };
+const initialState = {
+    step: 1,
+    pictograms: [],
+    title: null,
+    description: null
+};
+
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_PICTOGRAM:

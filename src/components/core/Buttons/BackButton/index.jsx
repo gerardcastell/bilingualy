@@ -9,9 +9,9 @@ const BackButton = () => {
       small
       raised
       round
-      iconMaterial='arrow_forward'
+      iconMaterial='arrow_back'
     >
-      Next
+      Back
     </Button>
   );
 };
