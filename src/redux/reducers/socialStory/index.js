@@ -2,10 +2,12 @@ import {
     ADD_PICTOGRAM,
     UNDO_PICTOGRAM,
     CREATE_SOCIAL_STORY,
-    CREATE_SOCIAL_STORY_ERROR
+    CREATE_SOCIAL_STORY_ERROR,
+    NEXT_STEP,
+    MOVE_TO_STEP,
 } from '../../../constants'
 
-const initialState = { pictograms: [] };
+const initialState = { pictograms: [], step: 0 };
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_PICTOGRAM:
@@ -28,6 +30,18 @@ export default (state = initialState, action) => {
         case CREATE_SOCIAL_STORY_ERROR:
             console.error(`Created social story FAIL: ${action.payload}`);
             return state;
+
+        case NEXT_STEP:
+            return {
+                ...state,
+                step: state.step + 1
+            }
+
+        case MOVE_TO_STEP:
+            return {
+                ...state,
+                step: action.payload
+            }
 
         default:
             return state;

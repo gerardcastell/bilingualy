@@ -31,6 +31,8 @@ const Step1 = () => {
   const [prevStory, setPrevStory] = useState([]);
   const [key, setKey] = useState(0)
 
+  const dispatch = useDispatch()
+
   const addPictogram = (id) => {
     setPrevStory([...prevStory, story])
     setStory([...story, { key, url: id, position: story.length }])
@@ -60,7 +62,7 @@ const Step1 = () => {
       <Block>
         <GridDnd elements={story} onUpdate={(newStory) => setUpdatedStory(newStory)} />
       </Block>
-      <NextButton disabled={!story.length} />
+      <NextButton clicked={() => dispatch(Actions.socialStoryActions.nextStep())} disabled={!story.length} />
       <UndoButton clicked={onUndo} disabled={!prevStory.length} />
       <Fab position='left-bottom' slot='fixed' text='Add'>
         <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>

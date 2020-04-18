@@ -17,9 +17,12 @@ import { f7 } from "framework7-react";
 
 import Stepper from "../components/core/Stepper";
 import Step1 from "../components/Create/Step1/index";
+import Step2 from "../components/Create/Step2/index";
+
+import { useDispatch, useSelector } from "react-redux";
 
 const createPage = ({ f7router }) => {
-  const activeStep = 0;
+  const activeStep = useSelector((state) => state.socialStory.step);
   const steps = [
     { title: "Design" },
     { title: "Title" },
@@ -39,6 +42,21 @@ const createPage = ({ f7router }) => {
     );
   };
 
+  const showStep = () => {
+    switch (activeStep) {
+      case 0:
+        return <Step1 />;
+      case 1:
+        return <Step2 />;
+      case 2:
+        return <Step1 />;
+      case 3:
+        return <Step1 />;
+      default:
+        return <p>Unexpected error</p>;
+    }
+  };
+
   return (
     <Page>
       <Navbar
@@ -47,8 +65,8 @@ const createPage = ({ f7router }) => {
         backLink='Back'
       />
       <Stepper steps={steps} activeStep={activeStep} />
-
-      <Step1 />
+      {showStep()}
+      {/* <Step1 /> */}
     </Page>
   );
 };

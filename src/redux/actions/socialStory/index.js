@@ -2,6 +2,8 @@ import {
     ADD_PICTOGRAM,
     UNDO_PICTOGRAM,
     UPDATE_PICTOGRAMS_POSITION,
+    NEXT_STEP,
+    MOVE_TO_STEP,
     CREATE_SOCIAL_STORY,
     CREATE_SOCIAL_STORY_ERROR
 } from '../../../constants'
@@ -19,8 +21,8 @@ const undoPictogram = () => {
     }
 }
 
-const updatePositions = (payload) => {
-
+const nextStep = () => {
+    return ({ type: NEXT_STEP })
 }
 
 const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -44,5 +46,6 @@ const createSocialStory = payload => async (dispatch, getState, { getFirebase, g
 export default {
     addPictogram,
     undoPictogram,
-    createSocialStory
+    createSocialStory,
+    nextStep
 }

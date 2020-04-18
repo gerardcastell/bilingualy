@@ -15,3 +15,5 @@ export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
 export const SIGNOUT_FAILED = "SIGNOUT_FAILED";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILED = "SIGNUP_FAILED";
+export const NEXT_STEP = "NEXT_STEP";
+export const MOVE_TO_STEP = "MOVE_TO_STEP";
