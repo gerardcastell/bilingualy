@@ -27,11 +27,15 @@ const PictoBrowser = ({ opened, onClose }) => {
   const dispatch = useDispatch();
 
   const handleSearchChange = (event) => {
-    let text = event.target.value;
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      getPictogramList(text);
-    }, 500);
+    let text = event.target.value.trim();
+    if (text !== "") {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        getPictogramList(text);
+      }, 500);
+    } else {
+      setSearchResults([]);
+    }
   };
 
   const getPictogramList = async (text) => {
