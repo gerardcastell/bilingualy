@@ -2,7 +2,7 @@ import React from "react";
 import "../index.scss";
 import { Button } from "framework7-react";
 
-const UndoButton = ({ clicked }) => {
+const UndoButton = ({ clicked, disabled }) => {
   return (
     <Button
       onClick={() => clicked()}
@@ -11,6 +11,7 @@ const UndoButton = ({ clicked }) => {
       fill
       raised
       round
+      disabled={disabled}
       iconMaterial='undo'
     >
       Undo

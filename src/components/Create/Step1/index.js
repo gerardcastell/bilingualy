@@ -26,18 +26,13 @@ import './index.scss'
 
 const Step1 = () => {
   const [openPictoBrowser, setOpenPictoBrowser] = useState(false)
-  const [story, setStory] = useState([{ key: 2, url: "https://api.arasaac.org/api/pictograms/29566", position: 0 },
-  { key: 0, url: "https://api.arasaac.org/api/pictograms/3021", position: 1 },
-  { key: 3, url: "https://api.arasaac.org/api/pictograms/3021", position: 2 },
-  { key: 1, url: "https://api.arasaac.org/api/pictograms/7041", position: 3 }]);
+  const [story, setStory] = useState([]);
   const [updatedStory, setUpdatedStory] = useState([]);
+  const [prevStory, setPrevStory] = useState([]);
   const [key, setKey] = useState(0)
-  // const currentStory = useSelector((state) => {
-  //   const items = state.socialStory.pictograms;
-  //   return items.map(item => item.url)
-  // });
 
   const addPictogram = (id) => {
+    setPrevStory([...prevStory, story])
     setStory([...story, { key, url: id, position: story.length }])
     setUpdatedStory([...story, { key, url: id, position: story.length }])
     setKey(key + 1)
@@ -47,13 +42,16 @@ const Step1 = () => {
     const newStory = updatedStory.map((item, idx) => {
       return { ...item, position: idx }
     })
-    setStory(newStory)
+    setPrevStory([...prevStory, story]);
+    setStory(newStory);
   }
 
-  const dispatch = useDispatch()
-
   const onUndo = () => {
-    dispatch(Actions.socialStoryActions.undoPictogram())
+    const previousStates = prevStory
+    const lastState = previousStates.pop();
+    setStory(lastState);
+    setUpdatedStory(lastState);
+    setPrevStory(previousStates);
   }
 
   return (
@@ -63,7 +61,7 @@ const Step1 = () => {
         <GridDnd elements={story} onUpdate={(newStory) => setUpdatedStory(newStory)} />
       </Block>
       <NextButton />
-      <UndoButton clicked={onUndo} />
+      <UndoButton clicked={onUndo} disabled={!prevStory.length} />
       <Fab position='left-bottom' slot='fixed' text='Add'>
         <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
         <Icon ios='f7:xmark' aurora='f7:xmark' md='material:close'></Icon>
