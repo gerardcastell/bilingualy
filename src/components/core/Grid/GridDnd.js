@@ -14,7 +14,7 @@ const GridDnd = ({ elements }) => {
             setItems(elements)
         }, [elements]
     );
-    // target id will only be set if dragging from one dropzone to another.
+
     function onChange(sourceId, sourceIndex, targetIndex, targetId) {
         const nextState = swap(items, sourceIndex, targetIndex);
         console.log(`Next state: ${nextState}`);

@@ -1,14 +1,20 @@
 import {
     ADD_PICTOGRAM,
+    UNDO_PICTOGRAM,
     CREATE_SOCIAL_STORY,
     CREATE_SOCIAL_STORY_ERROR
 } from '../../../constants'
-
 
 const addPictogram = (payload) => {
     return {
         type: ADD_PICTOGRAM,
         payload
+    }
+}
+
+const undoPictogram = () => {
+    return {
+        type: UNDO_PICTOGRAM
     }
 }
 
@@ -32,5 +38,6 @@ const createSocialStory = payload => async (dispatch, getState, { getFirebase, g
 
 export default {
     addPictogram,
+    undoPictogram,
     createSocialStory
 }

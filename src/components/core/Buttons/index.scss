@@ -1,5 +1,6 @@
 .next-button,
-.back-button {
+.back-button,
+.undo-button {
     width: 6.14rem;
     height: 3rem;
     display: flex;
@@ -14,4 +15,8 @@
 
 .back-button {
     left: 1rem;
+}
+
+.undo-button {
+    left: calc(50% - 3rem);
 }
