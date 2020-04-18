@@ -1,6 +1,7 @@
 import {
     ADD_PICTOGRAM,
     UNDO_PICTOGRAM,
+    UPDATE_PICTOGRAMS_POSITION,
     CREATE_SOCIAL_STORY,
     CREATE_SOCIAL_STORY_ERROR
 } from '../../../constants'
@@ -16,6 +17,10 @@ const undoPictogram = () => {
     return {
         type: UNDO_PICTOGRAM
     }
+}
+
+const updatePositions = (payload) => {
+
 }
 
 const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {

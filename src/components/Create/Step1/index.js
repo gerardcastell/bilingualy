@@ -26,12 +26,30 @@ import './index.scss'
 
 const Step1 = () => {
   const [openPictoBrowser, setOpenPictoBrowser] = useState(false)
+  const [story, setStory] = useState([]);
+  const [updatedStory, setUpdatedStory] = useState([]);
+  const [key, setKey] = useState(0)
+  // const currentStory = useSelector((state) => {
+  //   const items = state.socialStory.pictograms;
+  //   return items.map(item => item.url)
+  // });
 
-  const currentStory = useSelector((state) => state.socialStory);
+  const addPictogram = (id) => {
+    setStory([...story, { key, url: id, position: story.length }])
+    setUpdatedStory([...story, { key, url: id, position: story.length }])
+    setKey(key + 1)
+  }
+
+  const updatePictogramPositions = () => {
+    const newStory = updatedStory.map((item, idx) => {
+      return { ...item, position: idx }
+    })
+    setStory(newStory)
+  }
+
   const dispatch = useDispatch()
 
   const onUndo = () => {
-    console.log('clicked')
     dispatch(Actions.socialStoryActions.undoPictogram())
   }
 
@@ -39,7 +57,7 @@ const Step1 = () => {
     <>
       <BlockTitle>Add pictograms to your social story</BlockTitle>
       <Block>
-        <GridDnd elements={currentStory.pictograms} />
+        <GridDnd elements={story} onUpdate={(newStory) => setUpdatedStory(newStory)} />
       </Block>
       <NextButton />
       <UndoButton clicked={onUndo} />
@@ -47,10 +65,10 @@ const Step1 = () => {
         <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
         <Icon ios='f7:xmark' aurora='f7:xmark' md='material:close'></Icon>
         <FabButtons position='top'>
-          <FabButton onClick={() => setOpenPictoBrowser(true)} label='Pictogram'>
+          <FabButton onClick={() => { setOpenPictoBrowser(true); updatePictogramPositions() }} fabClose label='Pictogram'>
             <Icon md='material:portrait' />
           </FabButton>
-          <FabButton label='Photo'>
+          <FabButton fabClose label='Photo'>
             <Icon md='material:photo_camera' />
           </FabButton>
           <FabButton fabClose label='Draw'>
@@ -58,7 +76,7 @@ const Step1 = () => {
           </FabButton>
         </FabButtons>
       </Fab>
-      <PictoBrowser opened={openPictoBrowser} onClose={() => setOpenPictoBrowser(false)} />
+      <PictoBrowser opened={openPictoBrowser} addPictogram={(id) => addPictogram(id)} onClose={() => setOpenPictoBrowser(false)} />
     </>
   );
 };

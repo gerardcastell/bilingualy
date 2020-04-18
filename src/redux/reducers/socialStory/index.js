@@ -9,9 +9,10 @@ const initialState = { pictograms: [] };
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_PICTOGRAM:
+            const index = state.pictograms.length;
             return {
                 ...state,
-                pictograms: [...state.pictograms, action.payload]
+                pictograms: [...state.pictograms, { url: action.payload, position: index }]
             };
 
         case UNDO_PICTOGRAM:

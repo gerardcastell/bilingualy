@@ -7,7 +7,7 @@ import {
 } from "react-grid-dnd";
 import './GridDnd.scss'
 
-const GridDnd = ({ elements }) => {
+const GridDnd = ({ elements, onUpdate }) => {
     const [items, setItems] = useState([]); // supply your own state
     useEffect(
         () => {
@@ -19,6 +19,7 @@ const GridDnd = ({ elements }) => {
         const nextState = swap(items, sourceIndex, targetIndex);
         console.log(`Next state: ${nextState}`);
         setItems(nextState);
+        onUpdate(nextState)
     }
 
     return (
@@ -31,12 +32,12 @@ const GridDnd = ({ elements }) => {
                     boxesPerRow={3}
                     rowHeight={200}
                 >
-                    {items.map((item, idx) => (
-                        <GridItem key={idx}>
+                    {items.map((item) => (
+                        <GridItem key={item.key}>
                             <div className="grid-item">
                                 <div className="grid-item-content">
                                     <img
-                                        src={item}
+                                        src={item.url}
                                         alt=''
                                         className="image"
                                     />

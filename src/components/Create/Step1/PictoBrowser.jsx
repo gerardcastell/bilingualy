@@ -14,17 +14,12 @@ import {
   f7,
 } from "framework7-react";
 
-import { useDispatch } from "react-redux";
-import Actions from "../../../redux/actions";
-
 import { searchPictograms } from "../../../services/arasaac";
 
-const PictoBrowser = ({ opened, onClose }) => {
+const PictoBrowser = ({ opened, addPictogram, onClose }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [errorMsg, setErrorMsg] = useState();
   let timeout = 0;
-
-  const dispatch = useDispatch();
 
   const handleSearchChange = (event) => {
     let text = event.target.value.trim();
@@ -87,7 +82,7 @@ const PictoBrowser = ({ opened, onClose }) => {
   };
 
   const confirmPictogram = (id) => {
-    dispatch(Actions.socialStoryActions.addPictogram(id));
+    addPictogram(id);
     onClose();
   };
 
