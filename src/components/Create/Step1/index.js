@@ -60,7 +60,7 @@ const Step1 = () => {
       <Block>
         <GridDnd elements={story} onUpdate={(newStory) => setUpdatedStory(newStory)} />
       </Block>
-      <NextButton />
+      <NextButton disabled={!story.length} />
       <UndoButton clicked={onUndo} disabled={!prevStory.length} />
       <Fab position='left-bottom' slot='fixed' text='Add'>
         <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
