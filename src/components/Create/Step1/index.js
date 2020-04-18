@@ -26,7 +26,10 @@ import './index.scss'
 
 const Step1 = () => {
   const [openPictoBrowser, setOpenPictoBrowser] = useState(false)
-  const [story, setStory] = useState([]);
+  const [story, setStory] = useState([{ key: 2, url: "https://api.arasaac.org/api/pictograms/29566", position: 0 },
+  { key: 0, url: "https://api.arasaac.org/api/pictograms/3022", position: 1 },
+  { key: 3, url: "https://api.arasaac.org/api/pictograms/3021", position: 2 },
+  ]);
   const [updatedStory, setUpdatedStory] = useState([]);
   const [prevStory, setPrevStory] = useState([]);
   const [key, setKey] = useState(0)
