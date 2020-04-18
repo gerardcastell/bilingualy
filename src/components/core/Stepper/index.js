@@ -6,7 +6,6 @@ const CustomStepper = ({ steps, activeStep }) => {
     return (
         <>
             <Stepper
-                // circleTop={0}
                 completeBarColor="#68a3e3"
                 completeColor="#68a3e3"
                 activeColor="#468edd"

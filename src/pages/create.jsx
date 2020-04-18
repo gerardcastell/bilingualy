@@ -16,7 +16,7 @@ import {
 import { f7 } from "framework7-react";
 
 import Stepper from "../components/core/Stepper";
-import Step1 from "../components/Create/Step1";
+import Step1 from "../components/Create/Step1/index";
 
 const createPage = ({ f7router }) => {
   const activeStep = 0;
@@ -30,10 +30,10 @@ const createPage = ({ f7router }) => {
     f7.dialog.confirm(
       "Current social story will be deleted if you go on. Go back anyway?",
       () => {
-        f7router.navigate("/create/");
+        f7router.navigate("/");
       },
       () => {
-        f7router.navigate("/");
+        f7router.navigate("/create/");
         console.log("Delete current object");
       }
     );

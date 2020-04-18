@@ -8,14 +8,18 @@ const arasaacApi = axios.create({
 });
 
 async function getPictogramsByText(text) {
-    const response = await arasaacApi.get(`es/search/${text}`)
-        .then(res => {
-            return res
-        }).catch(err => {
-            console.log(`Error searching pictograms: ${err}`)
+    try {
+        const response = await arasaacApi.get(`es/search/${text}`)
+        return response
+
+    } catch (e) {
+        console.log(e.response.status)
+        if (e.response.status === 404) {
             return [];
-        })
-    return response;
+        }
+        console.log(`Error searching pictograms: ${e}`)
+        return [];
+    }
 }
 
 async function getPictogramsById(id) {
@@ -30,14 +34,20 @@ async function getPictogramsById(id) {
 }
 
 export async function searchPictograms(searchText) {
-    const matches = await getPictogramsByText(searchText);
-    const idMatches = matches.data.map(match => match._id);
-    if (idMatches.length === 0) {
-        return null;
-    } else {
-        const responses = idMatches.map(match => {
-            return `${Constants.ARASAAC_API}${match}`;
-        })
-        return responses;
+    try {
+        const matches = await getPictogramsByText(searchText);
+        console.log(`Matches: ${matches}`)
+        const idMatches = matches.data.map(match => match._id);
+        if (idMatches.length === 0) {
+            return [];
+        } else {
+            const responses = idMatches.map(match => {
+                return `${Constants.ARASAAC_API}${match}`;
+            })
+            return responses;
+        }
+    } catch (e) {
+        console.log(e)
+        return []
     }
 }

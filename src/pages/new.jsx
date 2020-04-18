@@ -24,7 +24,7 @@ const createPage = () => {
   const stories = useSelector((state) => state.firestore.ordered.prueba);
   const currentStory = useSelector((state) => state.socialStory);
   const dispatch = useDispatch();
-  useFirestoreConnect({collection: 'prueba', orderBy:['createdAt', 'desc']});
+  useFirestoreConnect({ collection: "prueba", orderBy: ["createdAt", "desc"] });
 
   const handleChange = (event) => {
     let id = event.target.value;
@@ -64,7 +64,10 @@ const createPage = () => {
 
   const downloadSocialStories = () => {
     console.log(stories);
-    f7.dialog.alert((stories? `${stories.length} lodaded` : 'No story loaded'),'Social stories')
+    f7.dialog.alert(
+      stories ? `${stories.length} lodaded` : "No story loaded",
+      "Social stories"
+    );
   };
 
   const showSearchResults = () => {
@@ -94,32 +97,7 @@ const createPage = () => {
         {/* {showCurrentStory()} */}
         <GridDnd elements={currentStory} />
       </Block>
-      <Block strong>
-        {/* {currentUser.loggedIn ? (
-          <>
-            <h1>Hello, {currentUser.user.name}</h1>
-            <button onClick={() => dispatch(allActions.userActions.logOut())}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <h1>Login</h1>
-            <button
-              onClick={() => dispatch(allActions.userActions.setUser(user))}
-            >
-              Login as Rei
-            </button>
-          </>
-        )}
-        <h1>Counter: {counter}</h1>
-        <button onClick={() => dispatch(allActions.counterActions.increment())}>
-          Increase Counter
-        </button>
-        <button onClick={() => dispatch(allActions.counterActions.decrement())}>
-          Decrease Counter
-        </button> */}
-      </Block>
+      <Block strong></Block>
       <Block>
         <List noHairlinesMd>
           <ListInput
