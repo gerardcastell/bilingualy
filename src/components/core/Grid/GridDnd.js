@@ -30,7 +30,7 @@ const GridDnd = ({ elements, onUpdate }) => {
                     className="dropzone"
                     id="items"
                     boxesPerRow={3}
-                    rowHeight={200}
+                    rowHeight={100}
                 >
                     {items.map((item) => (
                         <GridItem key={item.key}>
