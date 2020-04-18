@@ -36,14 +36,10 @@ async function getPictogramsById(id) {
 export async function searchPictograms(searchText) {
     try {
         const matches = await getPictogramsByText(searchText);
-        console.log(`Matches: ${matches}`)
-        const idMatches = matches.data.map(match => match._id);
-        if (idMatches.length === 0) {
+        if (matches.length) {
             return [];
         } else {
-            const responses = idMatches.map(match => {
-                return `${Constants.ARASAAC_API}${match}`;
-            })
+            const responses = matches.data.map(match => `${Constants.ARASAAC_API}${match._id}`)
             return responses;
         }
     } catch (e) {

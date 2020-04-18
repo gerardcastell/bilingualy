@@ -95,7 +95,6 @@ export default () => {
           link='/request-and-load/user/123456/'
         />
         <ListItem title='New Data' link='new/12' />
-        <ListItem title='Login page' link='/login/' />
         <ListItem title='Create page' link='/create/' />
         <ListItem title='About page' link='/about/' />
       </List>

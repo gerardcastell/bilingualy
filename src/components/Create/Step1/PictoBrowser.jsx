@@ -22,38 +22,40 @@ import { searchPictograms } from "../../../services/arasaac";
 const PictoBrowser = ({ opened, onClose }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [errorMsg, setErrorMsg] = useState();
-  //   const [timeout, settimeout] = useState(0);
   let timeout = 0;
+
   const dispatch = useDispatch();
 
   const handleSearchChange = (event) => {
     let text = event.target.value;
-    // setWord(id);
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
-      console.log("Se lanza la query");
       getPictogramList(text);
-    }, 1000);
+    }, 500);
   };
 
   const getPictogramList = async (text) => {
     f7.preloader.show();
+
     try {
       const response = await searchPictograms(text);
       setSearchResults(response);
       setErrorMsg(null);
     } catch (e) {
-      console.error(e);
       setSearchResults([]);
-      setErrorMsg("There is any match for this search.");
-      //   f7.dialog.alert("Unexpected error has occurred", "Search error");
+      setErrorMsg("There isn't any match for this search.");
     }
 
     f7.preloader.hide();
   };
 
   const selectPictogram = (id) => {
-    dispatch(Actions.socialStoryActions.addPictogram(id));
+    f7.dialog.confirm(
+      "Is this pictogram your final selection?",
+      null,
+      () => confirmPictogram(id),
+      null
+    );
   };
 
   const showSearchResults = () => {
@@ -65,7 +67,7 @@ const PictoBrowser = ({ opened, onClose }) => {
               src={item}
               key={idx}
               alt=''
-              style={{ height: "100px", width: "100px" }}
+              style={{ height: "6.5rem", width: "6.5rem" }}
               onClick={() => selectPictogram(item)}
             />
           ))}
@@ -78,6 +80,11 @@ const PictoBrowser = ({ opened, onClose }) => {
         </>
       );
     }
+  };
+
+  const confirmPictogram = (id) => {
+    dispatch(Actions.socialStoryActions.addPictogram(id));
+    onClose();
   };
 
   return (
@@ -106,9 +113,6 @@ const PictoBrowser = ({ opened, onClose }) => {
                 <Icon f7='search' slot='media' />
               </ListInput>
             </List>
-            <Button fill onClick={getPictogramList}>
-              Search
-            </Button>
             {showSearchResults()}
           </Block>
         </Page>
