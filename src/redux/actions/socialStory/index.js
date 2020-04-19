@@ -5,7 +5,8 @@ import {
     CREATE_SOCIAL_STORY,
     CREATE_SOCIAL_STORY_ERROR,
     ADD_TITLE,
-    ADD_TAGS
+    ADD_TAGS,
+    ADD_PRIVACITY
 } from '../../../constants'
 
 const addPictograms = (payload) => {
@@ -37,6 +38,13 @@ const addTags = (payload) => {
     })
 }
 
+const addPrivacity = (isPublic) => {
+    return ({
+        type: ADD_PRIVACITY,
+        payload: isPublic
+    })
+}
+
 const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
@@ -61,5 +69,6 @@ export default {
     nextStep,
     backStep,
     addTitle,
-    addTags
+    addTags,
+    addPrivacity
 }

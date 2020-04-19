@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import {
     Page,
     Navbar,
@@ -21,7 +21,7 @@ import TagsZone from './TagsZone';
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import Actions from '../../../redux/actions'
+import actions from '../../../redux/actions'
 
 import './style.scss'
 
@@ -29,12 +29,11 @@ const Step3 = () => {
     const [tags, setTags] = useState([])
     const [tagName, setTagName] = useState("")
     const [tagColor, setTagColor] = useState("")
-    const prevStates = useRef([])
     const dispatch = useDispatch();
 
     const nextStep = () => {
-        // dispatch(Actions.socialStoryActions.addTitle({ title, description }))
-        dispatch(Actions.socialStoryActions.nextStep())
+        dispatch(actions.socialStoryActions.addTags(tags))
+        dispatch(actions.socialStoryActions.nextStep())
     }
 
     const handleColorPicker = ({ hex }) => {
@@ -90,29 +89,20 @@ const Step3 = () => {
     }
 
     const addTag = () => {
-        prevStates.current = [...prevStates.current, tags]
         setTags([...tags, { text: tagName, color: tagColor }])
         setTagName("")
-        setTagColor()
-    }
-
-    const undoTag = () => {
-        const cleanedTags = prevStates.current.pop()
-        console.log('prev  es : ', cleanedTags)
-        setTags(cleanedTags)
+        setTagColor("")
     }
 
     const handleDeleteTag = (id) => {
-        let currentTags = tags
-        prevStates.current = [...prevStates.current, tags]
-        setTags(currentTags.filter((a, idx) => idx !== id))
+        setTags(tags.filter((a, idx) => idx !== id))
     }
 
     const showTags = () => {
         if (tags.length) {
             return (tags.map((tag, idx) => {
                 return (
-                    <CustomChip key={idx} id={idx} text={tag.text} color={tag.color} onDelete={() => handleDeleteTag(idx)} />
+                    <CustomChip key={idx} text={tag.text} color={tag.color} onDelete={() => handleDeleteTag(idx)} />
                 )
             }))
         }
@@ -199,16 +189,18 @@ const Step3 = () => {
                         <CustomChip color={tagColor ? tagColor : 'orange'} text={tagName ? tagName : 'Example'} />
                     </Col>
                     <Col>
-                        <Button onClick={() => undoTag()} fill round disabled={!tags.length}>Undo Tag</Button>
                     </Col>
                     <Col>
                         <Button onClick={() => addTag()} fill round disabled={!tagName || !tagColor}>Add Tag</Button>
                     </Col>
                 </Row>
-                <Row>
+
+            </Block>
+            <Block>
+                <h3>Current tags:</h3>
+                <Row className="row-separated">
                     <Col>
                         {showTags()}
-
                     </Col>
                 </Row>
             </Block>

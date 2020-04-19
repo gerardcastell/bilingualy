@@ -6,11 +6,12 @@ import {
     BACK_STEP,
     MOVE_TO_STEP,
     ADD_TITLE,
-    ADD_TAGS
+    ADD_TAGS,
+    ADD_PRIVACITY
 } from '../../../constants'
 
 const initialState = {
-    step: 2,
+    step: 3,
     pictograms: [],
     title: null,
     description: null,
@@ -62,7 +63,13 @@ export default (state = initialState, action) => {
         case ADD_TAGS:
             return {
                 ...state,
-                tags: payload
+                tags: action.payload
+            }
+
+        case ADD_PRIVACITY:
+            return {
+                ...state,
+                public: action.payload
             }
 
         default:
