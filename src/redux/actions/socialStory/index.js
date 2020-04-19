@@ -1,28 +1,33 @@
 import {
-    ADD_PICTOGRAM,
-    UNDO_PICTOGRAM,
-    UPDATE_PICTOGRAMS_POSITION,
+    ADD_PICTOGRAMS,
     NEXT_STEP,
+    BACK_STEP,
     MOVE_TO_STEP,
     CREATE_SOCIAL_STORY,
-    CREATE_SOCIAL_STORY_ERROR
+    CREATE_SOCIAL_STORY_ERROR,
+    ADD_TITLE
 } from '../../../constants'
 
-const addPictogram = (payload) => {
+const addPictograms = (payload) => {
     return {
-        type: ADD_PICTOGRAM,
+        type: ADD_PICTOGRAMS,
         payload
-    }
-}
-
-const undoPictogram = () => {
-    return {
-        type: UNDO_PICTOGRAM
     }
 }
 
 const nextStep = () => {
     return ({ type: NEXT_STEP })
+}
+
+const backStep = () => {
+    return ({ type: BACK_STEP })
+}
+
+const addTitle = (payload) => {
+    return ({
+        type: ADD_TITLE,
+        payload
+    })
 }
 
 const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -44,8 +49,9 @@ const createSocialStory = payload => async (dispatch, getState, { getFirebase, g
 }
 
 export default {
-    addPictogram,
-    undoPictogram,
+    addPictograms,
     createSocialStory,
-    nextStep
+    nextStep,
+    backStep,
+    addTitle
 }

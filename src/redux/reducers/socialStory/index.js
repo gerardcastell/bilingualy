@@ -1,32 +1,28 @@
 import {
-    ADD_PICTOGRAM,
-    UNDO_PICTOGRAM,
+    ADD_PICTOGRAMS,
     CREATE_SOCIAL_STORY,
     CREATE_SOCIAL_STORY_ERROR,
     NEXT_STEP,
+    BACK_STEP,
     MOVE_TO_STEP,
+    ADD_TITLE
 } from '../../../constants'
 
 const initialState = {
-    step: 1,
+    step: 0,
     pictograms: [],
     title: null,
-    description: null
+    description: null,
+    isPublic: false,
+    tags: []
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ADD_PICTOGRAM:
-            const index = state.pictograms.length;
+        case ADD_PICTOGRAMS:
             return {
                 ...state,
-                pictograms: [...state.pictograms, { url: action.payload, position: index }]
-            };
-
-        case UNDO_PICTOGRAM:
-            return {
-                ...state,
-                pictograms: state.pictograms.filter((item, idx) => idx !== (state.pictograms.length - 1))
+                pictograms: action.payload
             };
 
         case CREATE_SOCIAL_STORY:
@@ -43,10 +39,23 @@ export default (state = initialState, action) => {
                 step: state.step + 1
             }
 
+        case BACK_STEP:
+            return {
+                ...state,
+                step: state.step - 1
+            }
+
         case MOVE_TO_STEP:
             return {
                 ...state,
                 step: action.payload
+            }
+
+        case ADD_TITLE:
+            return {
+                ...state,
+                title: action.payload.title,
+                description: action.payload.description
             }
 
         default:

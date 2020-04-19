@@ -56,13 +56,20 @@ const Step1 = () => {
     setPrevStory(previousStates);
   }
 
+  const nextStep = () => {
+    const finalStory = updatedStory
+    finalStory.forEach(function (item) { delete item.key });
+    dispatch(Actions.socialStoryActions.addPictograms(finalStory))
+    dispatch(Actions.socialStoryActions.nextStep())
+  }
+
   return (
     <>
       <BlockTitle>Add pictograms to your social story:</BlockTitle>
       <Block>
         <GridDnd elements={story} onUpdate={(newStory) => setUpdatedStory(newStory)} />
       </Block>
-      <NextButton clicked={() => dispatch(Actions.socialStoryActions.nextStep())} disabled={!story.length} />
+      <NextButton clicked={() => nextStep()} disabled={!story.length} />
       <UndoButton clicked={onUndo} disabled={!prevStory.length} />
       <Fab position='left-bottom' slot='fixed' text='Add'>
         <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>

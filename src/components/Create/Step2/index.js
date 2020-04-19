@@ -14,12 +14,20 @@ import {
 import NextButton from '../../core/Buttons/NextButton';
 import BackButton from '../../core/Buttons/BackButton';
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import Actions from '../../../redux/actions'
 
 const Step2 = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const story = useSelector(state => state.socialStory);
+
+    const dispatch = useDispatch();
+
+    const nextStep = () => {
+        dispatch(Actions.socialStoryActions.addTitle({ title, description }))
+        dispatch(Actions.socialStoryActions.nextStep())
+    }
 
     return (
         <>
@@ -50,7 +58,7 @@ const Step2 = () => {
                 </ListInput>
             </List>
 
-            <NextButton disabled={title === '' || description === ''} />
+            <NextButton clicked={() => nextStep()} disabled={title === '' || description === ''} />
             <BackButton />
         </>
     )
