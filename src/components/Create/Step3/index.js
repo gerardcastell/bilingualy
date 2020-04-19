@@ -102,11 +102,17 @@ const Step3 = () => {
         setTags(cleanedTags)
     }
 
+    const handleDeleteTag = (id) => {
+        let currentTags = tags
+        prevStates.current = [...prevStates.current, tags]
+        setTags(currentTags.filter((a, idx) => idx !== id))
+    }
+
     const showTags = () => {
         if (tags.length) {
             return (tags.map((tag, idx) => {
                 return (
-                    <CustomChip key={idx} id={idx} text={tag.text} color={tag.color} onDelete={(e) => console.log(e.target)} />
+                    <CustomChip key={idx} id={idx} text={tag.text} color={tag.color} onDelete={() => handleDeleteTag(idx)} />
                 )
             }))
         }
@@ -114,7 +120,7 @@ const Step3 = () => {
 
     return (
         <>
-            <BlockTitle>Add tags to gather your social stories in topics</BlockTitle>
+            <BlockTitle>Add tags to gather your social stories in topics:</BlockTitle>
             <Block>
             </Block>
 

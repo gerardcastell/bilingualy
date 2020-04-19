@@ -4,7 +4,8 @@ import {
     BACK_STEP,
     CREATE_SOCIAL_STORY,
     CREATE_SOCIAL_STORY_ERROR,
-    ADD_TITLE
+    ADD_TITLE,
+    ADD_TAGS
 } from '../../../constants'
 
 const addPictograms = (payload) => {
@@ -25,6 +26,13 @@ const backStep = () => {
 const addTitle = (payload) => {
     return ({
         type: ADD_TITLE,
+        payload
+    })
+}
+
+const addTags = (payload) => {
+    return ({
+        type: ADD_TAGS,
         payload
     })
 }
@@ -52,5 +60,6 @@ export default {
     createSocialStory,
     nextStep,
     backStep,
-    addTitle
+    addTitle,
+    addTags
 }

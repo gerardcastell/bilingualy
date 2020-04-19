@@ -16,3 +16,4 @@ export const SIGNUP_FAILED = "SIGNUP_FAILED";
 export const NEXT_STEP = "NEXT_STEP";
 export const BACK_STEP = "BACK_STEP";
 export const ADD_TITLE = "ADD_TITLE";
+export const ADD_TAGS = "ADD_TAGS";

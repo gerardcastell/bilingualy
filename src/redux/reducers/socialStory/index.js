@@ -5,7 +5,8 @@ import {
     NEXT_STEP,
     BACK_STEP,
     MOVE_TO_STEP,
-    ADD_TITLE
+    ADD_TITLE,
+    ADD_TAGS
 } from '../../../constants'
 
 const initialState = {
@@ -56,6 +57,12 @@ export default (state = initialState, action) => {
                 ...state,
                 title: action.payload.title,
                 description: action.payload.description
+            }
+
+        case ADD_TAGS:
+            return {
+                ...state,
+                tags: payload
             }
 
         default:
