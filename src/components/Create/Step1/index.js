@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Page,
   Navbar,
@@ -27,38 +27,35 @@ import './index.scss'
 const Step1 = () => {
   const [openPictoBrowser, setOpenPictoBrowser] = useState(false)
   const [story, setStory] = useState([]);
-  const [updatedStory, setUpdatedStory] = useState([]);
-  const [prevStory, setPrevStory] = useState([]);
-  const [key, setKey] = useState(0)
+  const uniqueKey = useRef(0)
+  const prevStories = useRef([])
 
   const dispatch = useDispatch()
 
   const addPictogram = (id) => {
-    setPrevStory([...prevStory, story])
-    setStory([...story, { key, url: id, position: story.length }])
-    setUpdatedStory([...story, { key, url: id, position: story.length }])
-    setKey(key + 1)
+    prevStories.current = [...prevStories.current, story];
+    console.log(prevStories)
+    setStory([...story, { key: uniqueKey.current, url: id, position: story.length }])
+    uniqueKey.current += 1;
   }
 
-  const updatePictogramPositions = () => {
-    const newStory = updatedStory.map((item, idx) => {
-      return { ...item, position: idx }
-    })
-    setPrevStory([...prevStory, story]);
-    setStory(newStory);
+  const handleUpatePositions = (newState) => {
+    prevStories.current = [...prevStories.current, story]
+    setStory(newState);
   }
 
-  const onUndo = () => {
-    const previousStates = prevStory
-    const lastState = previousStates.pop();
-    setStory(lastState);
-    setUpdatedStory(lastState);
-    setPrevStory(previousStates);
+  const handleUndo = () => {
+    if (prevStories.current.length) {
+      setStory(prevStories.current.pop());
+    }
   }
 
   const nextStep = () => {
-    const finalStory = updatedStory
-    finalStory.forEach(function (item) { delete item.key });
+    const finalStory = story;
+    finalStory.forEach((item, index) => {
+      delete item.key
+      item.position = index
+    });
     dispatch(Actions.socialStoryActions.addPictograms(finalStory))
     dispatch(Actions.socialStoryActions.nextStep())
   }
@@ -67,15 +64,15 @@ const Step1 = () => {
     <>
       <BlockTitle>Add pictograms to your social story:</BlockTitle>
       <Block>
-        <GridDnd elements={story} onUpdate={(newStory) => setUpdatedStory(newStory)} />
+        <GridDnd elements={story} onUpdate={handleUpatePositions} />
       </Block>
-      <NextButton clicked={() => nextStep()} disabled={!story.length} />
-      <UndoButton clicked={onUndo} disabled={!prevStory.length} />
+      <NextButton clicked={nextStep} disabled={!story.length} />
+      <UndoButton clicked={handleUndo} disabled={!prevStories.current.length} />
       <Fab position='left-bottom' slot='fixed' text='Add'>
         <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
         <Icon ios='f7:xmark' aurora='f7:xmark' md='material:close'></Icon>
         <FabButtons position='top'>
-          <FabButton onClick={() => { setOpenPictoBrowser(true); updatePictogramPositions() }} fabClose label='Pictogram'>
+          <FabButton onClick={() => { setOpenPictoBrowser(true) }} fabClose label='Pictogram'>
             <Icon md='material:portrait' />
           </FabButton>
           <FabButton fabClose label='Photo'>

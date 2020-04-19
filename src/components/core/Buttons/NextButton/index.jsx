@@ -4,10 +4,10 @@ import { Button } from "framework7-react";
 const NextButton = ({ clicked, disabled }) => {
   return (
     <Button
-      className='next-button'
+      onClick={() => clicked()}
       disabled={disabled}
+      className='next-button'
       small
-      onClick={clicked}
       raised
       round
       iconMaterial='arrow_forward'

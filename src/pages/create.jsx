@@ -18,6 +18,7 @@ import { f7 } from "framework7-react";
 import Stepper from "../components/core/Stepper";
 import Step1 from "../components/Create/Step1/index";
 import Step2 from "../components/Create/Step2/index";
+import Step3 from "../components/Create/Step3/index";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -49,7 +50,7 @@ const createPage = ({ f7router }) => {
       case 1:
         return <Step2 />;
       case 2:
-        return <Step1 />;
+        return <Step3 />;
       case 3:
         return <Step1 />;
       default:

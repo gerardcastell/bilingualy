@@ -8,22 +8,12 @@ import {
 import './GridDnd.scss'
 
 const GridDnd = ({ elements, onUpdate }) => {
-    const [items, setItems] = useState([]); // supply your own state
-    useEffect(
-        () => {
-            setItems(elements)
-        }, [elements]
-    );
-
-    function onChange(sourceId, sourceIndex, targetIndex, targetId) {
-        const nextState = swap(items, sourceIndex, targetIndex);
-        console.log(`Next state: ${nextState}`);
-        setItems(nextState);
+    const handleChange = (sourceId, sourceIndex, targetIndex, targetId) => {
+        const nextState = swap(elements, sourceIndex, targetIndex);
         onUpdate(nextState)
     }
-
     return (
-        <GridContextProvider onChange={onChange}>
+        <GridContextProvider onChange={handleChange}>
             <div className="dnd-container">
 
                 <GridDropZone
@@ -32,7 +22,7 @@ const GridDnd = ({ elements, onUpdate }) => {
                     boxesPerRow={3}
                     rowHeight={100}
                 >
-                    {items.map((item) => (
+                    {elements.map((item) => (
                         <GridItem key={item.key}>
                             <div className="grid-item">
                                 <div className="grid-item-content">

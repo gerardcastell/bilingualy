@@ -6,12 +6,12 @@ const UndoButton = ({ clicked, disabled }) => {
   return (
     <Button
       onClick={() => clicked()}
+      disabled={disabled}
       className='undo-button'
       color='gray'
       fill
       raised
       round
-      disabled={disabled}
       iconMaterial='undo'
     >
       Undo
