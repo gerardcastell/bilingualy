@@ -45,18 +45,21 @@ const addPrivacity = (isPublic) => {
     })
 }
 
-const createSocialStory = payload => async (dispatch, getState, { getFirebase, getFirestore }) => {
+const createSocialStory = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const userId = getState().firebase.auth.uid;
+    let socialStory = getState().socialStory;
+    delete socialStory.step
+
     try {
-        await firestore.collection('prueba').add({
-            pictograms: payload,
+        await firestore.collection('socialStories').add({
+            ...socialStory,
             username: profile.username,
             userId,
             createdAt: new Date()
         })
-        dispatch({ type: CREATE_SOCIAL_STORY, payload })
+        dispatch({ type: CREATE_SOCIAL_STORY })
 
     } catch (e) {
         dispatch({ type: CREATE_SOCIAL_STORY_ERROR, err: e })

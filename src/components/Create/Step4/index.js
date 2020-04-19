@@ -33,8 +33,9 @@ const Step4 = () => {
         setPublicStory(value)
     }
 
-    const nextStep = () => {
-        // dispatch(actions.socialStoryActions.addTitle({ title, description }))
+    const handleSave = () => {
+        dispatch(actions.socialStoryActions.addPrivacity(publicStory))
+        dispatch(actions.socialStoryActions.createSocialStory())
         dispatch(actions.socialStoryActions.nextStep())
     }
 
@@ -54,7 +55,7 @@ const Step4 = () => {
                         Your social story will be <b>{publicStory ? 'public' : 'private'}</b>
                     </span>
                     <span className="span-spacer" />
-                    <Button raised fill >Save</Button>
+                    <Button raised fill onClick={() => { handleSave() }} >Save</Button>
                 </div>
                 <Row>
                     <Col>

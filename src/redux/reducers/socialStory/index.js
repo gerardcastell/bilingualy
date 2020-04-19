@@ -11,7 +11,7 @@ import {
 } from '../../../constants'
 
 const initialState = {
-    step: 3,
+    step: 0,
     pictograms: [],
     title: null,
     description: null,
@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
         case ADD_PRIVACITY:
             return {
                 ...state,
-                public: action.payload
+                isPublic: action.payload
             }
 
         default:
