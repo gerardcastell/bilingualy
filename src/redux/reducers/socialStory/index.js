@@ -9,7 +9,7 @@ import {
 } from '../../../constants'
 
 const initialState = {
-    step: 0,
+    step: 2,
     pictograms: [],
     title: null,
     description: null,

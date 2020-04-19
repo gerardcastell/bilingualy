@@ -1,10 +1,10 @@
 import React from 'react'
 import { Chip } from 'framework7-react'
 
-const CustomChip = ({ text, color }) => {
+const CustomChip = ({ text, color, onDelete }) => {
     return (
         <>
-            <Chip deleteable className="margin-horizontal-half" text={text} color={color} />
+            <Chip onDelete={onDelete} deleteable className="margin-horizontal-half" text={text} color={color} />
         </>
     )
 }
