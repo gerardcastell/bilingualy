@@ -17,12 +17,15 @@ import {
   Panel,
   View,
   Button,
+  Fab,
+  Icon,
 } from "framework7-react";
 import { useFirestoreConnect } from "react-redux-firebase";
 
 import { CardItem } from "../components/core/CardItem/CardItem";
 import SidePanel from "../components/core/SidePanel";
-export default () => {
+
+export default ({ f7router }) => {
   useFirestoreConnect(["users", "socialStories"]);
 
   return (
@@ -100,6 +103,13 @@ export default () => {
         <ListItem title='Create page' link='/create/' />
         <ListItem title='About page' link='/about/' />
       </List>
+      <Fab
+        onClick={() => f7router.navigate("/create/")}
+        position='right-bottom'
+        slot='fixed'
+      >
+        <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
+      </Fab>
     </Page>
   );
 };
