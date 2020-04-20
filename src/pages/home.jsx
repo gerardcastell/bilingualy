@@ -23,12 +23,11 @@ import { useFirestoreConnect } from "react-redux-firebase";
 import { CardItem } from "../components/core/CardItem/CardItem";
 import SidePanel from "../components/core/SidePanel";
 export default () => {
-  useFirestoreConnect(["users", "prueba"]);
+  useFirestoreConnect(["users", "socialStories"]);
 
   return (
     <Page name='home'>
       <SidePanel />
-      {/* Top Navbar */}
       <Navbar>
         <NavLeft>
           <Link style={{ pointerEvents: "none" }} iconMd='' />

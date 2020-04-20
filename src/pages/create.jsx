@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
   Page,
-  Navbar,
-  Block,
-  BlockTitle,
   Link,
-  ListInput,
-  List,
-  Fab,
-  FabButtons,
-  FabButton,
-  Icon,
-  Button,
+  Navbar,
+  NavLeft,
+  NavRight,
+  NavTitle,
   f7,
 } from "framework7-react";
 
@@ -49,7 +43,7 @@ const createPage = ({ f7router }) => {
     );
   };
 
-  const redirectDashboard = () => {
+  const redirectToDashboard = () => {
     f7router.navigate("/");
     dispatch(actions.socialStoryActions.initSocialStory());
   };
@@ -63,19 +57,30 @@ const createPage = ({ f7router }) => {
       case 2:
         return <Step3 />;
       case 3:
-        return <Step4 onSuccess={redirectDashboard} />;
+        return <Step4 onSuccess={redirectToDashboard} />;
       default:
         return <p>Unexpected error</p>;
     }
   };
 
   return (
-    <Page onPageBeforeUnmount={() => f7.dialog.alert("hola")}>
-      <Navbar
+    <Page>
+      {/* <Navbar
         onClickBack={confirmBack}
         title='Create your social story'
         backLink='Back'
-      />
+      /> */}
+      <Navbar>
+        <NavLeft>
+          <Link onClick={confirmBack} iconMd='material:arrow_back' />
+        </NavLeft>
+        <NavTitle className='header-title display-flex justify-content-center align-items-center'>
+          <span style={{ fontSize: 20 }}>Create your social story</span>
+        </NavTitle>
+        <NavRight>
+          <Link style={{ pointerEvents: "none" }} iconMd='' />
+        </NavRight>
+      </Navbar>
       <Stepper steps={steps} activeStep={activeStep} />
       {showStep()}
     </Page>
