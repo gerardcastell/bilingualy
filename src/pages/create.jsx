@@ -23,6 +23,8 @@ import Step4 from "../components/Create/Step4/index";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import actions from "../redux/actions";
+
 const createPage = ({ f7router }) => {
   const activeStep = useSelector((state) => state.socialStory.step);
   const steps = [
@@ -31,6 +33,9 @@ const createPage = ({ f7router }) => {
     { title: "Tags" },
     { title: "Save" },
   ];
+
+  const dispatch = useDispatch();
+
   const confirmBack = () => {
     f7.dialog.confirm(
       "Current social story will be deleted if you go on. Go back anyway?",
@@ -44,6 +49,11 @@ const createPage = ({ f7router }) => {
     );
   };
 
+  const redirectDashboard = () => {
+    f7router.navigate("/");
+    dispatch(actions.socialStoryActions.initSocialStory());
+  };
+
   const showStep = () => {
     switch (activeStep) {
       case 0:
@@ -53,7 +63,7 @@ const createPage = ({ f7router }) => {
       case 2:
         return <Step3 />;
       case 3:
-        return <Step4 />;
+        return <Step4 onSuccess={redirectDashboard} />;
       default:
         return <p>Unexpected error</p>;
     }

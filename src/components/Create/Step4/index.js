@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Page,
     Navbar,
@@ -13,19 +13,34 @@ import {
     Row,
     Col,
     Button,
+    f7
 } from "framework7-react";
 
-import NextButton from '../../core/Buttons/NextButton';
 import BackButton from '../../core/Buttons/BackButton';
 
 import { useSelector, useDispatch } from 'react-redux'
 
 import actions from '../../../redux/actions'
 
+import { SUCCESS, FAILURE } from '../../../constants'
+
 import './style.scss'
 
-const Step4 = () => {
+const Step4 = ({ onSuccess }) => {
     const [publicStory, setPublicStory] = useState(false)
+
+    const requestState = useSelector(state => state.socialStory.requestState);
+
+    useEffect(() => {
+        if (requestState === SUCCESS) {
+            f7.dialog.alert("You will be redirected to your dashboard.", "Social Story saved properly!", onSuccess)
+        } else if (requestState === FAILURE) {
+            f7.dialog.alert(
+                "Social Story saved properly! Find it in your dashboard", "Ooops! Something went wrong",
+                null
+            )
+        }
+    }, [requestState])
 
     const dispatch = useDispatch();
 
@@ -36,7 +51,6 @@ const Step4 = () => {
     const handleSave = () => {
         dispatch(actions.socialStoryActions.addPrivacity(publicStory))
         dispatch(actions.socialStoryActions.createSocialStory())
-        dispatch(actions.socialStoryActions.nextStep())
     }
 
     return (

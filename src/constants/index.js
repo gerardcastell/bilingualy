@@ -4,6 +4,7 @@ export const ARASAAC_RESOLUTION_URL = "https://static.arasaac.org/pictograms/234
 
 
 //ACTIONS
+export const INIT_SOCIAL_STORY = "INIT_SOCIAL_STORY";
 export const ADD_PICTOGRAMS = "ADD_PICTOGRAMS";
 export const CREATE_SOCIAL_STORY = "CREATE_SOCIAL_STORY";
 export const CREATE_SOCIAL_STORY_ERROR = "CREATE_SOCIAL_STORY_ERROR";
@@ -18,3 +19,9 @@ export const BACK_STEP = "BACK_STEP";
 export const ADD_TITLE = "ADD_TITLE";
 export const ADD_TAGS = "ADD_TAGS";
 export const ADD_PRIVACITY = "ADD_PRIVACITY";
+
+
+//REQUEST
+export const SUCCESS = "SUCCESS"
+export const FAILURE = "FAILURE"
+export const IDLE = "IDLE"

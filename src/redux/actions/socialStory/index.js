@@ -6,8 +6,13 @@ import {
     CREATE_SOCIAL_STORY_ERROR,
     ADD_TITLE,
     ADD_TAGS,
-    ADD_PRIVACITY
+    ADD_PRIVACITY,
+    INIT_SOCIAL_STORY
 } from '../../../constants'
+
+const initSocialStory = () => {
+    return { type: INIT_SOCIAL_STORY }
+}
 
 const addPictograms = (payload) => {
     return {
@@ -49,12 +54,11 @@ const createSocialStory = () => async (dispatch, getState, { getFirebase, getFir
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const userId = getState().firebase.auth.uid;
-    let socialStory = getState().socialStory;
-    delete socialStory.step
+    const { step, ...story } = getState().socialStory;
 
     try {
         await firestore.collection('socialStories').add({
-            ...socialStory,
+            ...story,
             username: profile.username,
             userId,
             createdAt: new Date()
@@ -73,5 +77,6 @@ export default {
     backStep,
     addTitle,
     addTags,
-    addPrivacity
+    addPrivacity,
+    initSocialStory
 }

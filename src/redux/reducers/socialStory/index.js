@@ -7,7 +7,11 @@ import {
     MOVE_TO_STEP,
     ADD_TITLE,
     ADD_TAGS,
-    ADD_PRIVACITY
+    ADD_PRIVACITY,
+    INIT_SOCIAL_STORY,
+    IDLE,
+    SUCCESS,
+    FAILURE
 } from '../../../constants'
 
 const initialState = {
@@ -16,11 +20,16 @@ const initialState = {
     title: null,
     description: null,
     isPublic: false,
-    tags: []
+    tags: [],
+    requestState: IDLE,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
+
+        case INIT_SOCIAL_STORY:
+            return initialState;
+
         case ADD_PICTOGRAMS:
             return {
                 ...state,
@@ -29,11 +38,12 @@ export default (state = initialState, action) => {
 
         case CREATE_SOCIAL_STORY:
             console.log('Created social story')
-            return initialState;
+            return { ...state, requestState: SUCCESS };
 
         case CREATE_SOCIAL_STORY_ERROR:
             console.error(`Created social story FAIL: ${action.payload}`);
-            return state;
+            return { ...state, requestState: FAILURE };
+
 
         case NEXT_STEP:
             return {
