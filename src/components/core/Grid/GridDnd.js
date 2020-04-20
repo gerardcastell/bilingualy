@@ -9,7 +9,7 @@ import {
 
 import useWindowDimensions from '../../Hooks/UseWindowDimensions';
 
-import './GridDnd.scss'
+import './style.scss';
 
 const GridDnd = ({ elements, onUpdate }) => {
     const { height, width } = useWindowDimensions();
