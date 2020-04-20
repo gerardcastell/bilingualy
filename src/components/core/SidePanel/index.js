@@ -6,12 +6,15 @@ import actions from '../../../redux/actions'
 
 const SidePanel = () => {
     const auth = useSelector(state => state.firebase.auth)
+    const username = useSelector(state => state.firebase.profile.username)
+
     const dispatch = useDispatch();
 
     const showLogButton = () => {
         if (auth.uid) {
             return (
                 <>
+                    <p>Logged as {username}</p>
                     <Button fill onClick={() => dispatch(actions.authActions.signOut())}>Log out</Button>
                 </>
             )
