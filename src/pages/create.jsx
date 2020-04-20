@@ -12,8 +12,8 @@ import {
   FabButton,
   Icon,
   Button,
+  f7,
 } from "framework7-react";
-import { f7 } from "framework7-react";
 
 import Stepper from "../components/core/Stepper";
 import Step1 from "../components/Create/Step1/index";
@@ -44,7 +44,7 @@ const createPage = ({ f7router }) => {
       },
       () => {
         f7router.navigate("/create/");
-        console.log("Delete current object");
+        dispatch(actions.socialStoryActions.initSocialStory());
       }
     );
   };
@@ -70,7 +70,7 @@ const createPage = ({ f7router }) => {
   };
 
   return (
-    <Page>
+    <Page onPageBeforeUnmount={() => f7.dialog.alert("hola")}>
       <Navbar
         onClickBack={confirmBack}
         title='Create your social story'
@@ -78,7 +78,6 @@ const createPage = ({ f7router }) => {
       />
       <Stepper steps={steps} activeStep={activeStep} />
       {showStep()}
-      {/* <Step1 /> */}
     </Page>
   );
 };

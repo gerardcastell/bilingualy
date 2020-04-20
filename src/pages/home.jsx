@@ -30,6 +30,9 @@ export default () => {
       <SidePanel />
       {/* Top Navbar */}
       <Navbar>
+        <NavLeft>
+          <Link style={{ pointerEvents: "none" }} iconMd='' />
+        </NavLeft>
         <NavTitle className='header-title display-flex justify-content-center align-items-center'>
           Bilingualy
         </NavTitle>
