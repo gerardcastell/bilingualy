@@ -1,0 +1,41 @@
+.card-short {
+    height: 25vh;
+}
+
+.card-title {
+    height: 25vh;
+}
+
+.card-content {
+    height: 75vh;
+
+    &__inner {
+        padding-left: 5vw;
+        padding-right: 5vw;
+
+        &__pictograms {
+            height: 40vh;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+    }
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.pictogram {
+    width: 27vw;
+    height: 26vw;
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
