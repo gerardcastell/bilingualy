@@ -40,3 +40,17 @@
     pointer-events: none;
     width: -webkit-fill-available;
 }
+
+@media (min-width: 480px) and (max-width: 781px) {
+    .grid-item-content {
+        width: 15vw;
+        height: 15vw;
+    }
+}
+
+@media (min-width: 781px) {
+    .grid-item-content {
+        width: 12vw;
+        height: 12vw;
+    }
+}
