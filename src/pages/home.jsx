@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Page,
   Navbar,
@@ -28,16 +28,23 @@ import StoryCard from "../components/core/StoryCard";
 import SidePanel from "../components/core/SidePanel";
 
 export default ({ f7router }) => {
+  const [isDisabled, setIsDisabled] = useState(false);
   useFirestoreConnect(["users", "socialStories"]);
 
   const myStories = useSelector(
     (state) => state.firestore.ordered.socialStories
   );
 
+  const handleCard = (value) => {
+    setIsDisabled(value);
+  };
+
   const showMyStories = () => {
     let items = myStories ? myStories : [];
     if (items.length) {
-      return items.map((item, idx) => <StoryCard key={idx} data={item} />);
+      return items.map((item, idx) => (
+        <StoryCard key={idx} onTouchCard={handleCard} data={item} />
+      ));
     } else {
       return <p>You don't have created any Social Story yet.</p>;
     }
@@ -81,6 +88,7 @@ export default ({ f7router }) => {
         <ListItem title='About page' link='/about/' />
       </List> */}
       <Fab
+        style={{ display: isDisabled ? "none" : "block" }}
         onClick={() => f7router.navigate("/create/")}
         position='right-bottom'
         slot='fixed'

@@ -10,8 +10,7 @@ import {
 
 import "./style.scss";
 
-const StoryCard = ({ data }) => {
-    const [pictograms, setpictograms] = useState(data.pictograms)
+const StoryCard = ({ data, onTouchCard }) => {
 
     const showTags = () => {
         return data.tags.map((tag, index) =>
@@ -26,19 +25,19 @@ const StoryCard = ({ data }) => {
 
     const showPictograms = () => {
         return data.pictograms.map(({ url, position }) =>
-            // <div className="grid-item-content" key={position}>
             <img
                 key={position}
                 className="pictogram"
                 src={url}
                 alt=''
             />
-            // </div>
         )
     }
 
     return (
         <Card
+            onCardOpen={() => onTouchCard(true)}
+            onCardClose={() => onTouchCard(false)}
             expandable
             expandableAnimateWidth
             swipeToClose
