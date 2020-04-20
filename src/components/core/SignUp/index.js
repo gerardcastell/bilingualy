@@ -87,8 +87,6 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
                     <List style={{ margin: 0, width: "100%", marginTop: "1.5rem" }}>
                         <Button onClick={signIn}>Sign Up</Button>
                         <BlockFooter>{showSignedIn()}</BlockFooter>
-                        <p>{openSignUp ? 'OpenSignUp true' : 'OpenSignUp false'}</p>
-                        <p>{firebase.auth.uid ? 'firebase.auth.uid true' : 'firebase.auth.uid false'}</p>
                     </List>
                 </div>
             </Page>
