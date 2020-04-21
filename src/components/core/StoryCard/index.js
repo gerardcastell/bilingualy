@@ -6,6 +6,7 @@ import {
     Chip,
     Link,
     Icon,
+    BlockTitle,
 } from "framework7-react";
 
 import "./style.scss";
@@ -41,10 +42,10 @@ const StoryCard = ({ data, onTouchCard }) => {
             expandable
             expandableAnimateWidth
             swipeToClose
-            className="card-short">
+            className="card-short custom-card">
 
             <CardContent padding={false}>
-                <div className="container" style={{ height: "100%" }}>
+                <div className="container">
                     <div className="row">
                         <div className="col bg-color-white card-title">
                             <CardHeader textColor="black" className="display-block">
@@ -52,17 +53,16 @@ const StoryCard = ({ data, onTouchCard }) => {
                             </CardHeader>
                             <Link
                                 cardClose
-                                className="card-opened-fade-in"
-                                style={{ position: "absolute", right: "15px", top: "15px" }}
+                                className="card-opened-fade-in custom-card__icon-close"
                                 iconF7="multiply_circle_fill"
                             />
                             <div className="row padding-horizontal-half padding-top-half">
-                                <div className="row justify-content-start">
+                                <div className="row justify-content-start custom-card__tags">
                                     {showTags()}
                                 </div>
-                                {/* <div className="row justify-content-center" style={{ width: '100%', marginTop: '.8rem' }}>
-                                    <Icon f7="chevron_down"></Icon>
-                                </div> */}
+                                <div className="row justify-content-center align-items-center custom-card__subtitle">
+                                    <BlockTitle>Posted by <b>{data.username} at {data.createdAt.toString()}</b></BlockTitle>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,6 @@ const StoryCard = ({ data, onTouchCard }) => {
                                 <h4>Description</h4>
                                 <p>{data.description}</p>
                                 <div className="card-content__inner__pictograms" >
-
                                     {showPictograms()}
                                 </div>
                             </div>
