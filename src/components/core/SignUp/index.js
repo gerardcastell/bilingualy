@@ -65,6 +65,7 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
                         <ListInput
                             type='text'
                             name='Username'
+                            autocomplete='username'
                             placeholder='Your username'
                             value={username}
                             onInput={(e) => setUsername(e.target.value)}
@@ -72,6 +73,7 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
                         <ListInput
                             type='text'
                             name='Email'
+                            autocomplete='email'
                             placeholder='Your email'
                             value={email}
                             onInput={(e) => setEmail(e.target.value)}
@@ -79,6 +81,7 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
                         <ListInput
                             type='password'
                             name='password'
+                            autocomplete='new-password'
                             placeholder='Your password'
                             value={password}
                             onInput={(e) => setPassword(e.target.value)}

@@ -53,7 +53,10 @@ const StoryCard = ({ data, onTouchCard }) => {
         } else {
             return (
                 <>
-                    <BlockTitle>By <b>{data.username}</b></BlockTitle>
+                    <BlockTitle>
+                        <Icon md='material:person' />
+                        <b>{data.username}</b>
+                    </BlockTitle>
                     <BlockTitle>{moment(data.createdAt.toDate()).calendar()}</BlockTitle>
                 </>
             )

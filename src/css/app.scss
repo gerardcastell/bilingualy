@@ -122,7 +122,17 @@ $font-size-title: 1.5rem !important;
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   color: #CCCCCC;
   font-size: small;
+
+  span {
+    line-height: 14px;
+  }
+}
+
+.searchbar-demo {
+  .searchbar-disable-button {
+    top: 0 !important;
+  }
 }

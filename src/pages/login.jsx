@@ -58,15 +58,19 @@ const LoginPage = () => {
           <LoginScreenTitle>Bilingualy</LoginScreenTitle>
           <List form>
             <ListInput
+              autocomplete='username'
               type='text'
               name='text'
               placeholder='Your email'
               value={email}
+              required
               onInput={(e) => setEmail(e.target.value)}
             ></ListInput>
             <ListInput
               type='password'
               name='password'
+              autocomplete='current-password'
+              required
               placeholder='Your password'
               value={password}
               onInput={(e) => setPassword(e.target.value)}
