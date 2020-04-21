@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BlockTitle, Card } from 'framework7-react'
+import { Card } from 'framework7-react'
 
 const DashboardSckeleton = () => {
     return (

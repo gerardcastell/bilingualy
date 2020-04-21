@@ -54,7 +54,7 @@ const createSocialStory = () => async (dispatch, getState, { getFirebase, getFir
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const userId = getState().firebase.auth.uid;
-    const { step, ...story } = getState().socialStory;
+    const { step, requestState, ...story } = getState().socialStory;
 
     try {
         await firestore.collection('socialStories').add({
