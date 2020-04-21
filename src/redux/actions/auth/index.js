@@ -26,6 +26,7 @@ const signOut = () => async (dispatch, getState, { getFirebase }) => {
 
     try {
         await firebase.auth().signOut();
+        await firebase.logout();
         dispatch({ type: SIGNOUT_SUCCESS })
 
     } catch (e) {

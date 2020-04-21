@@ -29,7 +29,16 @@ import SidePanel from "../components/core/SidePanel";
 
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
-  useFirestoreConnect(["users", "socialStories"]);
+
+  const uid = useSelector((state) => state.firebase.auth.uid);
+  useFirestoreConnect([
+    "users",
+    {
+      collection: "socialStories",
+      where: [["userId", "==", uid]],
+      // where: [["isPublic", "==", true]],
+    },
+  ]);
 
   const myStories = useSelector(
     (state) => state.firestore.ordered.socialStories
