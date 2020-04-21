@@ -63,3 +63,16 @@ $font-size-title: 1.5rem !important;
   height: 100%;
   font-size: $font-size-title;
 }
+
+.tab-dashboard {
+  overflow: auto;
+  padding-bottom: 0rem !important;
+  padding-top: 0rem !important;
+}
+
+
+.card-expandable.card-opening,
+.card-expandable.card-opened,
+.card-expandable.card-closing {
+  z-index: 80000 !important;
+}

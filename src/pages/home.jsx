@@ -8,6 +8,7 @@ import {
   NavRight,
   Link,
   Toolbar,
+  Tabs,
   Block,
   BlockTitle,
   List,
@@ -26,22 +27,28 @@ import { useDispatch, useSelector } from "react-redux";
 
 import StoryCard from "../components/core/StoryCard";
 import SidePanel from "../components/core/SidePanel";
+import TabMyStories from "../components/Dashboard/TabMyStories";
+import TabSharedStories from "../components/Dashboard/TabSharedStories";
 
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const uid = useSelector((state) => state.firebase.auth.uid);
   useFirestoreConnect([
-    "users",
     {
       collection: "socialStories",
       where: [["userId", "==", uid]],
-      // where: [["isPublic", "==", true]],
+      storeAs: "privateStories",
+    },
+    {
+      collection: "socialStories",
+      where: [["isPublic", "==", true]],
+      storeAs: "publicStories",
     },
   ]);
 
   const myStories = useSelector(
-    (state) => state.firestore.ordered.socialStories
+    (state) => state.firestore.ordered.privateStories
   );
 
   const handleCard = (value) => {
@@ -78,6 +85,16 @@ export default ({ f7router }) => {
           />
         </NavRight>
       </Navbar>
+      {/* <Toolbar tabbar bottom>
+        <Link tabLink='#tab-private' tabLinkActive>
+          My Stories
+        </Link>
+        <Link tabLink='#tab-shared'>Public Stories</Link>
+      </Toolbar> 
+       <Tabs swipeable>
+        <TabMyStories onTouchCard={handleCard} />
+        <TabSharedStories onTouchCard={handleCard} />
+      </Tabs> */}
       {showMyStories()}
       {/* <List>
         <ListItem
