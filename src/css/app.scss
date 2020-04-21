@@ -112,6 +112,17 @@ $font-size-title: 1.5rem !important;
 
     .block-title {
       margin: 0;
+      font-size: small !important;
     }
   }
+}
+
+.footer-dashboard-bottom {
+  height: 3.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #CCCCCC;
+  font-size: small;
 }

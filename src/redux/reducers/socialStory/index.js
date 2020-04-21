@@ -4,7 +4,6 @@ import {
     CREATE_SOCIAL_STORY_ERROR,
     NEXT_STEP,
     BACK_STEP,
-    MOVE_TO_STEP,
     ADD_TITLE,
     ADD_TAGS,
     ADD_PRIVACITY,
@@ -55,12 +54,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 step: state.step - 1
-            }
-
-        case MOVE_TO_STEP:
-            return {
-                ...state,
-                step: action.payload
             }
 
         case ADD_TITLE:

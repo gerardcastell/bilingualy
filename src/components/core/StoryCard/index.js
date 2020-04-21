@@ -9,6 +9,8 @@ import {
     BlockTitle,
 } from "framework7-react";
 
+import moment from 'moment';
+
 import "./style.scss";
 
 const StoryCard = ({ data, onTouchCard }) => {
@@ -35,6 +37,29 @@ const StoryCard = ({ data, onTouchCard }) => {
         )
     }
 
+    const displayFooter = () => {
+        const showPrivate = true;
+        if (showPrivate) {
+            return (
+                <>
+                    <BlockTitle>
+                        <Icon md={`material:${data.isPublic ? 'public' : 'lock'}`}
+                        ></Icon>
+                        {data.isPublic ? 'Public' : 'Private'}
+                    </BlockTitle>
+                    <BlockTitle>{moment(data.createdAt.toDate()).calendar()}</BlockTitle>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <BlockTitle>By <b>{data.username}</b></BlockTitle>
+                    <BlockTitle>{moment(data.createdAt.toDate()).calendar()}</BlockTitle>
+                </>
+            )
+        }
+    }
+
     return (
         <Card
             onCardOpen={() => onTouchCard(true)}
@@ -56,12 +81,12 @@ const StoryCard = ({ data, onTouchCard }) => {
                                 className="card-opened-fade-in custom-card__icon-close"
                                 iconF7="multiply_circle_fill"
                             />
-                            <div className="row padding-horizontal-half padding-top-half">
+                            <div className="row padding-horizontal-half">
                                 <div className="row justify-content-start custom-card__tags">
                                     {showTags()}
                                 </div>
-                                <div className="row justify-content-center align-items-center custom-card__subtitle">
-                                    <BlockTitle>Posted by <b>{data.username} at {data.createdAt.toString()}</b></BlockTitle>
+                                <div className="row custom-card__subtitle justify-content-space-between align-items-center margin-horizontal-half padding-top-half">
+                                    {displayFooter()}
                                 </div>
                             </div>
                         </div>

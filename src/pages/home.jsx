@@ -97,7 +97,9 @@ export default ({ f7router }) => {
         <TabSharedStories onTouchCard={handleCard} />
       </Tabs> */}
       {showMyStories()}
-      <DashboardSckeleton />
+      <div className='footer-dashboard-bottom'>
+        <span>Empowered with PWA technologies</span>
+      </div>
       {/* <List>
         <ListItem
           title='Dynamic (Component) Route'
