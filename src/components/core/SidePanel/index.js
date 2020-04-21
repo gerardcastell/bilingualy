@@ -1,5 +1,5 @@
 import React from 'react'
-import { Panel, View, Page, Navbar, Block, Button, ListItem } from 'framework7-react'
+import { Panel, View, Page, Navbar, Block, Button, f7 } from 'framework7-react'
 import { useSelector, useDispatch } from "react-redux";
 
 import actions from '../../../redux/actions'
@@ -15,7 +15,7 @@ const SidePanel = () => {
             return (
                 <>
                     <p>Logged as {username}</p>
-                    <Button fill onClick={() => dispatch(actions.authActions.signOut())}>Log out</Button>
+                    <Button fill onClick={() => { dispatch(actions.authActions.signOut()); f7.panel.close("right") }}>Log out</Button>
                 </>
             )
         } else {
