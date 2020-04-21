@@ -36,12 +36,12 @@ import TabSharedStories from "../components/Dashboard/TabSharedStories";
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
   const uid = useSelector((state) => state.firebase.auth.uid);
+
   useFirestoreConnect([
     {
       collection: "socialStories",
-      where: [["userId", "==", uid]],
+      where: [["userId", "==", uid ? uid : ""]],
       storeAs: "privateStories",
     },
     {
