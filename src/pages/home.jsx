@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import StoryCard from "../components/core/StoryCard";
 import SidePanel from "../components/core/SidePanel";
+import DashboardSckeleton from "../components/Dashboard/Skeleton";
 import TabMyStories from "../components/Dashboard/TabMyStories";
 import TabSharedStories from "../components/Dashboard/TabSharedStories";
 
@@ -62,7 +63,7 @@ export default ({ f7router }) => {
         <StoryCard key={idx} onTouchCard={handleCard} data={item} />
       ));
     } else {
-      return <p>You don't have created any Social Story yet.</p>;
+      return <DashboardSckeleton />;
     }
   };
 
@@ -96,6 +97,7 @@ export default ({ f7router }) => {
         <TabSharedStories onTouchCard={handleCard} />
       </Tabs> */}
       {showMyStories()}
+      <DashboardSckeleton />
       {/* <List>
         <ListItem
           title='Dynamic (Component) Route'

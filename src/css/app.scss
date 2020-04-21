@@ -76,3 +76,16 @@ $font-size-title: 1.5rem !important;
 .card-expandable.card-closing {
   z-index: 80000 !important;
 }
+
+.skeleton-dashboard {
+  border: 1px solid #CCCCCC;
+  margin-left: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left));
+  margin-right: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right));
+  margin-top: var(--f7-card-expandable-margin-vertical);
+  margin-bottom: var(--f7-card-expandable-margin-vertical);
+  box-shadow: var(--f7-card-expandable-box-shadow);
+
+  .card-content {
+    height: auto;
+  }
+}
