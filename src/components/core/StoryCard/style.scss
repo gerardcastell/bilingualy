@@ -28,6 +28,7 @@
     flex-direction: column;
 }
 
+
 .pictogram {
     width: 27vw;
     height: 26vw;
@@ -36,9 +37,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
+    border-radius: .3rem;
+    margin-bottom: .2rem;
     margin-right: .5rem;
+}
+
+.pictogram-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.pictogram-caption {
+    width: 26vw;
+    height: 5vh;
+    text-align: center;
+    border-radius: .3rem;
+    color: black !important;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (min-width: 480px) {
@@ -50,9 +72,22 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 1rem;
-        margin-bottom: 1rem;
+        border-radius: .3rem;
+        margin-bottom: .2rem;
         margin-right: 1rem;
+    }
 
+    .pictogram-caption {
+        width: 10vw;
+        height: 3vh;
+        text-align: center;
+        border-radius: .3rem;
+        color: black !important;
+        background-color: white;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 }

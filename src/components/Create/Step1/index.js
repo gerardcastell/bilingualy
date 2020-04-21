@@ -32,10 +32,9 @@ const Step1 = () => {
 
   const dispatch = useDispatch()
 
-  const addPictogram = (id) => {
+  const addPictogram = (id, name) => {
     prevStories.current = [...prevStories.current, story];
-    console.log(prevStories)
-    setStory([...story, { key: uniqueKey.current, url: id, position: story.length }])
+    setStory([...story, { key: uniqueKey.current, url: id, name, position: story.length }])
     uniqueKey.current += 1;
   }
 
@@ -83,7 +82,7 @@ const Step1 = () => {
           </FabButton>
         </FabButtons>
       </Fab>
-      <PictoBrowser opened={openPictoBrowser} addPictogram={(id) => addPictogram(id)} onClose={() => setOpenPictoBrowser(false)} />
+      <PictoBrowser opened={openPictoBrowser} addPictogram={(id, name) => addPictogram(id, name)} onClose={() => setOpenPictoBrowser(false)} />
     </>
   );
 };

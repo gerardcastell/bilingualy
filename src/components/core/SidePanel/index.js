@@ -1,5 +1,5 @@
 import React from 'react'
-import { Panel, View, Page, Navbar, Block, Button, f7 } from 'framework7-react'
+import { Panel, View, Page, Navbar, Icon, Block, Button, f7 } from 'framework7-react'
 import { useSelector, useDispatch } from "react-redux";
 
 import actions from '../../../redux/actions'
@@ -28,7 +28,10 @@ const SidePanel = () => {
         <Panel right cover themeDark>
             <View>
                 <Page>
-                    <Navbar title='My profile' />
+                    <Navbar>
+                        <Icon md={`material:person`}></Icon>
+                     My profile
+                    </Navbar>
                     <Block>
                         {showLogButton()}
                     </Block>

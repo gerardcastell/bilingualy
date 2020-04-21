@@ -49,12 +49,28 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
   };
 
   const selectPictogram = (id) => {
-    f7.dialog.confirm(
-      "Is this pictogram your final selection?",
-      null,
-      () => confirmPictogram(id),
-      null
+    // f7.dialog.confirm(
+    //   "Is this pictogram your final selection?",
+    //   null,
+    //   () => confirmPictogram(id),
+    //   null
+    // );
+    f7.dialog.prompt(
+      " Otherwise, press 'Okay' anyway",
+      "Do you want to add a caption to your pictogram?",
+      function (caption) {
+        f7.dialog.confirm(
+          "Are you sure that the caption would be '" + caption + "'?",
+          () => confirmPictogram(id, caption)
+        );
+      }
     );
+
+    //   app.dialog.prompt('What is your name?', function (name) {
+    //     app.dialog.confirm('Are you sure that your name is ' + name + '?', function () {
+    //       app.dialog.alert('Ok, your name is ' + name);
+    //     });
+    //   });
   };
 
   const showSearchResults = () => {
@@ -81,8 +97,8 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
     }
   };
 
-  const confirmPictogram = (id) => {
-    addPictogram(id);
+  const confirmPictogram = (id, name) => {
+    addPictogram(id, name);
     onClose();
   };
 

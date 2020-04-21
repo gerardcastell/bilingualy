@@ -27,13 +27,21 @@ const StoryCard = ({ data, onTouchCard }) => {
     }
 
     const showPictograms = () => {
-        return data.pictograms.map(({ url, position }) =>
-            <img
-                key={position}
-                className="pictogram"
-                src={url}
-                alt=''
-            />
+        return data.pictograms.map(({ url, position, name }) => {
+            const caption = name ? (name.length < 30 ? name : `${name.substring(0, 27)}...`) : '';
+
+            return (
+                <div className="pictogram-container" key={position}>
+                    <img
+                        key={position}
+                        className="pictogram"
+                        src={url}
+                        alt=''
+                    />
+                    <div className="pictogram-caption" style={{ display: name ? 'block' : 'none', fontSize: caption.length < 14 ? 'small' : 'x-small' }}>{caption}</div>
+                </div>
+            )
+        }
         )
     }
 
@@ -99,6 +107,7 @@ const StoryCard = ({ data, onTouchCard }) => {
                             <div className="card-content__inner">
                                 <h4>Description</h4>
                                 <p>{data.description}</p>
+                                <hr />
                                 <div className="card-content__inner__pictograms" >
                                     {showPictograms()}
                                 </div>
