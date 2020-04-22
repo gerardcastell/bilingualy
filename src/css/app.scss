@@ -173,3 +173,21 @@ $font-size-title: 1.5rem !important;
 .swiper-container {
   z-index: 300;
 }
+
+.picto-browser-popup {
+  .block {
+    height: 100%;
+  }
+
+  &__results-div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &__image {
+      height: 6.5rem;
+      width: 6.5rem;
+    }
+  }
+}
