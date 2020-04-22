@@ -23,7 +23,7 @@ import {
   Fab,
   Icon,
 } from "framework7-react";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect, useFirebaseConnect } from "react-redux-firebase";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -40,14 +40,6 @@ export default ({ f7router }) => {
 
   const uid = useSelector((state) => state.firebase.auth.uid);
 
-  const fetchedStories = useSelector(
-    (state) => state.firestore.ordered.privateStories
-  );
-
-  useEffect(() => {
-    setLoading(!fetchedStories);
-  }, [fetchedStories]);
-
   useFirestoreConnect([
     {
       collection: "socialStories",
@@ -60,6 +52,20 @@ export default ({ f7router }) => {
       storeAs: "publicStories",
     },
   ]);
+  const requestStatus = useSelector(
+    (state) => state.firestore.status.requested
+  );
+
+  const privateStories = useSelector(
+    (state) => state.firestore.ordered.privateStories
+  );
+  const publicStories = useSelector(
+    (state) => state.firestore.ordered.publicStories
+  );
+
+  useEffect(() => {
+    setLoading(!requestStatus.privateStories);
+  });
 
   const handleCard = (value) => {
     setIsDisabled(value);
@@ -73,14 +79,17 @@ export default ({ f7router }) => {
     setSearchValue(value);
   };
 
-  const showStories = () => {
+  const showStories = (scope) => {
+    let fetchedStories = scope === "public" ? publicStories : privateStories;
     let finalStories;
-    if (!loading) {
+
+    if (!loading && fetchedStories) {
       if (searchValue) {
         const regex = new RegExp(searchValue);
         const filteredStories = fetchedStories.filter((item) =>
           item.title.match(regex)
         );
+
         finalStories = filteredStories;
       } else {
         finalStories = fetchedStories;
@@ -90,6 +99,7 @@ export default ({ f7router }) => {
         <>
           {finalStories.map((item, idx) => (
             <StoryCard
+              privateScope={scope === "private"}
               className="item-content"
               key={idx}
               id={item.title}
@@ -142,24 +152,25 @@ export default ({ f7router }) => {
       <List className="searchbar-not-found">
         <ListItem title="Nothing found" />
       </List>
-
-      {/* <Toolbar tabbar bottom>
-        <Link tabLink='#tab-private' tabLinkActive>
+      <Toolbar tabbar bottom>
+        <Link tabLink="#tab-private" tabLinkActive>
           My Stories
         </Link>
-        <Link tabLink='#tab-shared'>Public Stories</Link>
-      </Toolbar> 
-       <Tabs swipeable>
-        <TabMyStories onTouchCard={handleCard} />
-        <TabSharedStories onTouchCard={handleCard} />
-      </Tabs> */}
+        <Link tabLink="#tab-shared">Public Stories</Link>
+      </Toolbar>
+      <Tabs swipeable>
+        <TabMyStories onTouchCard={handleCard}>
+          {showStories("private")}
+        </TabMyStories>
+        <TabSharedStories onTouchCard={handleCard}>
+          {showStories("public")}
+        </TabSharedStories>
+      </Tabs>{" "}
       {/* <List className="search-list searchbar-found"> */}
-      {showStories()}
       {/* </List> */}
       <footer className="footer-dashboard-bottom">
         <span>Empowered with PWA technologies</span>
       </footer>
-
       {/* <List>
         <ListItem
           title='Dynamic (Component) Route'

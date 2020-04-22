@@ -163,3 +163,13 @@ $font-size-title: 1.5rem !important;
     flex-direction: column;
   }
 }
+
+.page-content {
+  .panel-backdrop {
+    z-index: 0 !important;
+  }
+}
+
+.swiper-container {
+  z-index: 300;
+}
