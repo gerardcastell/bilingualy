@@ -43,9 +43,11 @@
   --g: 142;
   --b: 221;
   --progress: var(--f7-navbar-large-collapse-progress);
-  --f7-bars-link-color: rgb(calc(var(--r) + (255 - var(--r)) * var(--progress)),
-      calc(var(--g) + (255 - var(--g)) * var(--progress)),
-      calc(var(--b) + (255 - var(--b)) * var(--progress)));
+  --f7-bars-link-color: rgb(
+    calc(var(--r) + (255 - var(--r)) * var(--progress)),
+    calc(var(--g) + (255 - var(--g)) * var(--progress)),
+    calc(var(--b) + (255 - var(--b)) * var(--progress))
+  );
 }
 
 .theme-dark .navbar-large-transparent,
@@ -81,9 +83,13 @@ $font-size-title: 1.5rem !important;
 }
 
 .skeleton-dashboard {
-  border: 1px solid #CCCCCC;
-  margin-left: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left));
-  margin-right: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right));
+  border: 1px solid #cccccc;
+  margin-left: calc(
+    var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left)
+  );
+  margin-right: calc(
+    var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right)
+  );
   margin-top: var(--f7-card-expandable-margin-vertical);
   margin-bottom: var(--f7-card-expandable-margin-vertical);
   box-shadow: var(--f7-card-expandable-box-shadow);
@@ -101,7 +107,7 @@ $font-size-title: 1.5rem !important;
   &__icon-close {
     position: absolute;
     right: 15px;
-    top: 15px
+    top: 15px;
   }
 
   &__tags {
@@ -121,13 +127,16 @@ $font-size-title: 1.5rem !important;
 }
 
 .footer-dashboard-bottom {
+  position: absolute;
+  bottom: 10px;
   height: 3.5rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  color: #CCCCCC;
+  color: #cccccc;
   font-size: small;
+  // margin: var(--f7-list-margin-vertical) 0;
 
   span {
     line-height: 14px;
@@ -137,5 +146,20 @@ $font-size-title: 1.5rem !important;
 .searchbar-demo {
   .searchbar-disable-button {
     top: 0 !important;
+  }
+}
+
+.search-list {
+  z-index: 300;
+  // height: 100%;
+  // padding: 0;
+  // margin: 0;
+}
+
+.signup-popup {
+  &__container {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
   }
 }

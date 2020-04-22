@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Page,
   Navbar,
@@ -36,7 +36,17 @@ import TabSharedStories from "../components/Dashboard/TabSharedStories";
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const uid = useSelector((state) => state.firebase.auth.uid);
+
+  const fetchedStories = useSelector(
+    (state) => state.firestore.ordered.privateStories
+  );
+
+  useEffect(() => {
+    setLoading(!fetchedStories);
+  }, [fetchedStories]);
 
   useFirestoreConnect([
     {
@@ -50,12 +60,6 @@ export default ({ f7router }) => {
       storeAs: "publicStories",
     },
   ]);
-
-  const fetchedStories = useSelector((state) =>
-    state.firestore.ordered.privateStories
-      ? state.firestore.ordered.privateStories
-      : []
-  );
 
   const handleCard = (value) => {
     setIsDisabled(value);
@@ -71,33 +75,28 @@ export default ({ f7router }) => {
 
   const showStories = () => {
     let finalStories;
-    if (fetchedStories.length) {
+    if (!loading) {
       if (searchValue) {
         const regex = new RegExp(searchValue);
         const filteredStories = fetchedStories.filter((item) =>
           item.title.match(regex)
         );
-        if (filteredStories.length) finalStories = filteredStories;
-        else {
-          finalStories = [];
-        }
+        finalStories = filteredStories;
       } else {
         finalStories = fetchedStories;
       }
 
       return (
         <>
-          <List className='search-list searchbar-found' style={{ zIndex: 300 }}>
-            {finalStories.map((item, idx) => (
-              <StoryCard
-                className='item-content'
-                key={idx}
-                id={item.title}
-                onTouchCard={handleCard}
-                data={item}
-              />
-            ))}
-          </List>
+          {finalStories.map((item, idx) => (
+            <StoryCard
+              className="item-content"
+              key={idx}
+              id={item.title}
+              onTouchCard={handleCard}
+              data={item}
+            />
+          ))}
         </>
       );
     } else {
@@ -106,16 +105,16 @@ export default ({ f7router }) => {
   };
 
   return (
-    <Page name='home'>
+    <Page name="home">
       <SidePanel />
       <Navbar>
         <NavLeft>
           {/* <Link style={{ pointerEvents: "none" }} iconMd='' /> */}
           <Link
-            searchbarEnable='.searchbar-demo'
-            iconIos='f7:search'
-            iconAurora='f7:search'
-            iconMd='material:search'
+            searchbarEnable=".searchbar-demo"
+            iconIos="f7:search"
+            iconAurora="f7:search"
+            iconMd="material:search"
           ></Link>
         </NavLeft>
         <Searchbar
@@ -123,68 +122,26 @@ export default ({ f7router }) => {
           onChange={(e) => handleMatch(e.target.value)}
           onSearchbarClear={handleOnClear}
           onSearchbarDisable={handleOnClear}
-          className='searchbar-demo'
+          className="searchbar-demo"
           expandable
-          searchContainer='.search-list'
-          searchIn='.item-title'
+          searchContainer=".search-list"
+          searchIn=".item-title"
         ></Searchbar>
-        <NavTitle className='header-title display-flex justify-content-center align-items-center'>
+        <NavTitle className="header-title display-flex justify-content-center align-items-center">
           Bilingualy
         </NavTitle>
         <NavRight>
           <Link
-            iconIos='f7:menu'
-            iconAurora='f7:menu'
-            iconMd='material:menu'
-            panelOpen='right'
+            iconIos="f7:menu"
+            iconAurora="f7:menu"
+            iconMd="material:menu"
+            panelOpen="right"
           />
         </NavRight>
       </Navbar>
-      <List className='searchbar-not-found'>
-        <ListItem title='Nothing found' />
+      <List className="searchbar-not-found">
+        <ListItem title="Nothing found" />
       </List>
-      {/* <List className='search-list searchbar-found'>
-        <ListItem title='Acura' />
-        <ListItem title='Audi' />
-        <ListItem title='BMW' />
-        <ListItem title='Cadillac ' />
-        <ListItem title='Chevrolet ' />
-        <ListItem title='Chrysler ' />
-        <ListItem title='Dodge ' />
-        <ListItem title='Ferrari ' />
-        <ListItem title='Ford ' />
-        <ListItem title='GMC ' />
-        <ListItem title='Honda' />
-        <ListItem title='Hummer' />
-        <ListItem title='Hyundai' />
-        <ListItem title='Infiniti ' />
-        <ListItem title='Isuzu ' />
-        <ListItem title='Jaguar ' />
-        <ListItem title='Jeep ' />
-        <ListItem title='Kia' />
-        <ListItem title='Lamborghini ' />
-        <ListItem title='Land Rover' />
-        <ListItem title='Lexus ' />
-        <ListItem title='Lincoln ' />
-        <ListItem title='Lotus ' />
-        <ListItem title='Mazda' />
-        <ListItem title='Mercedes-Benz' />
-        <ListItem title='Mercury ' />
-        <ListItem title='Mitsubishi' />
-        <ListItem title='Nissan ' />
-        <ListItem title='Oldsmobile ' />
-        <ListItem title='Peugeot ' />
-        <ListItem title='Pontiac ' />
-        <ListItem title='Porsche' />
-        <ListItem title='Regal' />
-        <ListItem title='Saab ' />
-        <ListItem title='Saturn ' />
-        <ListItem title='Subaru ' />
-        <ListItem title='Suzuki ' />
-        <ListItem title='Toyota' />
-        <ListItem title='Volkswagen' />
-        <ListItem title='Volvo' />
-      </List> */}
 
       {/* <Toolbar tabbar bottom>
         <Link tabLink='#tab-private' tabLinkActive>
@@ -196,10 +153,13 @@ export default ({ f7router }) => {
         <TabMyStories onTouchCard={handleCard} />
         <TabSharedStories onTouchCard={handleCard} />
       </Tabs> */}
+      {/* <List className="search-list searchbar-found"> */}
       {showStories()}
-      <footer className='footer-dashboard-bottom'>
+      {/* </List> */}
+      <footer className="footer-dashboard-bottom">
         <span>Empowered with PWA technologies</span>
       </footer>
+
       {/* <List>
         <ListItem
           title='Dynamic (Component) Route'
@@ -220,10 +180,10 @@ export default ({ f7router }) => {
       <Fab
         style={{ display: isDisabled ? "none" : "block" }}
         onClick={() => f7router.navigate("/create/")}
-        position='right-bottom'
-        slot='fixed'
+        position="right-bottom"
+        slot="fixed"
       >
-        <Icon ios='f7:plus' aurora='f7:plus' md='material:add'></Icon>
+        <Icon ios="f7:plus" aurora="f7:plus" md="material:add"></Icon>
       </Fab>
     </Page>
   );
