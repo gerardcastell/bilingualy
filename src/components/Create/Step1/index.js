@@ -71,8 +71,18 @@ const Step1 = () => {
       <NextButton clicked={nextStep} disabled={!story.length} />
       <UndoButton clicked={handleUndo} disabled={!prevStories.current.length} />
       <Fab position="left-bottom" slot="fixed" text="Add">
-        <Icon ios="f7:plus" aurora="f7:plus" md="material:add"></Icon>
-        <Icon ios="f7:xmark" aurora="f7:xmark" md="material:close"></Icon>
+        <Icon
+          ios="f7:plus"
+          aurora="f7:plus"
+          md="material:add"
+          ios="material:add"
+        ></Icon>
+        <Icon
+          ios="f7:xmark"
+          aurora="f7:xmark"
+          md="material:close"
+          ios="material:close"
+        ></Icon>
         <FabButtons position="top">
           <FabButton
             onClick={() => {
@@ -81,13 +91,25 @@ const Step1 = () => {
             fabClose
             label="Pictogram"
           >
-            <Icon md="material:portrait" />
+            <Icon
+              md="material:portrait"
+              ios="material:portrait"
+              aurora="material:portrait"
+            />
           </FabButton>
           <FabButton fabClose label="Photo">
-            <Icon md="material:photo_camera" />
+            <Icon
+              md="material:photo_camera"
+              ios="material:photo_camera"
+              aurora="material:portrait"
+            />
           </FabButton>
           <FabButton fabClose label="Draw">
-            <Icon md="material:brush" />
+            <Icon
+              md="material:brush"
+              ios="material:brush"
+              aurora="material:portrait"
+            />
           </FabButton>
         </FabButtons>
       </Fab>

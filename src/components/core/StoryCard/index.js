@@ -55,7 +55,11 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
       return (
         <>
           <BlockTitle>
-            <Icon md={`material:${data.isPublic ? "public" : "lock"}`}></Icon>
+            <Icon
+              md={`material:${data.isPublic ? "public" : "lock"}`}
+              ios={`material:${data.isPublic ? "public" : "lock"}`}
+              aurora={`material:${data.isPublic ? "public" : "lock"}`}
+            ></Icon>
             {data.isPublic ? "Public" : "Private"}
           </BlockTitle>
           <BlockTitle>{moment(data.createdAt.toDate()).calendar()}</BlockTitle>
@@ -65,7 +69,11 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
       return (
         <>
           <BlockTitle>
-            <Icon md="material:person" />
+            <Icon
+              md="material:person"
+              ios="material:person"
+              aurora="material:person"
+            />
             <b>{data.username}</b>
           </BlockTitle>
           <BlockTitle>{moment(data.createdAt.toDate()).calendar()}</BlockTitle>

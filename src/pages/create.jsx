@@ -72,13 +72,23 @@ const createPage = ({ f7router }) => {
       /> */}
       <Navbar>
         <NavLeft>
-          <Link onClick={confirmBack} iconMd='material:arrow_back' />
+          <Link
+            onClick={confirmBack}
+            iconMd="material:arrow_back"
+            iconIos="material:arrow_back"
+            iconAurora="material:arrow_back"
+          />
         </NavLeft>
-        <NavTitle className='header-title display-flex justify-content-center align-items-center'>
+        <NavTitle className="header-title display-flex justify-content-center align-items-center">
           <span style={{ fontSize: 20 }}>Create your social story</span>
         </NavTitle>
         <NavRight>
-          <Link style={{ pointerEvents: "none" }} iconMd='' />
+          <Link
+            style={{ pointerEvents: "none" }}
+            iconMd=""
+            iconAurora=""
+            iconIos=""
+          />
         </NavRight>
       </Navbar>
       <Stepper steps={steps} activeStep={activeStep} />
