@@ -36,6 +36,8 @@ import { ReactReduxFirebaseProvider, getFirebase, isLoaded } from 'react-redux-f
 //Import Firebase project config
 import firebaseConfig from '../services/firebase/config'
 
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+
 //construct required properties
 const profileSpecificProps = {
   userProfile: 'users',
@@ -46,10 +48,10 @@ const profileSpecificProps = {
 
 const store = createStore(
   rootReducer,
-  compose(
+  composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(firebase, firebaseConfig),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    reduxFirestore(firebase, firebaseConfig)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
