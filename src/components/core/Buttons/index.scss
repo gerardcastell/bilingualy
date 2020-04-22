@@ -1,0 +1,23 @@
+.next-button,
+.back-button,
+.undo-button {
+    width: 6.14rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 1rem;
+    z-index: 10;
+}
+
+.next-button {
+    right: 1rem;
+}
+
+.back-button {
+    left: 1rem;
+}
+
+.undo-button {
+    left: calc(50% - 3rem);
+}

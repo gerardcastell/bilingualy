@@ -1,0 +1,20 @@
+.card-short {
+    height: 25vh;
+}
+
+.card-title {
+    height: 25vh;
+}
+
+.card-content {
+    height: 75vh;
+    .inner-content{
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}

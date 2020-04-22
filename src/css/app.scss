@@ -15,13 +15,14 @@
   --f7-bars-translucent-opacity: 0.9;
   --f7-bars-text-color: #fff;
   --f7-bars-link-color: #fff;
-  --f7-navbar-subtitle-text-color: rgba(255,255,255,0.85);
+  --f7-navbar-subtitle-text-color: rgba(255, 255, 255, 0.85);
   --f7-bars-border-color: transparent;
   --f7-tabbar-link-active-color: #fff;
-  --f7-tabbar-link-inactive-color: rgba(255,255,255,0.54);
+  --f7-tabbar-link-inactive-color: rgba(255, 255, 255, 0.54);
   --f7-sheet-border-color: transparent;
   --f7-tabbar-link-active-border-color: #fff;
 }
+
 .appbar,
 .navbar,
 .toolbar,
@@ -31,8 +32,9 @@
   --f7-touch-ripple-color: var(--f7-touch-ripple-white);
   --f7-link-highlight-color: var(--f7-link-highlight-white);
   --f7-button-text-color: #fff;
-  --f7-button-pressed-bg-color: rgba(255,255,255,0.1);
+  --f7-button-pressed-bg-color: rgba(255, 255, 255, 0.1);
 }
+
 .navbar-large-transparent,
 .navbar-large.navbar-transparent {
   --f7-navbar-large-title-text-color: #000;
@@ -41,15 +43,99 @@
   --g: 142;
   --b: 221;
   --progress: var(--f7-navbar-large-collapse-progress);
-  --f7-bars-link-color: rgb(
-    calc(var(--r) + (255 - var(--r)) * var(--progress)),
-    calc(var(--g) + (255 - var(--g)) * var(--progress)),
-    calc(var(--b) + (255 - var(--b)) * var(--progress))
-  );
+  --f7-bars-link-color: rgb(calc(var(--r) + (255 - var(--r)) * var(--progress)),
+      calc(var(--g) + (255 - var(--g)) * var(--progress)),
+      calc(var(--b) + (255 - var(--b)) * var(--progress)));
 }
+
 .theme-dark .navbar-large-transparent,
 .theme-dark .navbar-large.navbar-transparent {
   --f7-navbar-large-title-text-color: #fff;
 }
 
 /* Your app custom styles here */
+// Custom variables
+$font-size-title: 1.5rem !important;
+
+// Custom Classes
+.header-title {
+  width: 100%;
+  height: 100%;
+  font-size: $font-size-title;
+}
+
+.tab-dashboard {
+  overflow: auto;
+  padding-bottom: 0rem !important;
+  padding-top: 0rem !important;
+}
+
+.card-expandable .card-header {
+  font-size: 21px !important;
+}
+
+.card-expandable.card-opening,
+.card-expandable.card-opened,
+.card-expandable.card-closing {
+  z-index: 80000 !important;
+}
+
+.skeleton-dashboard {
+  border: 1px solid #CCCCCC;
+  margin-left: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left));
+  margin-right: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right));
+  margin-top: var(--f7-card-expandable-margin-vertical);
+  margin-bottom: var(--f7-card-expandable-margin-vertical);
+  box-shadow: var(--f7-card-expandable-box-shadow);
+
+  .card-content {
+    height: auto;
+  }
+}
+
+.custom-card {
+  .container {
+    height: 100%;
+  }
+
+  &__icon-close {
+    position: absolute;
+    right: 15px;
+    top: 15px
+  }
+
+  &__tags {
+    height: 11vh;
+    width: 100%;
+  }
+
+  &__subtitle {
+    height: 5vh;
+    width: 100%;
+
+    .block-title {
+      margin: 0;
+      font-size: small !important;
+    }
+  }
+}
+
+.footer-dashboard-bottom {
+  height: 3.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: #CCCCCC;
+  font-size: small;
+
+  span {
+    line-height: 14px;
+  }
+}
+
+.searchbar-demo {
+  .searchbar-disable-button {
+    top: 0 !important;
+  }
+}
