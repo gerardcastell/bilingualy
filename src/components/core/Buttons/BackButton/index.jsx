@@ -6,11 +6,11 @@ const BackButton = ({ clicked }) => {
   return (
     <Button
       onClick={() => clicked()}
-      className='back-button'
+      className="back-button fab fab-left-bottom "
       small
       raised
       round
-      iconMaterial='arrow_back'
+      iconMaterial="arrow_back"
     >
       Back
     </Button>

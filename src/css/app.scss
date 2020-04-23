@@ -191,3 +191,14 @@ $font-size-title: 1.5rem !important;
     }
   }
 }
+
+.step1 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .buttons-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
