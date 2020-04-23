@@ -171,7 +171,8 @@ $font-size-title: 1.5rem !important;
 }
 
 .swiper-container {
-  z-index: 300;
+  // z-index: 300;
+  overflow: visible !important;
 }
 
 .picto-browser-popup {
@@ -201,4 +202,17 @@ $font-size-title: 1.5rem !important;
     justify-content: space-between;
     align-items: flex-end;
   }
+}
+
+.page.page-with-card-opened .page-content {
+  overflow: visible !important;
+}
+
+.private {
+  .card-backdrop {
+    display: block;
+  }
+}
+.card-backdrop {
+  display: none;
 }

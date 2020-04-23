@@ -160,7 +160,12 @@ export default ({ f7router }) => {
       </Toolbar>
       <Tabs swipeable>
         <TabMyStories onTouchCard={handleCard}>
-          {showStories("private")}
+          <div className="private">
+            {isDisabled && (
+              <div className="card-backdrop card-backdrop-in"></div>
+            )}
+            {showStories("private")}
+          </div>
         </TabMyStories>
         <TabSharedStories onTouchCard={handleCard}>
           {showStories("public")}
@@ -194,6 +199,7 @@ export default ({ f7router }) => {
       >
         <Icon ios="f7:plus" aurora="f7:plus" md="material:add"></Icon>
       </Fab>
+      <div id="prueba"></div>
     </Page>
   );
 };
