@@ -166,8 +166,6 @@ export default ({ f7router }) => {
           {showStories("public")}
         </TabSharedStories>
       </Tabs>{" "}
-      {/* <List className="search-list searchbar-found"> */}
-      {/* </List> */}
       <footer className="footer-dashboard-bottom">
         <span>Empowered with PWA technologies</span>
       </footer>

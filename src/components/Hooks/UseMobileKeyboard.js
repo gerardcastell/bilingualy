@@ -10,15 +10,10 @@ export default function useMobileKeyboard() {
   //Set initial viewport height to handle mobile keyboard
   useEffect(() => {
     initialHeight.current = height;
-    console.log(height);
   }, []);
 
   //If mobile and viewport height changes set keyboard to open
   useEffect(() => {
-    console.log(
-      "TECLADO ABIERTO: ",
-      width < 450 && height < 0.8 * initialHeight.current
-    );
     setKeyboardOpen(width < 450 && height < 0.8 * initialHeight.current);
   }, [height]);
 
