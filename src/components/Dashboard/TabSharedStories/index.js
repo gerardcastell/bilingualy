@@ -7,26 +7,9 @@ import { useFirestoreConnect } from "react-redux-firebase";
 
 import StoryCard from "../../core/StoryCard";
 
-const TabSharedStories = ({ onTouchCard, children }) => {
-  //   const uid = useSelector((state) => state.firebase.auth.uid);
-  //   const myStories = useSelector(
-  //       (state) => state.firestore.ordered.publicStories
-  //   );
-
-  const showMyStories = () => {
-    let items = myStories ? myStories : [];
-    if (items.length) {
-      return items.map((item, idx) => (
-        <StoryCard key={idx} data={item} onTouchCard={onTouchCard} />
-      ));
-    } else {
-      return <p>You don't have created any Social Story yet.</p>;
-    }
-  };
-
+const TabSharedStories = ({ children }) => {
   return (
     <Tab id="tab-shared" className="page-content tab-dashboard">
-      {/* {showMyStories()} */}
       {children}
     </Tab>
   );

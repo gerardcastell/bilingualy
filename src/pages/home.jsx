@@ -37,6 +37,7 @@ export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(true);
+  const [privateScope, setPrivateScope] = useState(false);
 
   const uid = useSelector((state) => state.firebase.auth.uid);
 
@@ -153,10 +154,16 @@ export default ({ f7router }) => {
         <ListItem title="Nothing found" />
       </List>
       <Toolbar tabbar bottom>
-        <Link tabLink="#tab-private" tabLinkActive>
+        <Link
+          tabLink="#tab-private"
+          onClick={() => setPrivateScope(true)}
+          tabLinkActive
+        >
           My Stories
         </Link>
-        <Link tabLink="#tab-shared">Public Stories</Link>
+        <Link tabLink="#tab-shared" onClick={() => setPrivateScope(false)}>
+          Public Stories
+        </Link>
       </Toolbar>
       <Tabs swipeable>
         <TabMyStories onTouchCard={handleCard}>
@@ -168,7 +175,12 @@ export default ({ f7router }) => {
           </div>
         </TabMyStories>
         <TabSharedStories onTouchCard={handleCard}>
-          {showStories("public")}
+          <div className="private">
+            {isDisabled && (
+              <div className="card-backdrop card-backdrop-in"></div>
+            )}
+            {showStories("public")}
+          </div>
         </TabSharedStories>
       </Tabs>{" "}
       <footer className="footer-dashboard-bottom">

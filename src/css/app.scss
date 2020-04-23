@@ -204,13 +204,16 @@ $font-size-title: 1.5rem !important;
   }
 }
 
-.page.page-with-card-opened .page-content {
-  overflow: visible !important;
+@media (max-height: 781px) {
+  .page.page-with-card-opened .page-content {
+    overflow: visible !important;
+  }
 }
 
 .private {
   .card-backdrop {
     display: block;
+    height: 100vh;
   }
 }
 .card-backdrop {
