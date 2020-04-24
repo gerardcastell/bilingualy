@@ -33,6 +33,12 @@ const SidePanel = () => {
             }}
           >
             Log out
+            <Icon
+              className="sidepanel__exit"
+              md="material:exit_to_app"
+              ios="material:exit_to_app"
+              aurora="material:exit_to_app"
+            />
           </Button>
         </>
       );
@@ -46,19 +52,58 @@ const SidePanel = () => {
   };
   return (
     <Panel right cover themeDark className="sidepanel">
-      <View>
-        <Page>
-          <Navbar>
-            <Icon
-              md={`material:person`}
-              ios={`material:person`}
-              aurora={`material:person`}
-            ></Icon>
-            Logged as {auth.uid ? username : "guest"}
-          </Navbar>
-          <Block>{showLogButton()}</Block>
-        </Page>
-      </View>
+      <Navbar>
+        <Icon
+          md={`material:person`}
+          ios={`material:person`}
+          aurora={`material:person`}
+          className="sidepanel__logo-title"
+        ></Icon>
+        Logged as {auth.uid ? username : "guest"}
+      </Navbar>
+      <List>
+        <ListItem title="My Stories" link="/">
+          <Icon
+            slot="media"
+            md={`material:folder_shared`}
+            ios={`material:folder_shared`}
+            aurora={`material:folder_shared`}
+          ></Icon>
+        </ListItem>
+        <ListItem title="Community Stories" link="/social/">
+          <Icon
+            slot="media"
+            md={`material:group`}
+            ios={`material:group`}
+            aurora={`material:group`}
+          ></Icon>
+        </ListItem>
+        <ListItem title="Create new story" link="/create/">
+          <Icon
+            slot="media"
+            md={`material:create`}
+            ios={`material:create`}
+            aurora={`material:create`}
+          ></Icon>
+        </ListItem>
+        <ListItem title="Why pictograms?" link="/about/">
+          <Icon
+            slot="media"
+            md={`material:face`}
+            ios={`material:face`}
+            aurora={`material:face`}
+          ></Icon>
+        </ListItem>
+        <ListItem title="About PWA's" link="/about/">
+          <Icon
+            slot="media"
+            md={`material:network_check`}
+            ios={`material:network_check`}
+            aurora={`material:network_check`}
+          ></Icon>
+        </ListItem>
+      </List>
+      <Block>{showLogButton()}</Block>
     </Panel>
   );
 };

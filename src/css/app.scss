@@ -229,8 +229,18 @@ $font-size-title: 1.5rem !important;
 }
 
 .sidepanel {
-  i {
+  background-color: #1C1C1D;
+
+  &__logo-title {
     padding-right: 1rem;
     padding-left: 1rem;
+  }
+
+  &__exit {
+    padding-left: 1rem;
+  }
+
+  .list {
+    margin-top: 0;
   }
 }

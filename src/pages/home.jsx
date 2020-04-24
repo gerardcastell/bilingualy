@@ -30,14 +30,11 @@ import { useDispatch, useSelector } from "react-redux";
 import StoryCard from "../components/core/StoryCard";
 import SidePanel from "../components/core/SidePanel";
 import DashboardSckeleton from "../components/Dashboard/Skeleton";
-import TabMyStories from "../components/Dashboard/TabMyStories";
-import TabSharedStories from "../components/Dashboard/TabSharedStories";
 
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(true);
-  const [privateScope, setPrivateScope] = useState(false);
 
   const uid = useSelector((state) => state.firebase.auth.uid);
 
