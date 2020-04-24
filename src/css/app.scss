@@ -220,3 +220,17 @@ $font-size-title: 1.5rem !important;
   height: 100%;
   width: 100%;
 }
+
+.dashboard-title-button {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  pointer-events: none;
+}
+
+.sidepanel {
+  i {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}

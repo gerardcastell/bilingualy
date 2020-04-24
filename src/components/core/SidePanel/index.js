@@ -8,6 +8,8 @@ import {
   Block,
   Button,
   f7,
+  List,
+  ListItem,
 } from "framework7-react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -23,7 +25,6 @@ const SidePanel = () => {
     if (auth.uid) {
       return (
         <>
-          <p>Logged as {username}</p>
           <Button
             fill
             onClick={() => {
@@ -44,7 +45,7 @@ const SidePanel = () => {
     }
   };
   return (
-    <Panel right cover themeDark>
+    <Panel right cover themeDark className="sidepanel">
       <View>
         <Page>
           <Navbar>
@@ -53,7 +54,7 @@ const SidePanel = () => {
               ios={`material:person`}
               aurora={`material:person`}
             ></Icon>
-            My profile
+            Logged as {auth.uid ? username : "guest"}
           </Navbar>
           <Block>{showLogButton()}</Block>
         </Page>

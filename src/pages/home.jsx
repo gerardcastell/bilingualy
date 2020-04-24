@@ -105,9 +105,9 @@ export default ({ f7router }) => {
 
       return (
         <>
-          <h2 className="">
-            <u>MY SOCIAL STORIES</u>
-          </h2>
+          <Button raised outline className="dashboard-title-button">
+            MY SOCIAL STORIES
+          </Button>
           {finalStories.map((item, idx) => (
             <StoryCard
               privateScope={scope === "private"}
@@ -167,23 +167,7 @@ export default ({ f7router }) => {
       <footer className="footer-dashboard-bottom">
         <span>Empowered with PWA technology</span>
       </footer>
-      {/* <List>
-        <ListItem
-          title='Dynamic (Component) Route'
-          link='/dynamic-route/blog/45/post/125/?foo=bar#about'
-        />
-        <ListItem
-          title='Default Route (404)'
-          link='/load-something-that-doesnt-exist/'
-        />
-        <ListItem
-          title='Request Data & Load'
-          link='/request-and-load/user/123456/'
-        />
-        <ListItem title='New Data' link='new/12' />
-        <ListItem title='Create page' link='/create/' />
-        <ListItem title='About page' link='/about/' />
-      </List> */}
+
       <Fab
         style={{ display: isDisabled ? "none" : "block" }}
         onClick={() => f7router.navigate("/create/")}
