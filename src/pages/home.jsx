@@ -92,12 +92,22 @@ export default ({ f7router }) => {
         );
 
         finalStories = filteredStories;
+        if (!finalStories.length) {
+          return (
+            <div className="list-empty-result">
+              <h2>Nothing found with this title</h2>
+            </div>
+          );
+        }
       } else {
         finalStories = fetchedStories;
       }
 
       return (
         <>
+          <h2 className="">
+            <u>MY SOCIAL STORIES</u>
+          </h2>
           {finalStories.map((item, idx) => (
             <StoryCard
               privateScope={scope === "private"}
@@ -153,38 +163,9 @@ export default ({ f7router }) => {
       <List className="searchbar-not-found">
         <ListItem title="Nothing found" />
       </List>
-      <Toolbar tabbar bottom>
-        <Link
-          tabLink="#tab-private"
-          onClick={() => setPrivateScope(true)}
-          tabLinkActive
-        >
-          My Stories
-        </Link>
-        <Link tabLink="#tab-shared" onClick={() => setPrivateScope(false)}>
-          Public Stories
-        </Link>
-      </Toolbar>
-      <Tabs swipeable>
-        <TabMyStories onTouchCard={handleCard}>
-          <div className="private">
-            {isDisabled && (
-              <div className="card-backdrop card-backdrop-in"></div>
-            )}
-            {showStories("private")}
-          </div>
-        </TabMyStories>
-        <TabSharedStories onTouchCard={handleCard}>
-          <div className="private">
-            {isDisabled && (
-              <div className="card-backdrop card-backdrop-in"></div>
-            )}
-            {showStories("public")}
-          </div>
-        </TabSharedStories>
-      </Tabs>{" "}
+      {showStories("private")}
       <footer className="footer-dashboard-bottom">
-        <span>Empowered with PWA technologies</span>
+        <span>Empowered with PWA technology</span>
       </footer>
       {/* <List>
         <ListItem

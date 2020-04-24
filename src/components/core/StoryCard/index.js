@@ -89,6 +89,7 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
       expandable
       expandableAnimateWidth
       swipeToClose
+      closeByBackdropClick
       className="card-short custom-card"
     >
       <CardContent padding={false}>

@@ -43,11 +43,9 @@
   --g: 142;
   --b: 221;
   --progress: var(--f7-navbar-large-collapse-progress);
-  --f7-bars-link-color: rgb(
-    calc(var(--r) + (255 - var(--r)) * var(--progress)),
-    calc(var(--g) + (255 - var(--g)) * var(--progress)),
-    calc(var(--b) + (255 - var(--b)) * var(--progress))
-  );
+  --f7-bars-link-color: rgb(calc(var(--r) + (255 - var(--r)) * var(--progress)),
+      calc(var(--g) + (255 - var(--g)) * var(--progress)),
+      calc(var(--b) + (255 - var(--b)) * var(--progress)));
 }
 
 .theme-dark .navbar-large-transparent,
@@ -84,12 +82,8 @@ $font-size-title: 1.5rem !important;
 
 .skeleton-dashboard {
   border: 1px solid #cccccc;
-  margin-left: calc(
-    var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left)
-  );
-  margin-right: calc(
-    var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right)
-  );
+  margin-left: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left));
+  margin-right: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right));
   margin-top: var(--f7-card-expandable-margin-vertical);
   margin-bottom: var(--f7-card-expandable-margin-vertical);
   box-shadow: var(--f7-card-expandable-box-shadow);
@@ -197,6 +191,7 @@ $font-size-title: 1.5rem !important;
   display: flex;
   flex-direction: column;
   width: 100%;
+
   .buttons-row {
     display: flex;
     justify-content: space-between;
@@ -204,18 +199,24 @@ $font-size-title: 1.5rem !important;
   }
 }
 
-@media (max-height: 781px) {
-  .page.page-with-card-opened .page-content {
-    overflow: visible !important;
-  }
-}
+// .page.page-with-card-opened .page-content {
+//   overflow: visible !important;
+// }
 
-.private {
-  .card-backdrop {
-    display: block;
-    height: 100vh;
-  }
-}
-.card-backdrop {
-  display: none;
+// .private {
+//   .card-backdrop {
+//     display: block;
+//   }
+// }
+
+// .card-backdrop {
+//   display: none;
+// }
+
+.list-empty-result {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
 }
