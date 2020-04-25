@@ -20,11 +20,14 @@ import {
   ListInput,
   ListButton,
   BlockFooter,
+  f7,
 } from "framework7-react";
 
 import routes from "../js/routes";
 import SidePanel from "../components/core/SidePanel";
 import LoginView from "../pages/login";
+import OfflineToast from "../components/core/OfflineToast";
+
 export default class extends React.Component {
   constructor() {
     super();
@@ -55,6 +58,8 @@ export default class extends React.Component {
           pushState={true}
           pushStateSeparator="#"
         />
+        <OfflineToast />
+
         <LoginView />
         <SidePanel />
       </App>

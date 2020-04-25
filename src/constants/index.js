@@ -1,7 +1,7 @@
 //ARASAAC
 export const ARASAAC_API = "https://api.arasaac.org/api/pictograms/";
-export const ARASAAC_RESOLUTION_URL = "https://static.arasaac.org/pictograms/2340/2340_2500.png";
-
+export const ARASAAC_RESOLUTION_URL =
+  "https://static.arasaac.org/pictograms/2340/2340_2500.png";
 
 //ACTIONS
 export const INIT_SOCIAL_STORY = "INIT_SOCIAL_STORY";
@@ -19,9 +19,10 @@ export const BACK_STEP = "BACK_STEP";
 export const ADD_TITLE = "ADD_TITLE";
 export const ADD_TAGS = "ADD_TAGS";
 export const ADD_PRIVACITY = "ADD_PRIVACITY";
-
+export const SWITCH_ONLINE = "SWITCH_ONLINE";
+export const SWITCH_OFFLINE = "SWITCH_OFFLINE";
 
 //REQUEST
-export const SUCCESS = "SUCCESS"
-export const FAILURE = "FAILURE"
-export const IDLE = "IDLE"
+export const SUCCESS = "SUCCESS";
+export const FAILURE = "FAILURE";
+export const IDLE = "IDLE";
