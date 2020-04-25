@@ -45,6 +45,11 @@ export default ({ f7router }) => {
       where: [["userId", "==", uid ? uid : ""]],
       storeAs: "privateStories",
     },
+    {
+      collection: "socialStories",
+      where: [["isPublic", "==", true]],
+      storeAs: "publicStories",
+    },
   ]);
   const requestStatus = useSelector(
     (state) => state.firestore.status.requested

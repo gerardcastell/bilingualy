@@ -14,6 +14,13 @@ import moment from "moment";
 import "./style.scss";
 
 const StoryCard = ({ data, onTouchCard, privateScope }) => {
+  const hasCaptions = () => {
+    data.pictograms.map(({ name }) => {
+      if (name) return true;
+    });
+    return false;
+  };
+
   const showTags = () => {
     return data.tags.map((tag, index) => (
       <Chip
@@ -26,6 +33,7 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
   };
 
   const showPictograms = () => {
+    const captions = hasCaptions();
     return data.pictograms.map(({ url, position, name }) => {
       const caption = name
         ? name.length < 30
@@ -39,7 +47,8 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
           <div
             className="pictogram-caption"
             style={{
-              display: name ? "block" : "none",
+              display: caption ? "block" : "none",
+              backgroundColor: name ? "white" : "transparent",
               fontSize: caption.length < 14 ? "small" : "x-small",
             }}
           >
@@ -118,8 +127,10 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
           <div className="row card-content-padding ">
             <div className="col bg-color-primary text-color-white card-content">
               <div className="card-content__inner">
-                <h4>Description</h4>
-                <p>{data.description}</p>
+                <div className="card-content__inner__description">
+                  <h4>Description</h4>
+                  <p>{data.description}</p>
+                </div>
                 <hr />
                 <div className="card-content__inner__pictograms">
                   {showPictograms()}

@@ -22,60 +22,63 @@ import App from "../components/app.jsx";
 Framework7.use(Framework7React);
 
 //Import Redux libraries
-import {
-  Provider, useSelector
-} from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../redux/reducers";
-import thunk from 'redux-thunk'
+import thunk from "redux-thunk";
 
 //Import Firebase modules
-import firebase from 'firebase/app';
-import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
-import { ReactReduxFirebaseProvider, getFirebase, isLoaded } from 'react-redux-firebase'
+import firebase from "firebase/app";
+import {
+  createFirestoreInstance,
+  reduxFirestore,
+  getFirestore,
+} from "redux-firestore";
+import {
+  ReactReduxFirebaseProvider,
+  getFirebase,
+  isLoaded,
+} from "react-redux-firebase";
 //Import Firebase project config
-import firebaseConfig from '../services/firebase/config'
+import firebaseConfig from "../services/firebase/config";
 
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 //construct required properties
 const profileSpecificProps = {
-  userProfile: 'users',
+  userProfile: "users",
   useFirestoreForProfile: true,
   enableRedirectHandling: false,
-  resetBeforeLogin: false
-}
+  resetBeforeLogin: false,
+};
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(firebase, firebaseConfig)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
 const AuthIsLoaded = ({ children }) => {
-  const auth = useSelector(state => state.firebase.auth)
+  const auth = useSelector((state) => state.firebase.auth);
   if (!isLoaded(auth)) return <div>splash screen...</div>;
-  return children
-}
+  return children;
+};
 
 const reactReduxFirebaseProps = {
   firebase,
   config: firebaseConfig,
   config: profileSpecificProps,
   dispatch: store.dispatch,
-  createFirestoreInstance
+  createFirestoreInstance,
 };
 
 // Mount React App
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
-      <AuthIsLoaded>
-        {React.createElement(App)}
-      </AuthIsLoaded>
+      <AuthIsLoaded>{React.createElement(App)}</AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("app")
