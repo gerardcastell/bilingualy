@@ -32,6 +32,8 @@ import StoryCard from "../components/core/StoryCard";
 import SidePanel from "../components/core/SidePanel";
 import DashboardSckeleton from "../components/Dashboard/Skeleton";
 
+import OfflineToast from "../components/core/OfflineToast";
+
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -126,6 +128,8 @@ export default ({ f7router }) => {
   return (
     <Page name="home">
       {/* <SidePanel /> */}
+      <OfflineToast />
+
       <Navbar>
         <NavLeft>
           <Link
