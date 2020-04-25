@@ -4,6 +4,10 @@ import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { BackgroundSyncPlugin } from "workbox-background-sync";
 import { Queue } from "workbox-background-sync";
+import { skipWaiting, clientsClaim } from "workbox-core";
+
+skipWaiting();
+clientsClaim();
 
 import {
   CacheFirst,
@@ -46,7 +50,6 @@ registerRoute(
 );
 
 registerRoute(
-  // new RegExp("https://api\\.arasaac\\.org/api/pictograms/(d+)"),
   /https:\/\/api\.arasaac\.org\/api\/pictograms\/\d+/,
   new CacheFirst({
     cacheName: "pictogram-cache",
@@ -78,7 +81,7 @@ registerRoute(
   })
 );
 
-const bgSyncPlugin = new BackgroundSyncPlugin("myQueueName", {
+const bgSyncPlugin = new BackgroundSyncPlugin("postedStoriesQueue", {
   maxRetentionTime: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
 });
 registerRoute(
