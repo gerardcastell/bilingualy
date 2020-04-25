@@ -88,6 +88,7 @@ registerRoute(
   }),
   "POST"
 );
+//This code is used to make a queue with all the request
 // const queue = new Queue("backgroundSyncQueue");
 
 // self.addEventListener("fetch", (event) => {
@@ -98,7 +99,4 @@ registerRoute(
 //   });
 
 //   event.waitUntil(promiseChain);
-// });
-// self.addEventListener("fetch", (e) => {
-//   console.log("fetching", e);
 // });
