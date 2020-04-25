@@ -2,6 +2,8 @@ import { registerRoute } from "workbox-routing";
 import { precacheAndRoute } from "workbox-precaching";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
+import { Queue } from "workbox-background-sync";
+
 import {
   CacheFirst,
   StaleWhileRevalidate,
@@ -74,22 +76,17 @@ registerRoute(
   })
 );
 
-// registerRoute(
-//   new RegExp("https://api\\.arasaac\\.org/api/pictograms/*"),
-//   new CacheFirst({
-//     cacheName: "pictograms",
-//     plugins: [
-//       new ExpirationPlugin({
-//         maxEntries: 50,
-//         maxAgeSeconds: 5 * 60, // 5 minutes
-//       }),
-//       new CacheableResponsePlugin({
-//         statuses: [0, 200],
-//       }),
-//     ],
-//   })
-// );
+const queue = new Queue("myQueueName");
 
+self.addEventListener("fetch", (event) => {
+  // Clone the request to ensure it's safe to read when
+  // adding to the Queue.
+  const promiseChain = fetch(event.request.clone()).catch((err) => {
+    return queue.pushRequest({ request: event.request });
+  });
+
+  event.waitUntil(promiseChain);
+});
 // self.addEventListener("fetch", (e) => {
 //   console.log("fetching", e);
 // });
