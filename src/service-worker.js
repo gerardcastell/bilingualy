@@ -42,8 +42,36 @@ registerRoute(
 );
 
 registerRoute(
-  new RegExp("https://api\\.arasaac\\.org/api/pictograms/*"),
-  new CacheFirst()
+  // new RegExp("https://api\\.arasaac\\.org/api/pictograms/(d+)"),
+  /https:\/\/api\.arasaac\.org\/api\/pictograms\/\d+/,
+  new CacheFirst({
+    cacheName: "pictogram-cache",
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 200,
+        maxAgeSeconds: 60 * 60, // 60 minutes
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  new RegExp("https://api\\.arasaac\\.org/api/pictograms/(es||en)/search/*"),
+  new CacheFirst({
+    cacheName: "search-cache",
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60, // 60 minutes
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
 );
 
 // registerRoute(
