@@ -23,7 +23,7 @@ import {
 } from "framework7-react";
 
 import routes from "../js/routes";
-
+import SidePanel from "../components/core/SidePanel";
 import LoginView from "../pages/login";
 export default class extends React.Component {
   constructor() {
@@ -50,12 +50,13 @@ export default class extends React.Component {
         {/* Your main view, should have "view-main" class */}
         <View
           main
-          className='safe-areas'
-          url='/'
+          className="safe-areas"
+          url="/"
           pushState={true}
-          pushStateSeparator='#'
+          pushStateSeparator="#"
         />
         <LoginView />
+        <SidePanel />
       </App>
     );
   }

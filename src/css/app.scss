@@ -226,6 +226,10 @@ $font-size-title: 1.5rem !important;
   margin-left: 2rem;
   margin-right: 2rem;
   pointer-events: none;
+
+  i {
+    padding-left: 1rem;
+  }
 }
 
 .sidepanel {

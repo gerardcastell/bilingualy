@@ -22,6 +22,7 @@ import {
   Button,
   Fab,
   Icon,
+  f7,
 } from "framework7-react";
 import { useFirestoreConnect, useFirebaseConnect } from "react-redux-firebase";
 
@@ -43,11 +44,6 @@ export default ({ f7router }) => {
       collection: "socialStories",
       where: [["userId", "==", uid ? uid : ""]],
       storeAs: "privateStories",
-    },
-    {
-      collection: "socialStories",
-      where: [["isPublic", "==", true]],
-      storeAs: "publicStories",
     },
   ]);
   const requestStatus = useSelector(
@@ -104,6 +100,11 @@ export default ({ f7router }) => {
         <>
           <Button raised outline className="dashboard-title-button">
             MY SOCIAL STORIES
+            <Icon
+              md="material:lock"
+              ios="material:lock"
+              aurora="material:lock"
+            ></Icon>
           </Button>
           {finalStories.map((item, idx) => (
             <StoryCard
@@ -124,10 +125,9 @@ export default ({ f7router }) => {
 
   return (
     <Page name="home">
-      <SidePanel />
+      {/* <SidePanel /> */}
       <Navbar>
         <NavLeft>
-          {/* <Link style={{ pointerEvents: "none" }} iconMd='' /> */}
           <Link
             searchbarEnable=".searchbar-demo"
             iconIos="f7:search"
@@ -136,7 +136,6 @@ export default ({ f7router }) => {
           ></Link>
         </NavLeft>
         <Searchbar
-          // onFocus={handleSearchBar}
           onChange={(e) => handleMatch(e.target.value)}
           onSearchbarClear={handleOnClear}
           onSearchbarDisable={handleOnClear}
@@ -154,6 +153,7 @@ export default ({ f7router }) => {
             iconAurora="f7:menu"
             iconMd="material:menu"
             panelOpen="right"
+            // onClick={() => f7.panel.open("right")}
           />
         </NavRight>
       </Navbar>

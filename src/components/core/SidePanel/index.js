@@ -18,13 +18,28 @@ import actions from "../../../redux/actions";
 import SidePanelButton from "../SidePanelButton";
 
 const SidePanel = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const auth = useSelector((state) => state.firebase.auth);
   const username = useSelector((state) => state.firebase.profile.username);
 
   const dispatch = useDispatch();
 
+  const closePanel = () => {
+    setIsOpen(false);
+
+    console.log("CLOSE PANEL");
+  };
+
   return (
-    <Panel right cover themeDark className="sidepanel">
+    <Panel
+      closeByBackdropClick
+      // opened={isOpen}
+      // onPanelOpened={() => setIsOpen(true)}
+      right
+      cover
+      themeDark
+      className="sidepanel"
+    >
       <Navbar>
         <Icon
           md={`material:person`}
