@@ -126,7 +126,7 @@ export default ({ f7router }) => {
       <Navbar>
         <NavLeft>
           <Link
-            searchbarEnable=".searchbar-demo"
+            searchbarEnable=".searchbar-social"
             iconIos="f7:search"
             iconAurora="f7:search"
             iconMd="material:search"
@@ -136,7 +136,9 @@ export default ({ f7router }) => {
           onChange={(e) => handleMatch(e.target.value)}
           onSearchbarClear={handleOnClear}
           onSearchbarDisable={handleOnClear}
-          className="searchbar-demo"
+          onClickClear={handleOnClear}
+          onClickDisable={handleOnClear}
+          className="searchbar-social"
           expandable
           searchContainer=".search-list"
           searchIn=".item-title"
