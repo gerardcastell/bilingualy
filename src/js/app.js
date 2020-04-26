@@ -44,6 +44,7 @@ import firebaseConfig from "../services/firebase/config";
 
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
+import { f7 } from "framework7-react";
 //construct required properties
 const profileSpecificProps = {
   userProfile: "users",
@@ -62,7 +63,22 @@ const store = createStore(
 
 const AuthIsLoaded = ({ children }) => {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div>splash screen...</div>;
+  if (!isLoaded(auth))
+    return (
+      <div
+        style={{
+          color: "white",
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "#468edd",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Loading...
+      </div>
+    );
   return children;
 };
 
