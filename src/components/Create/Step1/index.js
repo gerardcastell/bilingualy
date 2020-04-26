@@ -1,17 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-  Page,
-  Navbar,
   Block,
   BlockTitle,
-  Link,
-  ListInput,
-  List,
   Fab,
   FabButtons,
   FabButton,
   Icon,
-  Button,
+  f7,
 } from "framework7-react";
 
 import UndoButton from "../../core/Buttons/UndoButton";
@@ -112,14 +107,32 @@ const Step1 = () => {
                 aurora="material:portrait"
               />
             </FabButton>
-            <FabButton fabClose label="Photo">
+            <FabButton
+              fabClose
+              label="Photo"
+              onClick={() =>
+                f7.dialog.alert(
+                  "This feature will be ready soon",
+                  "Bilingualy Team"
+                )
+              }
+            >
               <Icon
                 md="material:photo_camera"
                 ios="material:photo_camera"
                 aurora="material:portrait"
               />
             </FabButton>
-            <FabButton fabClose label="Draw">
+            <FabButton
+              fabClose
+              label="Draw"
+              onClick={() =>
+                f7.dialog.alert(
+                  "This feature will be ready soon",
+                  "Bilingualy Team"
+                )
+              }
+            >
               <Icon
                 md="material:brush"
                 ios="material:brush"
