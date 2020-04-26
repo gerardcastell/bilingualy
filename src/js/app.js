@@ -21,6 +21,9 @@ import App from "../components/app.jsx";
 // Init F7 Vue Plugin
 Framework7.use(Framework7React);
 
+//Import logo
+import logo from "../static/icons/512x512.png";
+
 //Import Redux libraries
 import { Provider, useSelector } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
@@ -44,7 +47,6 @@ import firebaseConfig from "../services/firebase/config";
 
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
-import { f7 } from "framework7-react";
 //construct required properties
 const profileSpecificProps = {
   userProfile: "users",
@@ -70,13 +72,13 @@ const AuthIsLoaded = ({ children }) => {
           color: "white",
           width: "100vw",
           height: "100vh",
-          backgroundColor: "#468edd",
+          backgroundColor: "#68a3e3",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        Loading...
+        <img src={logo} alt="Logo" style={{ height: "150px" }} />
       </div>
     );
   return children;
