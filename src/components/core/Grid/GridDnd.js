@@ -16,11 +16,11 @@ const GridDnd = ({ elements, onUpdate }) => {
 
   const getHeight = () => {
     if (height < 350) {
-      return 100;
+      return 120;
     } else if (width < 420) {
-      return 125;
-    } else {
       return 150;
+    } else {
+      return 230;
     }
   };
 
@@ -47,18 +47,36 @@ const GridDnd = ({ elements, onUpdate }) => {
           boxesPerRow={getBoxesPerRow()}
           rowHeight={getHeight()}
         >
-          {elements.map((item) => (
-            <GridItem
-              key={item.key || item.position}
-              style={{ marginBottom: "2rem", marginTop: "2rem" }}
-            >
-              <div className="grid-item">
-                <div className="grid-item-content">
-                  <img src={item.url} alt="" className="image" />
+          {elements.map((item) => {
+            const caption = item.name
+              ? item.name.length < 30
+                ? item.name
+                : `${item.name.substring(0, 27)}...`
+              : "";
+            return (
+              <GridItem
+                key={item.key || item.position}
+                style={{ marginBottom: "4rem" }}
+              >
+                <div className="grid-item">
+                  <div className="grid-item-content">
+                    <img src={item.url} alt="" className="image" />
+                  </div>
+                  <div
+                    className="pictogram-caption"
+                    style={{
+                      marginTop: ".3rem",
+                      border: item.name ? "1px solid black" : "none",
+                      backgroundColor: name ? "white" : "transparent",
+                      fontSize: caption.length < 14 ? "small" : "x-small",
+                    }}
+                  >
+                    {caption}
+                  </div>
                 </div>
-              </div>
-            </GridItem>
-          ))}
+              </GridItem>
+            );
+          })}
         </GridDropZone>
       </div>
     </GridContextProvider>

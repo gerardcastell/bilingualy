@@ -204,6 +204,10 @@ $font-size-title: 1.5rem !important;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    .fab {
+      position: fixed;
+    }
   }
 }
 
