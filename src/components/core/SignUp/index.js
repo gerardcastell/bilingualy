@@ -47,7 +47,12 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
   };
 
   return (
-    <Popup className="signup-popup" opened={openSignUp} swipeToClose>
+    <Popup
+      className="signup-popup"
+      opened={openSignUp}
+      onPopupClose={closeSignUp}
+      swipeToClose
+    >
       <Page loginScreen>
         <Navbar>
           <NavRight>
@@ -63,6 +68,8 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
               autocomplete="username"
               placeholder="Your username"
               value={username}
+              required
+              maxlength={15}
               onInput={(e) => setUsername(e.target.value)}
             ></ListInput>
             <ListInput
@@ -71,6 +78,8 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
               autocomplete="email"
               placeholder="Your email"
               value={email}
+              required
+              maxlength={30}
               onInput={(e) => setEmail(e.target.value)}
             ></ListInput>
             <ListInput
@@ -79,6 +88,8 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
               autocomplete="new-password"
               placeholder="Your password"
               value={password}
+              required
+              maxlength={20}
               onInput={(e) => setPassword(e.target.value)}
             ></ListInput>
           </List>

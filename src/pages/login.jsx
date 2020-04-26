@@ -52,34 +52,48 @@ const LoginPage = () => {
   };
 
   return (
-    <LoginScreen opened={openSignIn} id='my-login-screen'>
+    <LoginScreen opened={openSignIn} id="my-login-screen">
       <View>
         <Page loginScreen>
           <LoginScreenTitle>Bilingualy</LoginScreenTitle>
           <List form>
             <ListInput
-              autocomplete='username'
-              type='text'
-              name='text'
-              placeholder='Your email'
+              autocomplete="username"
+              type="text"
+              name="text"
+              placeholder="Your email"
               value={email}
               required
+              maxlength={30}
               onInput={(e) => setEmail(e.target.value)}
             ></ListInput>
             <ListInput
-              type='password'
-              name='password'
-              autocomplete='current-password'
+              type="password"
+              name="password"
+              autocomplete="current-password"
               required
-              placeholder='Your password'
+              maxlength={20}
+              placeholder="Your password"
               value={password}
               onInput={(e) => setPassword(e.target.value)}
             ></ListInput>
           </List>
           <List>
-            <ListButton title='Sign In' onClick={signIn} />
+            {/* <ListButton title="Sign In" onClick={signIn} /> */}
+            <Button
+              style={{ marginLeft: "2rem", marginRight: "2rem" }}
+              fill
+              onClick={signIn}
+            >
+              Sign In
+            </Button>
             <BlockFooter>{showSignedIn()}</BlockFooter>
-            <Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
+            <Button
+              style={{ margin: "2rem" }}
+              onClick={() => setOpenSignUp(true)}
+            >
+              Sign Up
+            </Button>
           </List>
 
           <SignUpPopup openSignUp={openSignUp} closeSignUp={closeSignUp} />

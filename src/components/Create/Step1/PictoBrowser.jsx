@@ -17,12 +17,14 @@ import {
 import { searchPictograms } from "../../../services/arasaac";
 
 const PictoBrowser = ({ opened, addPictogram, onClose }) => {
+  const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [errorMsg, setErrorMsg] = useState();
   let timeout = 0;
 
-  const handleSearchChange = (event) => {
-    let text = event.target.value.trim();
+  const handleSearchChange = (val) => {
+    setSearchValue(val.trim());
+    let text = val.trim();
     if (text !== "") {
       if (timeout) clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -87,6 +89,7 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
 
   const confirmPictogram = (id, name) => {
     addPictogram(id, name);
+    handleSearchChange("");
     onClose();
   };
 
@@ -111,7 +114,8 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
                 type="text"
                 placeholder="Write a word"
                 clearButton
-                onChange={handleSearchChange}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                value={searchValue}
               >
                 <Icon f7="search" slot="media" />
               </ListInput>

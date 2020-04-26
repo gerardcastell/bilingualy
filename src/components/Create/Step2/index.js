@@ -25,24 +25,7 @@ const Step2 = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const { height, width } = useWindowDimensions();
   const isMobileKeyboardOpen = useMobileKeyboard();
-  //   const [keyboardOpen, setKeyboardOpen] = useState(false);
-  //   const initialHeight = useRef();
-  //   //Set initial viewport height to handle mobile keyboard
-  //   useEffect(() => {
-  //     initialHeight.current = height;
-  //     console.log(height);
-  //   }, []);
-
-  //   //If mobile and viewport height changes set keyboard to open
-  //   useEffect(() => {
-  //     console.log(
-  //       "TECLADO ABIERTO: ",
-  //       width < 450 && height < 0.8 * initialHeight.current
-  //     );
-  //     setKeyboardOpen(width < 450 && height < 0.8 * initialHeight.current);
-  //   }, [height]);
 
   const showBottomButtons = () => {
     if (!isMobileKeyboardOpen) {
@@ -78,6 +61,7 @@ const Step2 = () => {
           type="text"
           placeholder="Enter a title"
           required
+          maxlength={30}
           validate
           clearButton
           onChange={(e) => setTitle(e.target.value)}
@@ -87,6 +71,7 @@ const Step2 = () => {
           type="textarea"
           placeholder="Enter a brief description about the social story"
           required
+          maxlength={120}
           validate
           clearButton
           onChange={(e) => setDescription(e.target.value)}

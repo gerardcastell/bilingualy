@@ -24,22 +24,8 @@ const SidePanel = () => {
 
   const dispatch = useDispatch();
 
-  const closePanel = () => {
-    setIsOpen(false);
-
-    console.log("CLOSE PANEL");
-  };
-
   return (
-    <Panel
-      closeByBackdropClick
-      // opened={isOpen}
-      // onPanelOpened={() => setIsOpen(true)}
-      right
-      cover
-      themeDark
-      className="sidepanel"
-    >
+    <Panel closeByBackdropClick right cover themeDark className="sidepanel">
       <Navbar>
         <Icon
           md={`material:person`}
@@ -47,7 +33,12 @@ const SidePanel = () => {
           aurora={`material:person`}
           className="sidepanel__logo-title"
         ></Icon>
-        Logged as {auth.uid ? username : "guest"}
+        <span>
+          Logged as{" "}
+          <b>
+            <i>{auth.uid ? username : "guest"}</i>
+          </b>
+        </span>
       </Navbar>
 
       <List>

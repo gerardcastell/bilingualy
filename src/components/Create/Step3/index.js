@@ -137,6 +137,7 @@ const Step3 = () => {
           type="text"
           placeholder="Enter a tag name"
           required
+          maxlength={12}
           validate
           clearButton
           onChange={(e) => setTagName(e.target.value)}

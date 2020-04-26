@@ -105,7 +105,7 @@ export default ({ f7router }) => {
           </Button>
           {finalStories.map((item, idx) => (
             <StoryCard
-              privateScope={scope === "public"}
+              privateScope={scope === "private"}
               className="item-content"
               key={idx}
               id={item.title}

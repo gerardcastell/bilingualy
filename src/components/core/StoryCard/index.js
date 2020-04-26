@@ -47,7 +47,7 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
           <div
             className="pictogram-caption"
             style={{
-              display: caption ? "block" : "none",
+              display: caption ? "flex" : "none",
               backgroundColor: name ? "white" : "transparent",
               fontSize: caption.length < 14 ? "small" : "x-small",
             }}
