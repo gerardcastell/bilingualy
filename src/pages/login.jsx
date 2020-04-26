@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Page,
   Link,
@@ -23,22 +23,38 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [openSignIn, setOpenSignIn] = useState(true);
   const [openedSignUp, setOpenedSignUp] = useState(false);
+  const [showInstallPWA, setShowInstallPWA] = useState(false);
+
+  const deferredPromptRef = useRef();
 
   const auth = useSelector((state) => state.auth);
   const firebase = useSelector((state) => state.firebase);
 
   const dispatch = useDispatch();
 
-  let deferredPrompt;
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPromptRef.current = e;
+      setDeferredPrompt(e);
+      // Update UI notify the user they can install the PWA
+      showInstallPromotion();
+      setShowInstallPWA(true);
+    });
+  }, []);
 
-  window.addEventListener("beforeinstallprompt", (e) => {
-    // Prevent the mini-infobar from appearing on mobile
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    // Update UI notify the user they can install the PWA
-    showInstallPromotion();
-  });
+  const onClickPrompt = () => {
+    setShowInstallPWA(false);
+    deferredPromptRef.current.prompt();
+
+    deferredPromptRef.current.userChoice.then((choiceResult) => {
+      if (choiceResult === "accepted") console.log("User accepted the A2HS");
+      else console.log("User declined the A2HS prompt");
+      setDeferredPrompt.current = null;
+    });
+  };
 
   useEffect(() => {
     if (auth.authError) {
@@ -123,27 +139,16 @@ const LoginPage = () => {
             >
               Sign Up
             </Button>
-            <Button
-              style={{
-                margin: "var(--f7-login-screen-blocks-margin-vertical) auto",
-              }}
-              onClick={(e) => {
-                // Hide the app provided install promotion
-                // hideMyInstallPromotion();
-                // Show the install prompt
-                deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
-                deferredPrompt.userChoice.then((choiceResult) => {
-                  if (choiceResult.outcome === "accepted") {
-                    console.log("User accepted the install prompt");
-                  } else {
-                    console.log("User dismissed the install prompt");
-                  }
-                });
-              }}
-            >
-              Install PWA
-            </Button>
+            {(
+              <Button
+                style={{
+                  margin: "var(--f7-login-screen-blocks-margin-vertical) auto",
+                }}
+                onClick={onClickPrompt}
+              >
+                Install PWA
+              </Button>
+            ) && showInstallPWA}
           </List>
 
           <SignUpPopup openSignUp={openedSignUp} closeSignUp={closeSignUp} />
