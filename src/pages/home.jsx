@@ -29,10 +29,8 @@ import { useFirestoreConnect, useFirebaseConnect } from "react-redux-firebase";
 import { useDispatch, useSelector } from "react-redux";
 
 import StoryCard from "../components/core/StoryCard";
-import SidePanel from "../components/core/SidePanel";
 import DashboardSckeleton from "../components/Dashboard/Skeleton";
-
-import OfflineToast from "../components/core/OfflineToast";
+import CardsPresenter from "../components/core/CardsPresenter";
 
 export default ({ f7router }) => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -44,13 +42,13 @@ export default ({ f7router }) => {
   useFirestoreConnect([
     {
       collection: "socialStories",
-      where: [["userId", "==", uid ? uid : ""]],
-      storeAs: "privateStories",
+      where: [["isPublic", "==", true]],
+      storeAs: "publicStories",
     },
     {
       collection: "socialStories",
-      where: [["isPublic", "==", true]],
-      storeAs: "publicStories",
+      where: [["userId", "==", uid ? uid : ""]],
+      storeAs: "privateStories",
     },
   ]);
   const requestStatus = useSelector(
@@ -80,61 +78,8 @@ export default ({ f7router }) => {
     setSearchValue(value);
   };
 
-  const showStories = (scope) => {
-    let fetchedStories = scope === "public" ? publicStories : privateStories;
-    let finalStories;
-
-    if (!loading && fetchedStories) {
-      if (searchValue) {
-        const regex = new RegExp(searchValue);
-        const filteredStories = fetchedStories.filter((item) =>
-          item.title.match(regex)
-        );
-
-        finalStories = filteredStories;
-        if (!finalStories.length) {
-          return (
-            <div className="list-empty-result">
-              <h2>Nothing found with this title</h2>
-            </div>
-          );
-        }
-      } else {
-        finalStories = fetchedStories;
-      }
-
-      return (
-        <>
-          <Button raised outline className="dashboard-title-button">
-            MY SOCIAL STORIES
-            <Icon
-              md="material:lock"
-              ios="material:lock"
-              aurora="material:lock"
-            ></Icon>
-          </Button>
-          {finalStories.map((item, idx) => (
-            <StoryCard
-              privateScope={scope === "private"}
-              className="item-content"
-              key={idx}
-              id={item.title}
-              onTouchCard={handleCard}
-              data={item}
-            />
-          ))}
-        </>
-      );
-    } else {
-      return <DashboardSckeleton />;
-    }
-  };
-
   return (
     <Page name="home">
-      {/* <SidePanel /> */}
-      <OfflineToast />
-
       <Navbar>
         <NavLeft>
           <Link
@@ -167,19 +112,11 @@ export default ({ f7router }) => {
           />
         </NavRight>
       </Navbar>
-      <List className="searchbar-not-found">
-        <ListItem title="Nothing found" />
-      </List>
-      <div className="container-content">
-        {/* <div className="col-25"></div> */}
-        <div className="col container-content__col">
-          {showStories("private")}
-        </div>
-        {/* <div className="col-25"></div> */}
-      </div>
-      <footer className="footer-dashboard-bottom">
-        <span>Empowered with PWA technology</span>
-      </footer>
+      <CardsPresenter
+        variant={"home"}
+        searchFilter={searchValue}
+        onCardOpen={handleCard}
+      />
 
       <Fab
         style={{ display: isDisabled ? "none" : "block" }}
@@ -189,7 +126,6 @@ export default ({ f7router }) => {
       >
         <Icon ios="f7:plus" aurora="f7:plus" md="material:add"></Icon>
       </Fab>
-      <div id="prueba"></div>
     </Page>
   );
 };

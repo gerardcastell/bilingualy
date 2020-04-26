@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Page,
-  Navbar,
-  Block,
-  BlockTitle,
-  NavRight,
   Link,
   Button,
   LoginScreen,

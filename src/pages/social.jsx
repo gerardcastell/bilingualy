@@ -44,6 +44,11 @@ export default ({ f7router }) => {
       where: [["isPublic", "==", true]],
       storeAs: "publicStories",
     },
+    // {
+    //   collection: "socialStories",
+    //   where: [["userId", "==", uid ? uid : ""]],
+    //   storeAs: "privateStories",
+    // },
   ]);
 
   const requestStatus = useSelector(
@@ -122,7 +127,6 @@ export default ({ f7router }) => {
 
   return (
     <Page>
-      {/* <SidePanel /> */}
       <Navbar>
         <NavLeft>
           <Link
@@ -158,10 +162,11 @@ export default ({ f7router }) => {
       <List className="searchbar-not-found">
         <ListItem title="Nothing found" />
       </List>
-      {showStories("public")}
-      <footer className="footer-dashboard-bottom">
-        <span>Empowered with PWA technology</span>
-      </footer>
+      <div className="container-content">
+        <div className="col container-content__col">
+          {showStories("public")}
+        </div>
+      </div>
 
       <Fab
         style={{ display: isDisabled ? "none" : "block" }}
@@ -171,7 +176,6 @@ export default ({ f7router }) => {
       >
         <Icon ios="f7:plus" aurora="f7:plus" md="material:add"></Icon>
       </Fab>
-      <div id="prueba"></div>
     </Page>
   );
 };
