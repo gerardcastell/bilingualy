@@ -21,59 +21,82 @@ import App from "../components/app.jsx";
 // Init F7 Vue Plugin
 Framework7.use(Framework7React);
 
+//Import logo
+import logo from "../static/icons/512x512.png";
+
 //Import Redux libraries
-import {
-  Provider, useSelector
-} from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../redux/reducers";
-import thunk from 'redux-thunk'
+import thunk from "redux-thunk";
 
 //Import Firebase modules
-import firebase from 'firebase/app';
-import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
-import { ReactReduxFirebaseProvider, getFirebase, isLoaded } from 'react-redux-firebase'
+import firebase from "firebase/app";
+import {
+  createFirestoreInstance,
+  reduxFirestore,
+  getFirestore,
+} from "redux-firestore";
+import {
+  ReactReduxFirebaseProvider,
+  getFirebase,
+  isLoaded,
+} from "react-redux-firebase";
 //Import Firebase project config
-import firebaseConfig from '../services/firebase/config'
+import firebaseConfig from "../services/firebase/config";
+
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 //construct required properties
 const profileSpecificProps = {
-  userProfile: 'users',
+  userProfile: "users",
   useFirestoreForProfile: true,
   enableRedirectHandling: false,
-  resetBeforeLogin: false
-}
+  resetBeforeLogin: false,
+};
 
 const store = createStore(
   rootReducer,
-  compose(
+  composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(firebase, firebaseConfig),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    reduxFirestore(firebase, firebaseConfig)
   )
 );
 
 const AuthIsLoaded = ({ children }) => {
-  const auth = useSelector(state => state.firebase.auth)
-  if (!isLoaded(auth)) return <div>splash screen...</div>;
-  return children
-}
+  const auth = useSelector((state) => state.firebase.auth);
+  if (!isLoaded(auth))
+    return (
+      <div
+        style={{
+          color: "white",
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "#68a3e3",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img src={logo} alt="Logo" style={{ height: "150px" }} />
+      </div>
+    );
+  return children;
+};
 
 const reactReduxFirebaseProps = {
   firebase,
   config: firebaseConfig,
   config: profileSpecificProps,
   dispatch: store.dispatch,
-  createFirestoreInstance
+  createFirestoreInstance,
 };
 
 // Mount React App
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
-      <AuthIsLoaded>
-        {React.createElement(App)}
-      </AuthIsLoaded>
+      <AuthIsLoaded>{React.createElement(App)}</AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("app")

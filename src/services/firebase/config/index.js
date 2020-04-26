@@ -1,8 +1,8 @@
 // import * as firebase from 'firebase';
 //In production change the above import with these below
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 const config = {
   apiKey: "AIzaSyBhygWp3hfBCBVekPtYKJ7mXykySgzKKjU",
   authDomain: "bilingualy.firebaseapp.com",
@@ -16,10 +16,7 @@ const config = {
 // Initialize Firebase
 firebase.initializeApp(config);
 
-firebase.firestore() // <- needed if using firestore
+firebase.firestore(); // <- needed if using firestore
 
 export default firebase;
 // firebase.analytics();
-
-// const databaseRef = firebase.database().ref();
-// export const todosRef = databaseRef.child("todos")

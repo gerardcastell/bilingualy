@@ -1,30 +1,12 @@
 import React from "react";
 
-import {
-  App,
-  Panel,
-  Views,
-  View,
-  Popup,
-  Page,
-  Navbar,
-  Toolbar,
-  NavRight,
-  Link,
-  Block,
-  BlockTitle,
-  LoginScreen,
-  LoginScreenTitle,
-  List,
-  ListItem,
-  ListInput,
-  ListButton,
-  BlockFooter,
-} from "framework7-react";
+import { App, View } from "framework7-react";
 
 import routes from "../js/routes";
-
+import SidePanel from "../components/core/SidePanel";
 import LoginView from "../pages/login";
+import OfflineToast from "../components/core/OfflineToast";
+
 export default class extends React.Component {
   constructor() {
     super();
@@ -50,12 +32,15 @@ export default class extends React.Component {
         {/* Your main view, should have "view-main" class */}
         <View
           main
-          className='safe-areas'
-          url='/'
+          className="safe-areas"
+          url="/"
           pushState={true}
-          pushStateSeparator='#'
+          pushStateSeparator="#"
         />
+        <OfflineToast />
+
         <LoginView />
+        <SidePanel />
       </App>
     );
   }

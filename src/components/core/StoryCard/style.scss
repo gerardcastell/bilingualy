@@ -1,9 +1,12 @@
 .card-short {
     height: 25vh;
+    min-height: 165px;
+
 }
 
 .card-title {
     height: 25vh;
+    min-height: 165px;
 }
 
 .card-content {
@@ -13,10 +16,15 @@
         padding-left: 5vw;
         padding-right: 5vw;
 
+        &__description {
+            // min-width: 50px;
+        }
+
         &__pictograms {
             height: 40vh;
             display: flex;
             justify-content: flex-start;
+            align-items: flex-start;
             flex-wrap: wrap;
         }
     }
@@ -75,6 +83,9 @@
         border-radius: .3rem;
         margin-bottom: .2rem;
         margin-right: 1rem;
+        max-width: 138px;
+        min-width: 103px;
+        max-height: 138px;
     }
 
     .pictogram-caption {
@@ -89,5 +100,7 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        max-width: 138px;
+        min-height: 30px;
     }
 }

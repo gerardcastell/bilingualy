@@ -1,23 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import { } from 'framework7-react'
-import Chip from '../../core/Chip'
+import {} from "framework7-react";
+import Chip from "../../core/Chip";
 const TagsZone = (props) => {
-    const tags = [{ color: 'red', text: 'red' }]
-    const showTags = () => {
-        console.log(tags)
-        if (tags.length) {
-            return tags.map((tag, idx) => {
-                <Chip key={idx} text={tag.text} color={tag.color} />
-            })
-        }
+  const tags = [{ color: "red", text: "red" }];
+  const showTags = () => {
+    if (tags.length) {
+      return tags.map((tag, idx) => {
+        <Chip key={idx} text={tag.text} color={tag.color} />;
+      });
     }
+  };
 
-    return (
-        <div style={{ height: '100px', width: '100%' }}>
-            {showTags()}
-        </div>
-    )
-}
+  return <div style={{ height: "100px", width: "100%" }}>{showTags()}</div>;
+};
 
-export default TagsZone
+export default TagsZone;

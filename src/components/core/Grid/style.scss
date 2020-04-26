@@ -1,52 +1,55 @@
 .dnd-container {
-    display: flex;
-    touch-action: none;
-    width: 90vw;
-    margin: 1rem auto;
+  display: flex;
+  touch-action: none;
+  width: 90vw;
+  margin: 1rem auto;
 }
 
 .dropzone {
-    flex: 1;
-    height: 53vh;
+  flex: 1;
+  height: 53vh;
 }
 
 .grid-item {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .grid-item-content {
-    width: 27vw;
-    height: 26vw;
-    box-sizing: border-box;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.4);
+  width: 27vw;
+  height: 26vw;
+  box-sizing: border-box;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .image {
-    padding: .4rem;
-    pointer-events: none;
-    width: -webkit-fill-available;
+  padding: 0.4rem;
+  pointer-events: none;
+  width: -webkit-fill-available;
 }
 
 @media (min-width: 480px) and (max-width: 781px) {
-    .grid-item-content {
-        width: 15vw;
-        height: 15vw;
-    }
+  .grid-item-content {
+    width: 15vw;
+    height: 15vw;
+  }
 }
 
 @media (min-width: 781px) {
-    .grid-item-content {
-        width: 12vw;
-        height: 12vw;
-    }
+  .grid-item-content {
+    width: 12vw;
+    height: 12vw;
+    max-width: 204px;
+    max-height: 175px;
+  }
 }

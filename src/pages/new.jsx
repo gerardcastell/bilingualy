@@ -54,7 +54,7 @@ const createPage = () => {
           <img
             src={item}
             key={idx}
-            alt=''
+            alt=""
             style={{ height: "100px", width: "100px" }}
           />
         ))}
@@ -63,7 +63,6 @@ const createPage = () => {
   };
 
   const downloadSocialStories = () => {
-    console.log(stories);
     f7.dialog.alert(
       stories ? `${stories.length} lodaded` : "No story loaded",
       "Social stories"
@@ -78,7 +77,7 @@ const createPage = () => {
             <img
               src={item}
               key={idx}
-              alt=''
+              alt=""
               style={{ height: "100px", width: "100px" }}
               onClick={() => selectPictogram(item)}
             />
@@ -90,7 +89,7 @@ const createPage = () => {
 
   return (
     <Page>
-      <Navbar title='About' backLink='Back' />
+      <Navbar title="About" backLink="Back" />
       <BlockTitle>About My App</BlockTitle>
       <Block>
         <h1>My social Story</h1>
@@ -101,14 +100,14 @@ const createPage = () => {
       <Block>
         <List noHairlinesMd>
           <ListInput
-            label='Pictogram'
+            label="Pictogram"
             floatingLabel
-            type='text'
-            placeholder='Write a word'
+            type="text"
+            placeholder="Write a word"
             clearButton
             onChange={handleChange}
           >
-            <Icon f7='search' slot='media' />
+            <Icon f7="search" slot="media" />
           </ListInput>
         </List>
         <Button fill onClick={getPictogramList}>

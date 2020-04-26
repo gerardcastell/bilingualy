@@ -17,12 +17,14 @@ import {
 import { searchPictograms } from "../../../services/arasaac";
 
 const PictoBrowser = ({ opened, addPictogram, onClose }) => {
+  const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [errorMsg, setErrorMsg] = useState();
   let timeout = 0;
 
-  const handleSearchChange = (event) => {
-    let text = event.target.value.trim();
+  const handleSearchChange = (val) => {
+    setSearchValue(val.trim());
+    let text = val.trim();
     if (text !== "") {
       if (timeout) clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -49,12 +51,6 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
   };
 
   const selectPictogram = (id) => {
-    // f7.dialog.confirm(
-    //   "Is this pictogram your final selection?",
-    //   null,
-    //   () => confirmPictogram(id),
-    //   null
-    // );
     f7.dialog.prompt(
       " Otherwise, press 'Okay' anyway",
       "Do you want to add a caption to your pictogram?",
@@ -65,28 +61,22 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
         );
       }
     );
-
-    //   app.dialog.prompt('What is your name?', function (name) {
-    //     app.dialog.confirm('Are you sure that your name is ' + name + '?', function () {
-    //       app.dialog.alert('Ok, your name is ' + name);
-    //     });
-    //   });
   };
 
   const showSearchResults = () => {
     if (searchResults.length && !errorMsg) {
       return (
-        <>
+        <div className="picto-browser-popup__results-div">
           {searchResults.map((item, idx) => (
             <img
               src={item}
               key={idx}
-              alt=''
-              style={{ height: "6.5rem", width: "6.5rem" }}
+              alt=""
+              className="picto-browser-popup__results-div__image"
               onClick={() => selectPictogram(item)}
             />
           ))}
-        </>
+        </div>
       );
     } else if (searchResults.length === 0 && errorMsg) {
       return (
@@ -99,18 +89,19 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
 
   const confirmPictogram = (id, name) => {
     addPictogram(id, name);
+    handleSearchChange("");
     onClose();
   };
 
   return (
     <>
       <Popup
-        className='picto-browser-popup'
+        className="picto-browser-popup"
         opened={opened}
         onPopupClosed={() => onClose()}
       >
         <Page>
-          <Navbar title='Picto Browser'>
+          <Navbar title="Picto Browser">
             <NavRight>
               <Link popupClose>Close</Link>
             </NavRight>
@@ -118,14 +109,15 @@ const PictoBrowser = ({ opened, addPictogram, onClose }) => {
           <Block>
             <List noHairlinesMd>
               <ListInput
-                label='Pictogram'
+                label="Pictogram"
                 floatingLabel
-                type='text'
-                placeholder='Write a word'
+                type="text"
+                placeholder="Write a word"
                 clearButton
-                onChange={handleSearchChange}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                value={searchValue}
               >
-                <Icon f7='search' slot='media' />
+                <Icon f7="search" slot="media" />
               </ListInput>
             </List>
             {showSearchResults()}
