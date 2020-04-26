@@ -15,10 +15,10 @@ import {
   ListButton,
   BlockFooter,
   Popup,
+  f7,
 } from "framework7-react";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../redux/actions";
-import { f7 } from "framework7-react";
 
 import SignUpPopup from "../components/core/SignUp";
 
@@ -26,10 +26,26 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [openSignIn, setOpenSignIn] = useState(true);
-  const [openSignUp, setOpenSignUp] = useState(false);
+  const [openedSignUp, setOpenedSignUp] = useState(false);
 
   const auth = useSelector((state) => state.auth);
   const firebase = useSelector((state) => state.firebase);
+
+  useEffect(() => {
+    if (auth.authError) {
+      f7.toast.show({
+        text: "Login failed",
+        icon:
+          app.theme === "ios"
+            ? '<i class="f7-icons">highlight_off</i>'
+            : '<i class="material-icons">highlight_off</i>',
+        position: "center",
+        closeTimeout: 3000,
+        destroyOnClose: true,
+        cssClass: "login-toast",
+      });
+    }
+  }, [auth]);
 
   const dispatch = useDispatch();
 
@@ -42,14 +58,20 @@ const LoginPage = () => {
   };
 
   const closeSignUp = () => {
-    setOpenSignUp(false);
+    setOpenedSignUp(false);
   };
 
-  const showSignedIn = () => {
-    if (auth.authError) {
-      return <BlockFooter style={{ color: "red" }}>Login failed</BlockFooter>;
-    }
+  const openSignUp = () => {
+    setOpenedSignUp(true);
+    dispatch(actions.authActions.cleanAuthError());
   };
+
+  // const showSignedIn = () => {
+  //   if (auth.authError) {
+
+  //     return <BlockFooter style={{ color: "red" }}>Login failed</BlockFooter>;
+  //   }
+  // };
 
   return (
     <LoginScreen opened={openSignIn} id="my-login-screen">
@@ -79,7 +101,6 @@ const LoginPage = () => {
             ></ListInput>
           </List>
           <List>
-            {/* <ListButton title="Sign In" onClick={signIn} /> */}
             <Button
               style={{ marginLeft: "2rem", marginRight: "2rem" }}
               fill
@@ -87,16 +108,17 @@ const LoginPage = () => {
             >
               Sign In
             </Button>
-            <BlockFooter>{showSignedIn()}</BlockFooter>
             <Button
-              style={{ margin: "2rem" }}
-              onClick={() => setOpenSignUp(true)}
+              style={{
+                margin: "var(--f7-login-screen-blocks-margin-vertical) auto",
+              }}
+              onClick={openSignUp}
             >
               Sign Up
             </Button>
           </List>
 
-          <SignUpPopup openSignUp={openSignUp} closeSignUp={closeSignUp} />
+          <SignUpPopup openSignUp={openedSignUp} closeSignUp={closeSignUp} />
         </Page>
       </View>
     </LoginScreen>

@@ -21,6 +21,7 @@ export const ADD_TAGS = "ADD_TAGS";
 export const ADD_PRIVACITY = "ADD_PRIVACITY";
 export const SWITCH_ONLINE = "SWITCH_ONLINE";
 export const SWITCH_OFFLINE = "SWITCH_OFFLINE";
+export const CLEAN_AUTH_ERROR = "CLEAN_AUTH_ERROR";
 
 //REQUEST
 export const SUCCESS = "SUCCESS";

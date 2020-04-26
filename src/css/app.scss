@@ -137,7 +137,8 @@ $font-size-title: 1.5rem !important;
   }
 }
 
-.searchbar-my-stories, .searchbar-social {
+.searchbar-my-stories,
+.searchbar-social {
   .searchbar-disable-button {
     top: 0 !important;
   }
@@ -247,4 +248,9 @@ $font-size-title: 1.5rem !important;
   .list {
     margin-top: 0;
   }
+}
+
+.login-toast {
+  display: flex;
+  justify-content: center;
 }

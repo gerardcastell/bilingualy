@@ -34,6 +34,17 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
     closeSignUp();
   }, [firebase.auth.uid]);
 
+  // useEffect(() => {
+  //   if (auth.authError) {
+  //     f7.toast.show({
+  //       text: "hola",
+  //       position: "bottom",
+  //       closeTimeout: 3000,
+  //       destroyOnClose: true,
+  //     });
+  //   }
+  // }, [auth]);
+
   const signIn = async () => {
     await dispatch(actions.authActions.signUp({ username, email, password }));
   };
@@ -94,8 +105,8 @@ const SignUpPopup = ({ openSignUp, closeSignUp }) => {
             ></ListInput>
           </List>
           <List style={{ margin: 0, width: "100%", marginTop: "1.5rem" }}>
-            <Button onClick={signIn}>Sign Up</Button>
             <BlockFooter>{showSignedIn()}</BlockFooter>
+            <Button onClick={signIn}>Sign Up</Button>
           </List>
         </div>
       </Page>
