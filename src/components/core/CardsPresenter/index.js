@@ -79,18 +79,20 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
         if (!finalStories.length) {
           return (
             <div className="list-empty-result">
-              <h2>Nothing found with this title</h2>
+              <div className="icon-no-results">
+                <Icon
+                  md="f7:square_stack_3d_up_slash"
+                  ios="f7:square_stack_3d_up_slash"
+                  aurora="f7:square_stack_3d_up_slash"
+                ></Icon>
+                <p>Nothing found with this title</p>
+              </div>
             </div>
           );
         }
       } else if (!searchFilter && !fetchedStories.length) {
         return (
           <div className="icon-no-results">
-            {/* <h3>
-              Welcome to Bilingualy family! Click on the ' + '' button to start
-              creating your first story or visit the community page to make
-              initial contact about what you can do with our features.{" "}
-            </h3> */}
             <Icon
               md="f7:person_2_square_stack_fill"
               ios="f7:person_2_square_stack_fill"
