@@ -31,6 +31,19 @@ const LoginPage = () => {
   const auth = useSelector((state) => state.auth);
   const firebase = useSelector((state) => state.firebase);
 
+  const dispatch = useDispatch();
+
+  let deferredPrompt;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    // Update UI notify the user they can install the PWA
+    showInstallPromotion();
+  });
+
   useEffect(() => {
     if (auth.authError) {
       f7.toast.show({
@@ -46,8 +59,6 @@ const LoginPage = () => {
       });
     }
   }, [auth]);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setOpenSignIn(firebase.auth.uid ? false : true);
@@ -115,6 +126,27 @@ const LoginPage = () => {
               onClick={openSignUp}
             >
               Sign Up
+            </Button>
+            <Button
+              style={{
+                margin: "var(--f7-login-screen-blocks-margin-vertical) auto",
+              }}
+              onClick={(e) => {
+                // Hide the app provided install promotion
+                // hideMyInstallPromotion();
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                  if (choiceResult.outcome === "accepted") {
+                    console.log("User accepted the install prompt");
+                  } else {
+                    console.log("User dismissed the install prompt");
+                  }
+                });
+              }}
+            >
+              Install PWA
             </Button>
           </List>
 

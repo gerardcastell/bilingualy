@@ -164,14 +164,19 @@ export default ({ f7router }) => {
             iconAurora="f7:menu"
             iconMd="material:menu"
             panelOpen="right"
-            // onClick={() => f7.panel.open("right")}
           />
         </NavRight>
       </Navbar>
       <List className="searchbar-not-found">
         <ListItem title="Nothing found" />
       </List>
-      {showStories("private")}
+      <div className="container-content">
+        {/* <div className="col-25"></div> */}
+        <div className="col container-content__col">
+          {showStories("private")}
+        </div>
+        {/* <div className="col-25"></div> */}
+      </div>
       <footer className="footer-dashboard-bottom">
         <span>Empowered with PWA technology</span>
       </footer>

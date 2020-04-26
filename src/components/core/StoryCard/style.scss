@@ -83,6 +83,8 @@
         border-radius: .3rem;
         margin-bottom: .2rem;
         margin-right: 1rem;
+        max-width: 138px;
+        max-height: 138px;
     }
 
     .pictogram-caption {
@@ -97,5 +99,7 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        max-width: 138px;
+        min-height: 30px;
     }
 }
