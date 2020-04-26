@@ -11,6 +11,7 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
   const [loading, setLoading] = useState(true);
 
   const uid = useSelector((state) => state.firebase.auth.uid);
+  const isOnline = useSelector((state) => state.device.online);
   const requestStatus = useSelector(
     (state) => state.firestore.status.requested
   );
@@ -90,6 +91,20 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
             </div>
           );
         }
+      } else if (fetchedStories.length && !isOnline) {
+        return (
+          <div className="icon-no-results">
+            <Icon
+              md="material:wifi_off"
+              ios="material:wifi_off"
+              aurora="material:wifi_off"
+            ></Icon>
+            <p>
+              There are connectivity issues and the app couldn't precache any
+              social story
+            </p>
+          </div>
+        );
       } else if (!searchFilter && !fetchedStories.length) {
         return (
           <div className="icon-no-results">
