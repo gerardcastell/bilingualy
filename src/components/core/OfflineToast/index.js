@@ -1,96 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { f7, f7ready } from "framework7-react";
 
 import actions from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 
 const OfflineToast = () => {
-  //   const [isOnline, setIsOnline] = useState(false);
+  let firstTimeRef = useRef(true);
 
-  //   useEffect(() => {
-  //     window.addEventListener("online", handleConnectionChange);
-  //     window.addEventListener("offline", handleConnectionChange);
-  //     return () => {
-  //       window.removeEventListener("online", handleConnectionChange);
-  //       window.removeEventListener("offline", handleConnectionChange);
-  //     };
-  //   }, []);
-
-  //   useEffect(() => {
-  //     console.log("IS ONLINE?", isOnline);
-  //   }, [isOnline]);
-
-  //   const handleConnectionChange = () => {
-  //     const condition = navigator.onLine ? "online" : "offline";
-  //     if (condition === "online") {
-  //       const webPing = setInterval(() => {
-  //         fetch("//google.com", {
-  //           mode: "no-cors",
-  //         })
-  //           .then(() => {
-  //             setIsOnline(true);
-  //             clearInterval(webPing);
-  //           })
-  //           .catch(() => setIsOnline(false));
-  //       }, 2000);
-  //       return;
-  //     }
-
-  //     return setIsOnline(true);
-  //   };
-
-  // Test this by running the code snippet below and then
-  // use the "Offline" checkbox in DevTools Network panel
   const dispatch = useDispatch();
-  window.addEventListener("online", handleConnection);
-  window.addEventListener("offline", handleConnection);
+
+  useEffect(() => {
+    handleConnection();
+    window.addEventListener("online", handleConnection);
+    window.addEventListener("offline", handleConnection);
+    return () => {
+      window.removeEventListener("online", handleConnection);
+      window.removeEventListener("offline", handleConnection);
+    };
+  }, []);
+
+  // window.addEventListener("online", handleConnection);
+  // window.addEventListener("offline", handleConnection);
+
+  function renderToast(connection) {
+    let options = {
+      text: null,
+      position: "bottom",
+      closeTimeout: 4000,
+      closeButton: true,
+      closeButtonText: "Close Me",
+      closeButtonColor: null,
+    };
+    console.log(connection);
+    switch (connection) {
+      case "online": {
+        options.text = "You are online again!";
+        options.closeButtonColor = "blue";
+        break;
+      }
+      case "offline": {
+        options.text = "You are offline right now";
+        options.closeButtonColor = "red";
+        break;
+      }
+      case "badConnectivity": {
+        options.text = "You are online again!";
+        options.closeButtonColor = "red";
+        break;
+      }
+
+      default: {
+        options.text = "Unexpected problem with toast";
+        options.closeButtonColor = "red";
+        break;
+      }
+    }
+    if (f7ready && !firstTimeRef.current) {
+      f7.toast.show(options);
+    } else {
+      firstTimeRef.current = false;
+    }
+  }
 
   function handleConnection() {
     if (navigator.onLine) {
       isReachable(getServerUrl()).then(function (online) {
         if (online) {
-          // handle online status
-          console.log("online");
           dispatch(actions.deviceActions.switchOnline());
-          if (f7ready) {
-            f7.toast.show({
-              text: "You are online again!",
-              position: "bottom",
-              closeTimeout: 4000,
-              closeButton: true,
-              closeButtonText: "Close Me",
-              closeButtonColor: "blue",
-            });
-          }
+          renderToast("online");
         } else {
-          console.log("no connectivity");
           dispatch(actions.deviceActions.switchOffline());
-          if (f7ready) {
-            f7.toast.show({
-              text: "It seems like you have connectivity problems.",
-              position: "bottom",
-              closeTimeout: 4000,
-              closeButton: true,
-              closeButtonText: "Close Me",
-              closeButtonColor: "red",
-            });
-          }
+          renderToast("badConnectivity");
         }
       });
     } else {
-      // handle offline status
-      console.log("offline");
       dispatch(actions.deviceActions.switchOffline());
-      if (f7ready) {
-        f7.toast.show({
-          text: " You are offline right now",
-          position: "bottom",
-          closeTimeout: 4000,
-          closeButton: true,
-          closeButtonText: "Close Me",
-          closeButtonColor: "red",
-        });
-      }
+      renderToast("offline");
     }
   }
 
@@ -115,7 +100,7 @@ const OfflineToast = () => {
   function getServerUrl() {
     return window.location.origin;
   }
-  return <div></div>;
+  return <></>;
 };
 
 export default OfflineToast;

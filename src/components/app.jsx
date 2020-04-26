@@ -1,27 +1,6 @@
 import React from "react";
 
-import {
-  App,
-  Panel,
-  Views,
-  View,
-  Popup,
-  Page,
-  Navbar,
-  Toolbar,
-  NavRight,
-  Link,
-  Block,
-  BlockTitle,
-  LoginScreen,
-  LoginScreenTitle,
-  List,
-  ListItem,
-  ListInput,
-  ListButton,
-  BlockFooter,
-  f7,
-} from "framework7-react";
+import { App, View } from "framework7-react";
 
 import routes from "../js/routes";
 import SidePanel from "../components/core/SidePanel";

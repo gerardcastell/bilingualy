@@ -28,6 +28,10 @@ const createPage = ({ f7router }) => {
     { title: "Save" },
   ];
 
+  useEffect(() => {
+    dispatch(actions.socialStoryActions.initSocialStory());
+  }, []);
+
   const dispatch = useDispatch();
 
   const confirmBack = () => {
@@ -45,7 +49,6 @@ const createPage = ({ f7router }) => {
 
   const redirectToDashboard = () => {
     f7router.navigate("/");
-    dispatch(actions.socialStoryActions.initSocialStory());
   };
 
   const showStep = () => {

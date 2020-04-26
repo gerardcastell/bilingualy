@@ -28,21 +28,23 @@ import "./style.scss";
 
 const Step4 = ({ onSuccess }) => {
   const [publicStory, setPublicStory] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
 
   const requestState = useSelector((state) => state.socialStory.requestState);
+  const isOnline = useSelector((state) => state.device.online);
 
   useEffect(() => {
     if (requestState === SUCCESS) {
       f7.dialog.alert(
-        "You will be redirected to your dashboard.",
-        "Social Story saved properly!",
+        "Your social story is saved in our servers",
+        "Social Story uploaded properly!",
         onSuccess
       );
     } else if (requestState === FAILURE) {
       f7.dialog.alert(
         "Social Story saved properly! Find it in your dashboard",
         "Ooops! Something went wrong",
-        null
+        setButtonClicked(false)
       );
     }
   }, [requestState]);
@@ -56,6 +58,18 @@ const Step4 = ({ onSuccess }) => {
   const handleSave = () => {
     dispatch(actions.socialStoryActions.addPrivacity(publicStory));
     dispatch(actions.socialStoryActions.createSocialStory());
+  };
+
+  const onClickSave = () => {
+    setButtonClicked(true);
+    handleSave();
+    if (!isOnline) {
+      f7.dialog.alert(
+        "Thanks to PWA tech, we will save your story in background and upload it when Internet comes back.",
+        "It seems like you don't have Internet connection right now",
+        onSuccess
+      );
+    }
   };
 
   return (
@@ -77,22 +91,10 @@ const Step4 = ({ onSuccess }) => {
             <b>{publicStory ? "public" : "private"}</b>
           </span>
           <span className="span-spacer" />
-          <Button
-            raised
-            fill
-            onClick={() => {
-              handleSave();
-            }}
-          >
+          <Button disabled={buttonClicked} raised fill onClick={onClickSave}>
             Save
           </Button>
         </div>
-        <Row>
-          <Col></Col>
-          <Col></Col>
-
-          <Col></Col>
-        </Row>
       </Block>
 
       <BackButton
