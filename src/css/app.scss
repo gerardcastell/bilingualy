@@ -104,9 +104,16 @@ $font-size-title: 1.5rem !important;
     top: 15px;
   }
 
+  &__icon-delete {
+    position: absolute;
+    right: 15px;
+    top: 50px;
+  }
+
   &__tags {
     height: 11vh;
     width: 100%;
+    padding-right: 25px;
   }
 
   &__subtitle {

@@ -7,21 +7,21 @@ import {
   Link,
   Icon,
   BlockTitle,
+  f7,
 } from "framework7-react";
 
 import moment from "moment";
 
+import { useDispatch } from "react-redux";
+
+import actions from "../../../redux/actions";
+
 import "./style.scss";
 
 const StoryCard = ({ data, onTouchCard, privateScope }) => {
-  const hasCaptions = () => {
-    data.pictograms.map(({ name }) => {
-      if (name) return true;
-    });
-    return false;
-  };
+  const dispatch = useDispatch();
 
-  const showTags = () => {
+  const renderTags = () => {
     return data.tags.map((tag, index) => (
       <Chip
         className="margin-horizontal-half"
@@ -32,8 +32,7 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
     ));
   };
 
-  const showPictograms = () => {
-    const captions = hasCaptions();
+  const renderPictograms = () => {
     return data.pictograms.map(({ url, position, name }) => {
       const caption = name
         ? name.length < 30
@@ -59,7 +58,7 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
     });
   };
 
-  const displayFooter = () => {
+  const renderFooter = () => {
     if (privateScope) {
       return (
         <>
@@ -91,6 +90,32 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
     }
   };
 
+  const renderDeleteButton = () => {
+    function onClickDelete() {
+      f7.dialog.confirm(
+        "This action will be irreversible",
+        "Are you sure you want to delete this social story?",
+        deleteStory
+      );
+    }
+
+    function deleteStory() {
+      dispatch(actions.socialStoryActions.deleteSocialStory(data.id));
+    }
+
+    if (privateScope) {
+      return (
+        <Link
+          cardClose
+          onClick={onClickDelete}
+          className="card-opened-fade-in custom-card__icon-delete"
+          iconF7="trash"
+          color="red"
+        />
+      );
+    }
+  };
+
   return (
     <Card
       onCardOpen={() => onTouchCard(true)}
@@ -114,12 +139,13 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
                 className="card-opened-fade-in custom-card__icon-close"
                 iconF7="multiply_circle_fill"
               />
+              {renderDeleteButton()}
               <div className="row padding-horizontal-half">
                 <div className="row justify-content-start custom-card__tags">
-                  {showTags()}
+                  {renderTags()}
                 </div>
                 <div className="row custom-card__subtitle justify-content-space-between align-items-center margin-horizontal-half padding-top-half">
-                  {displayFooter()}
+                  {renderFooter()}
                 </div>
               </div>
             </div>
@@ -133,7 +159,7 @@ const StoryCard = ({ data, onTouchCard, privateScope }) => {
                 </div>
                 <hr />
                 <div className="card-content__inner__pictograms">
-                  {showPictograms()}
+                  {renderPictograms()}
                 </div>
               </div>
             </div>
