@@ -1,6 +1,7 @@
 import HomePage from "../pages/home.jsx";
 import SocialPage from "../pages/social.jsx";
-import AboutPage from "../pages/about.jsx";
+import AboutPictogramsPage from "../pages/aboutPictograms.jsx";
+import AboutPWAPage from "../pages/aboutPWA.jsx";
 import FormPage from "../pages/form.jsx";
 import NewPage from "../pages/new.jsx";
 import LoginPage from "../pages/login.jsx";
@@ -20,10 +21,13 @@ var routes = [
     component: NewPage,
   },
   {
-    path: "/about/",
-    component: AboutPage,
+    path: "/about-pictograms/",
+    component: AboutPictogramsPage,
   },
-
+  {
+    path: "/about-pwa/",
+    component: AboutPWAPage,
+  },
   {
     path: "/social/",
     component: SocialPage,

@@ -42,7 +42,7 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
   const renderTitle = () => {
     if (variant === "home") {
       return (
-        <Button raised outline className="dashboard-title-button">
+        <Button fill raised outline className="dashboard-title-button">
           MY SOCIAL STORIES
           <Icon
             md="material:lock"
@@ -53,7 +53,7 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
       );
     } else {
       return (
-        <Button raised outline className="dashboard-title-button">
+        <Button fill raised outline className="dashboard-title-button">
           COMMUNITY STORIES
           <Icon
             md="material:public"

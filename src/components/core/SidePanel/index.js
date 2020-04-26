@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import {
   Panel,
-  View,
-  Page,
   Navbar,
   Icon,
   Block,
   Button,
   f7,
   List,
-  ListItem,
 } from "framework7-react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -18,7 +15,6 @@ import actions from "../../../redux/actions";
 import SidePanelButton from "../SidePanelButton";
 
 const SidePanel = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const auth = useSelector((state) => state.firebase.auth);
   const username = useSelector((state) => state.firebase.profile.username);
 
@@ -60,12 +56,12 @@ const SidePanel = () => {
           />
           <SidePanelButton
             title="Why pictograms?"
-            link="/about/"
+            link="/about-pictograms/"
             icon="material:face"
           />
           <SidePanelButton
             title="About PWA's"
-            link="/about/"
+            link="/about-pwa/"
             icon="material:network_check"
           />
         </ul>
