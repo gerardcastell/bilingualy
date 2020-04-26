@@ -20,7 +20,6 @@ export default (props) => (
       >
         Click
       </button>
-      <button onClick={() => console.log(props)}>Go to about</button>
       <button onClick={() => props.f7router.navigate("/create/")}>
         Go to about
       </button>

@@ -19,9 +19,6 @@ const OfflineToast = () => {
     };
   }, []);
 
-  // window.addEventListener("online", handleConnection);
-  // window.addEventListener("offline", handleConnection);
-
   function renderToast(connection) {
     let options = {
       text: null,
@@ -31,7 +28,6 @@ const OfflineToast = () => {
       closeButtonText: "Close Me",
       closeButtonColor: null,
     };
-    console.log(connection);
     switch (connection) {
       case "online": {
         options.text = "You are online again!";

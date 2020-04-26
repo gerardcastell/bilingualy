@@ -3,7 +3,6 @@ import { Page, Navbar, Block, Link } from "framework7-react";
 
 export default class DynamicRoutePage extends Component {
   componentDidMount() {
-    console.log(this.$f7);
     setTimeout(() => {
       this.$f7router.navigate("/test/");
     }, 2000);
@@ -12,7 +11,7 @@ export default class DynamicRoutePage extends Component {
   render() {
     return (
       <Page>
-        <Navbar title='Dynamic Route' backLink='Back' />
+        <Navbar title="Dynamic Route" backLink="Back" />
         <Block strong>
           <ul>
             <li>
