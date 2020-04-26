@@ -49,7 +49,7 @@ const GridDnd = ({ elements, onUpdate }) => {
         >
           {elements.map((item) => (
             <GridItem
-              key={item.key}
+              key={item.key || item.position}
               style={{ marginBottom: "2rem", marginTop: "2rem" }}
             >
               <div className="grid-item">

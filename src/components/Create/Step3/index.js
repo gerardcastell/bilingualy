@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Page,
   Navbar,
@@ -34,10 +34,11 @@ const Step3 = () => {
   const isMobileKeyboardOpen = useMobileKeyboard();
   const dispatch = useDispatch();
 
-  const nextStep = () => {
-    dispatch(actions.socialStoryActions.addTags(tags));
-    dispatch(actions.socialStoryActions.nextStep());
-  };
+  const dataStored = useSelector((state) => state.socialStory.tags);
+
+  useEffect(() => {
+    if (dataStored) setTags(dataStored);
+  }, [dataStored]);
 
   const handleColorPicker = ({ hex }) => {
     let color = null;
@@ -101,7 +102,7 @@ const Step3 = () => {
     setTags(tags.filter((a, idx) => idx !== id));
   };
 
-  const showTags = () => {
+  const renderTags = () => {
     if (tags.length) {
       return tags.map((tag, idx) => {
         return (
@@ -115,12 +116,20 @@ const Step3 = () => {
       });
     }
   };
-  const showBottomButtons = () => {
+
+  const nextStep = () => {
+    dispatch(actions.socialStoryActions.addTags(tags));
+    dispatch(actions.socialStoryActions.nextStep());
+  };
+
+  const renderBottomButtons = () => {
     if (!isMobileKeyboardOpen) {
       return (
         <>
           <NextButton clicked={() => nextStep()} disabled={!tags.length} />
-          <BackButton clicked={() => nextStep()} />
+          <BackButton
+            clicked={() => dispatch(actions.socialStoryActions.backStep())}
+          />
         </>
       );
     }
@@ -223,10 +232,10 @@ const Step3 = () => {
       <Block>
         <h3>Current tags:</h3>
         <Row className="row-separated">
-          <Col>{showTags()}</Col>
+          <Col>{renderTags()}</Col>
         </Row>
       </Block>
-      {showBottomButtons()}
+      {renderBottomButtons()}
     </>
   );
 };

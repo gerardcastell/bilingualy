@@ -32,6 +32,12 @@ const Step1 = () => {
 
   const dispatch = useDispatch();
 
+  const dataStored = useSelector((state) => state.socialStory.pictograms);
+
+  useEffect(() => {
+    if (dataStored.length) setStory(dataStored);
+  }, [dataStored]);
+
   const addPictogram = (id, name) => {
     prevStories.current = [...prevStories.current, story];
     setStory([
