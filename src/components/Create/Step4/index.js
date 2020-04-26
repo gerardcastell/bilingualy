@@ -33,12 +33,17 @@ const Step4 = ({ onSuccess }) => {
   const requestState = useSelector((state) => state.socialStory.requestState);
   const isOnline = useSelector((state) => state.device.online);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (requestState === SUCCESS) {
       f7.dialog.alert(
         "Your social story is saved in our servers",
         "Social Story uploaded properly!",
-        onSuccess
+        () => {
+          onSuccess();
+          dispatch(actions.socialStoryActions.initSocialStory());
+        }
       );
     } else if (requestState === FAILURE) {
       f7.dialog.alert(
@@ -48,8 +53,6 @@ const Step4 = ({ onSuccess }) => {
       );
     }
   }, [requestState]);
-
-  const dispatch = useDispatch();
 
   const handleToggle = (value) => {
     setPublicStory(value);
