@@ -10,18 +10,16 @@ import {
   Fab,
   Icon,
 } from "framework7-react";
-import { useFirestoreConnect, useFirebaseConnect } from "react-redux-firebase";
-
-import { useDispatch, useSelector } from "react-redux";
 
 import CardsPresenter from "../components/core/CardsPresenter";
 
 export default ({ f7router }) => {
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
+
   const [searchValue, setSearchValue] = useState("");
 
   const handleCard = (value) => {
-    setIsDisabled(value);
+    setIsEnabled(!value);
   };
 
   const handleOnClear = () => {
@@ -73,7 +71,7 @@ export default ({ f7router }) => {
       />
 
       <Fab
-        style={{ display: isDisabled ? "none" : "block" }}
+        style={{ display: isEnabled ? "block" : "none" }}
         onClick={() => f7router.navigate("/create/")}
         position="right-bottom"
         slot="fixed"

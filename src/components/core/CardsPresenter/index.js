@@ -89,7 +89,7 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
   };
 
   const renderCards = () => {
-    let fetchedStories = variant === "public" ? publicStories : privateStories;
+    let fetchedStories = variant === "home" ? privateStories : publicStories;
     let finalStories;
 
     if (!loading && fetchedStories) {
