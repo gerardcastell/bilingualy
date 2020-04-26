@@ -1,30 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Page,
-  Navbar,
-  NavLeft,
-  NavTitle,
-  NavTitleLarge,
-  NavRight,
-  Link,
-  Searchbar,
-  Subnavbar,
-  Toolbar,
-  Tabs,
-  Block,
-  BlockTitle,
-  List,
-  ListItem,
-  Row,
-  Col,
-  Panel,
-  View,
-  Button,
-  Fab,
-  Icon,
-  f7,
-} from "framework7-react";
-import { useFirestoreConnect, useFirebaseConnect } from "react-redux-firebase";
+import { Button, Icon, f7 } from "framework7-react";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -107,6 +83,25 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
             </div>
           );
         }
+      } else if (!searchFilter && !fetchedStories.length) {
+        return (
+          <div className="icon-no-results">
+            {/* <h3>
+              Welcome to Bilingualy family! Click on the ' + '' button to start
+              creating your first story or visit the community page to make
+              initial contact about what you can do with our features.{" "}
+            </h3> */}
+            <Icon
+              md="f7:person_2_square_stack_fill"
+              ios="f7:person_2_square_stack_fill"
+              aurora="f7:person_2_square_stack_fill"
+            ></Icon>
+            <p>
+              You don't have created <br />
+              any social story yet
+            </p>
+          </div>
+        );
       } else {
         finalStories = fetchedStories;
       }
