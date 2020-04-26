@@ -94,9 +94,9 @@ const CardsPresenter = ({ variant, searchFilter, onCardOpen }) => {
 
     if (!loading && fetchedStories) {
       if (searchFilter) {
-        const regex = new RegExp(searchFilter);
+        const regex = new RegExp(searchFilter.toLowerCase());
         const filteredStories = fetchedStories.filter((item) =>
-          item.title.match(regex)
+          item.title.toLowerCase().match(regex)
         );
 
         finalStories = filteredStories;
